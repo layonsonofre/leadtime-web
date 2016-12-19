@@ -1,26 +1,27 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Lead Time</title>
-  <base href="/">
+   <meta charset="utf-8">
+   <title>Lead Time</title>
+   <base href="/">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
    <input type="checkbox" id="sidebartoggler" value="">
    <div class="page-wrap">
-      <label for="sidebartoggler" class="toggle">☰</label>
+      <label for="sidebartoggler" class="toggle">≡</label>
       <div class="page-content">
-         <div class="unit"></div>
-         <app-root>Carregando...</app-root>
+         <div class="content">
+            <app-root>Carregando...</app-root>
+         </div>
       </div>
       <div class="sidebar">
-         <ul>
-            <li>Início</li>
-            <li>Cargas</li>
-            <li>Descargas</li>
+         <ul class="nav">
+            <li class="is-active"><span>≡</span>Início</li>
+            <li><span>≡</span>Cargas</li>
+            <li><span>≡</span>Descargas</li>
          </ul>
       </div>
    </div>
