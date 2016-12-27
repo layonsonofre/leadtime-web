@@ -1,0 +1,128 @@
+.nav {
+   font-family: sans-serif;
+   list-style: none;
+   width: 250px;
+   padding: 0;
+   margin-top: 0;
+   padding-bottom: 60px;
+   background-color: #fff;
+   overflow-y: auto;
+   will-change: transform;
+   backface-visibility: hidden;
+
+   li {
+      float: none;
+      line-height: 100%;
+
+      &.active {
+         background-color: rgba(0,0,0,.05);
+      }
+
+      &.menuoption {
+         display: block;
+
+         & > a {
+            vertical-align: middle;
+         }
+      }
+   }
+
+   a {
+      color: rgba(0, 0, 0, 0.7);
+      display: block;
+      font-size: 0.9rem;
+      font-weight: bolder;;
+      height: 30px;
+      line-height: 100%;
+      padding: 0 10px;
+      text-decoration: none;
+      vertical-align: middle;
+
+      &:hover {
+         background-color: rgba(0, 0, 0, .05);
+         cursor: pointer;
+      }
+   }
+
+   a > i {
+      float: left;
+      height: 24px;
+      line-height: 100%;
+      margin-right: 20px;
+      width: 12px;
+      color: rgba(0,0,0,.54);
+   }
+
+   .divider {
+      margin: 10px 0 10px 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.2);
+      height: 1px;
+   }
+
+   .subheader {
+      &:hover {
+         background-color: transparent;
+      }
+
+      cursor: initial;
+      pointer-events: none;
+      color: rgba(0,0,0,.54);
+      font-size: 1rem;
+      font-weight: bold;
+      line-height: 30px;
+   }
+
+   .user {
+      color: #fff;
+      position: relative;
+      padding: 10px 10px 0;
+      margin-bottom: 15px;
+
+      & > a {
+         height: auto;
+         padding: 0;
+         &:hover {
+            background-color: transparent;
+         }
+      }
+
+      .background {
+         overflow: hidden;
+         position: absolute;
+         top: 0;
+         right: 0;
+         bottom: 0;
+         left: 0;
+         z-index: -1;
+      }
+
+      .circle, .name, .email {
+         display: block;
+      }
+
+      .circle {
+         height: 64px;
+         width: 64px;
+         border-radius: 32px;
+         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+         border: 2px solid rgba(255, 255, 255, 0.5);
+      }
+
+      .name, .email {
+         font-size: 0.9rem;
+         line-height: 24px;
+         text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .name {
+         margin-top: 16px;
+         font-weight: bolder;
+      }
+
+      .email {
+         padding-bottom: 16px;
+         font-weight: normal;
+      }
+   }
+}

@@ -1,0 +1,85 @@
+.icon {
+   padding-left: 20px;
+   background-repeat: no-repeat;
+   background-position: left;
+   background-size: 12px;
+}
+@mixin icon-agenda-black {
+   @extend .icon;
+   background-image: url('assets/img/icons/agenda-black.png');
+}
+@mixin icon-agenda-white {
+   @extend .icon;
+   background-image: url('assets/img/icons/agenda-white.png');
+}
+@mixin icon-caminhao-black {
+   @extend .icon;
+   background-image: url('assets/img/icons/caminhao-black.png');
+}
+@mixin icon-caminhao-white {
+   @extend .icon;
+   background-image: url('assets/img/icons/caminhao-white.png');
+}
+@mixin icon-destino-black {
+   @extend .icon;
+   background-image: url('assets/img/icons/destino-black.png');
+}
+@mixin icon-destino-white {
+   @extend .icon;
+   background-image: url('assets/img/icons/destino-white.png');
+}
+@mixin icon-mercadoria-black {
+   @extend .icon;
+   background-image: url('assets/img/icons/mercadoria-black.png');
+}
+@mixin icon-mercadoria-white {
+   @extend .icon;
+   background-image: url('assets/img/icons/mercadoria-white.png');
+}
+@mixin icon-origem-black {
+   @extend .icon;
+   background-image: url('assets/img/icons/origem-black.png');
+}
+@mixin icon-origem-white {
+   @extend .icon;
+   background-image: url('assets/img/icons/origem-white.png');
+}
+@mixin icon-pessoa-black {
+   @extend .icon;
+   background-image: url('assets/img/icons/pessoa-black.png');
+}
+@mixin icon-pessoa-white {
+   @extend .icon;
+   background-image: url('assets/img/icons/pessoa-white.png');
+}
+@mixin icon-relogio-black {
+   @extend .icon;
+   background-image: url('assets/img/icons/relogio-black.png');
+}
+@mixin icon-relogio-white {
+   @extend .icon;
+   background-image: url('assets/img/icons/relogio-white.png');
+}
+@mixin icon-rodovia-black {
+   @extend .icon;
+   background-image: url('assets/img/icons/rodovia-black.png');
+}
+@mixin icon-rodovia-white {
+   @extend .icon;
+   background-image: url('assets/img/icons/rodovia-white.png');
+}
+@mixin icon-telefone-black {
+   @extend .icon;
+   background-image: url('assets/img/icons/telefone-black.png');
+}
+@mixin icon-telefone-white {
+   @extend .icon;
+   background-image: url('assets/img/icons/telefone-white.png');
+}
+
+@mixin card-background {
+   background-image: url('assets/img/icons/card-background-black.png');
+   background-size: 70px;
+   background-repeat: no-repeat;
+   background-position: 90% 50%;
+}

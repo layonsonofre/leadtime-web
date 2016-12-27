@@ -1,0 +1,160 @@
+@import './icons';
+@import './animations';
+@import './variables';
+
+html {
+   font-size: 16px;
+}
+.atrasado {
+   @include card-background;
+   background-color: map-get($colors, atrasado)!important;
+}
+.previsto {
+   @include card-background;
+   background-color: map-get($colors, previsto)!important;
+}
+.atrasado-border {
+   background-color: #FFF!important;
+   border-left: 4px solid map-get($colors, atrasado);
+}
+.previsto-border {
+   background-color: #FFF!important;
+   border-left: 4px solid map-get($colors, previsto);
+}
+ion-card {
+   padding: 0 !important;
+   display: flex;
+   .logo {
+      width: 40%;
+      height: inherit;
+      float: left;
+      overflow: hidden;
+      background-color: #fff;
+      box-shadow: 2px 0 15px rgba(0, 0, 0, 0.4);
+      padding: 5px;
+      vertical-align: middle;
+   }
+}
+ion-card-content {
+   width: 60%!important;
+   padding: 5px 5px 5px 10px !important;
+   position: relative;
+   float: right;
+   font-weight: bolder;
+   vertical-align: top;
+   font-size: 1.4rem!important;
+   font-weight: normal;
+   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+   .minimized-info {
+      display: block;
+   }
+   .detailed-info {
+      display: none;
+   }
+}
+.info {
+   position: relative;
+   line-height: 90%;
+   margin-bottom: 3px;
+   margin-top: 3px;
+   &.full {
+      display: block;
+      width: 100%;
+   }
+   &.half {
+      width: 50%;
+      &.left {
+         float: left;
+      }
+      &.right {
+         float: right;
+      }
+   }
+   &.chegada-prevista {
+      @include icon-agenda-white;
+   }
+   &.placa {
+      @include icon-caminhao-white;
+   }
+   &.romaneio {
+      @include icon-rodovia-white;
+   }
+   &.destino {
+      @include icon-destino-white;
+   }
+   &.mercadoria {
+      @include icon-mercadoria-white;
+   }
+   &.origem {
+      @include icon-origem-white;
+   }
+   &.pessoa {
+      @include icon-pessoa-white;
+   }
+   &.tempo {
+      @include icon-relogio-white;
+   }
+   &.telefone {
+      @include icon-telefone-white;
+   }
+}
+.help-text {
+   position: relative;
+   margin-top: 2px;
+   display: block;
+   font-size: 0.8em;
+   opacity: 0.5;
+}
+.detailed {
+   height: 100%;
+   @include animation(grow 300ms cubic-bezier(0, 0.45, 0.30, 2.4));
+
+   color: map-get($colors, dark);
+   .minimized-info {
+      display: none;
+   }
+   ion-card-content {
+      width: 100%!important;
+   }
+   .detailed-info {
+      display: block;
+   }
+   .logo {
+      display: none;
+   }
+   &.atrasado {
+      @extend .atrasado-border;
+   }
+   &.previsto {
+      @extend .previsto-border;
+   }
+   .info {
+      &.chegada-prevista {
+         @include icon-agenda-black;
+      }
+      &.placa {
+         @include icon-caminhao-black;
+      }
+      &.romaneio {
+         @include icon-rodovia-black;
+      }
+      &.destino {
+         @include icon-destino-black;
+      }
+      &.mercadoria {
+         @include icon-mercadoria-black;
+      }
+      &.origem {
+         @include icon-origem-black;
+      }
+      &.pessoa {
+         @include icon-pessoa-black;
+      }
+      &.tempo {
+         @include icon-relogio-black;
+      }
+      &.telefone {
+         @include icon-telefone-black;
+      }
+   }
+}

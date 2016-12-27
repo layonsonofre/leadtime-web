@@ -1,0 +1,13 @@
+@mixin animation($str...) {
+  -webkit-animation: $str;
+  -moz-animation: $str;
+  -ms-animation: $str;
+  -o-animation: $str;
+  animation: $str;
+}
+
+@keyframes grow {
+  0% { -webkit-transform: scaleY(1); transform: scaleY(1); }
+  70% { -webkit-transform: scaleY(1.2); transform: scaleY(1.2); }
+  100% { -webkit-transform: scaleY(1); transform: scaleY(1); }
+}
