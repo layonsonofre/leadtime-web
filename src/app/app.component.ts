@@ -9,5 +9,6 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 export class AppComponent {
    @ViewChild(SidenavComponent)
    private sideNav: SidenavComponent;
+
    private title: String = 'AppComponent';
 }

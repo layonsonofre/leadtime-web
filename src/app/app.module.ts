@@ -8,20 +8,20 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { LoginRoutingModule } from './login-routing.module';
-import { LoginComponent } from './login.component';
 import { DialogService } from './dialog.service';
 import { DataService } from './data.service';
 
+import { LoginRoutingModule } from './login/login-routing.module';
+import { LoginComponent } from './login/login.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { HomeComponent } from './home/home.component';
 import { CargaComponent } from './carga/carga.component';
 
 @NgModule({
    declarations: [
+      LoginComponent,
       SidenavComponent,
       AppComponent,
-      LoginComponent,
       HomeComponent,
       CargaComponent
    ],
