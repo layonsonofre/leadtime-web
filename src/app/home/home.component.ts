@@ -12,7 +12,6 @@ export class HomeComponent implements OnInit {
    isDarkTheme: boolean = false;
    lastDialogResult: string;
    public indicadoresHome: any;
-   private title: String = 'Home';
 
    foods: any[] = [
       {name: 'Pizza', rating: 'Excellent'},

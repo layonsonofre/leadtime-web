@@ -1,1 +1,147 @@
-<p>carga works!</p>
+<md-tab-group>
+   <md-tab label="Viagem" (click)="loadCargasViagem(null, false)">
+      <div class="flex-container" fxLayout="row" fxLayoutGap="10px">
+         <div class="list-summary" fxFlex="30"  fxFlex.xs="100" fxFlexOrder="1">
+            <md-card>
+               <!-- <h2>Estatísticas</h2> -->
+               <div class="summary">
+                  <span class="s-title">Total: </span>
+                  <span class="s-value">17</span>
+               </div>
+               <div class="summary">
+                  <a href="#"><span class="legenda previsto"></span></a>
+                  <span class="s-title">Previstos: </span>
+                  <span class="s-value">12</span>
+                  <span class="active"></span>
+               </div>
+               <div class="summary">
+                  <a href="#"><span class="legenda atrasado"></span></a>
+                  <span class="s-title">Atrasados: </span>
+                  <span class="s-value">5</span>
+                  <span class="active"></span>
+               </div>
+            </md-card>
+         </div>
+         <div class="card-list" fxFlex="100" fxFlex.xs="100" fxFlexOrder="2">
+            <div *ngFor="let viagem of cargasViagem.viagens, let i = index">
+               <md-card class="card" [ngClass]="viagem.status == 'ATRASADO' ? 'atrasado' : 'previsto'" (click)="detailedViagem[i] = !detailedViagem[i]" [class.detailed]="detailedViagem[i]">
+                  <div class="logo" [ngStyle]="{'background': 'url(' + viagem.transportadora.logo + ') no-repeat center #FFFFFF'}"></div>
+                  <div class="card-content">
+                     <div class="minimized-info">
+                        <div class="info full chegada-prevista">
+                           {{ viagem.chegada_prevista }}
+                           <div class="help-text">Chegada prevista</div>
+                        </div>
+                        <div class="info half left placa">
+                           {{ viagem.placa }}
+                           <div class="help-text">Placa</div>
+                        </div>
+                        <div class="info half right romaneio">
+                           {{ viagem.romaneio }}
+                           <div class="help-text">Romaneio</div>
+                        </div>
+                     </div>
+                     <div class="detailed-info">
+                        <div class="info half left placa">
+                           {{ viagem.transportadora.nome_fantasia }}
+                           <div class="help-text">Transportadora</div>
+                        </div>
+                        <div class="info half right chegada-prevista">
+                           {{ viagem.chegada_prevista }}
+                           <div class="help-text">Chegada prevista</div>
+                        </div>
+                        <div class="info half left placa">
+                           {{ viagem.placa }}
+                           <div class="help-text">Placa</div>
+                        </div>
+                        <div class="info half right romaneio">
+                           {{ viagem.romaneio }}
+                           <div class="help-text">Romaneio</div>
+                        </div>
+                        <div class="info half left mercadoria">
+                           {{ viagem.mercadoria }}
+                           <div class="help-text">Mercadoria</div>
+                        </div>
+                        <div class="info half right pessoa">
+                           {{ viagem.motorista }}
+                           <div class="help-text">Motorista</div>
+                        </div>
+                        <div class="info half left origem">
+                           {{ viagem.municipio_origem }}
+                           <div class="help-text">Origem</div>
+                        </div>
+                        <div class="info half right destino">
+                           {{ viagem.municipio_destino }}
+                           <div class="help-text">Destino</div>
+                        </div>
+                     </div>
+                  </div>
+               </md-card>
+            </div>
+            <button md-button>+</button>
+         </div>
+      </div>
+   </md-tab>
+   <md-tab label="Aguardando" (click)="loadCargasAguardando(null, false)">
+      <div *ngFor="let viagem of cargasAguardando.viagens, let i = index" class="card-wrapper">
+         <md-card class="card" [ngClass]="viagem.status == 'ATRASADO' ? 'atrasado' : 'previsto'" (click)="detailedViagem[i] = !detailedAguardando[i]" [class.detailed]="detailedAguardando[i]">
+            <div class="logo" [ngStyle]="{'background': 'url(' + viagem.transportadora.logo + ') no-repeat center #FFFFFF'}"></div>
+            <div class="card-content">
+               <div class="minimized-info">
+                  <div class="info full chegada-prevista">
+                     {{ viagem.chegada_prevista }}
+                     <div class="help-text">Chegada prevista</div>
+                  </div>
+                  <div class="info half left placa">
+                     {{ viagem.placa }}
+                     <div class="help-text">Placa</div>
+                  </div>
+                  <div class="info half right romaneio">
+                     {{ viagem.romaneio }}
+                     <div class="help-text">Romaneio</div>
+                  </div>
+               </div>
+               <div class="detailed-info">
+                  <div class="info half left placa">
+                     {{ viagem.transportadora.nome_fantasia }}
+                     <div class="help-text">Transportadora</div>
+                  </div>
+                  <div class="info half right chegada-prevista">
+                     {{ viagem.chegada_prevista }}
+                     <div class="help-text">Chegada prevista</div>
+                  </div>
+                  <div class="info half left placa">
+                     {{ viagem.placa }}
+                     <div class="help-text">Placa</div>
+                  </div>
+                  <div class="info half right romaneio">
+                     {{ viagem.romaneio }}
+                     <div class="help-text">Romaneio</div>
+                  </div>
+                  <div class="info half left mercadoria">
+                     {{ viagem.mercadoria }}
+                     <div class="help-text">Mercadoria</div>
+                  </div>
+                  <div class="info half right pessoa">
+                     {{ viagem.motorista }}
+                     <div class="help-text">Motorista</div>
+                  </div>
+                  <div class="info half left origem">
+                     {{ viagem.municipio_origem }}
+                     <div class="help-text">Origem</div>
+                  </div>
+                  <div class="info half right destino">
+                     {{ viagem.municipio_destino }}
+                     <div class="help-text">Destino</div>
+                  </div>
+               </div>
+            </div>
+         </md-card>
+      </div>
+   </md-tab>
+</md-tab-group>
+<div class="fab-menu">
+   <a class="fab-button" (click)="openFilter()" tooltip="Filtro"></a>
+   <a class="fab-button" (click)="expand()" tooltip="Expandir/Contrair"></a>
+   <a class="fab-button" tooltip="Opções"></a>
+</div>

@@ -10,5 +10,5 @@ export class AppComponent {
    @ViewChild(SidenavComponent)
    private sideNav: SidenavComponent;
 
-   private title: String = 'AppComponent';
+   private title: String = 'Lead Time';
 }

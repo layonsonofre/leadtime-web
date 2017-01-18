@@ -5,6 +5,24 @@
 html {
    font-size: 16px;
 }
+body {
+   overflow: hidden;
+}
+
+md-toolbar, md-toolbar-row {
+   height: 10vh!important;
+   min-height: 10vh!important;
+   max-height: 10vh!important;
+   overflow: hidden;
+}
+
+.app-content {
+   background-color: map-get($colors, app-background)!important;
+   height: 90vh;
+   max-height: 90vh;
+   overflow: hidden;
+}
+
 .atrasado {
    @include card-background;
    background-color: map-get($colors, atrasado)!important;
@@ -21,32 +39,40 @@ html {
    background-color: #FFF!important;
    border-left: 4px solid map-get($colors, previsto);
 }
-ion-card {
+
+
+md-card {
+   margin: 20px;
+}
+
+.card {
    padding: 0 !important;
    display: flex;
+   cursor: pointer;
    .logo {
       width: 40%;
       height: inherit;
       float: left;
       overflow: hidden;
       background-color: #fff;
-      box-shadow: 2px 0 15px rgba(0, 0, 0, 0.4);
+      box-shadow: 2px 0px 0px rgba(0, 0, 0, 0.2);
       padding: 5px;
       vertical-align: middle;
    }
 }
-ion-card-content {
+.card-content {
    width: 60%!important;
    padding: 5px 5px 5px 10px !important;
    position: relative;
    float: right;
    font-weight: bolder;
    vertical-align: top;
-   font-size: 1.4rem!important;
+   font-size: 1rem!important;
    font-weight: normal;
    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
    .minimized-info {
       display: block;
+      color: map-get($colors, light);
    }
    .detailed-info {
       display: none;
@@ -62,7 +88,8 @@ ion-card-content {
       width: 100%;
    }
    &.half {
-      width: 50%;
+      width: 40%;
+      display: inline-block;
       &.left {
          float: left;
       }
@@ -108,12 +135,12 @@ ion-card-content {
 .detailed {
    height: 100%;
    @include animation(grow 300ms cubic-bezier(0, 0.45, 0.30, 2.4));
-
    color: map-get($colors, dark);
+
    .minimized-info {
       display: none;
    }
-   ion-card-content {
+   .card-content {
       width: 100%!important;
    }
    .detailed-info {
@@ -156,5 +183,145 @@ ion-card-content {
       &.telefone {
          @include icon-telefone-black;
       }
+   }
+}
+
+.card-list {
+   max-height: 80vh;
+   overflow-y: scroll;
+}
+
+hr {
+   // border-top: 1px solid #f4f4f4;
+   // margin-top: 20px;
+   // margin-bottom: 20px;
+}
+
+
+.fab-menu {
+   bottom: 30px;
+   position: absolute;
+   margin: 2em;
+   left: 0px;
+   z-index: 2;
+}
+
+.fab-button {
+   box-shadow: 0px 5px 11px -2px rgba(0, 0, 0, 0.18), 0px 4px 12px -7px rgba(0, 0, 0, 0.15);
+   border-radius: 50%;
+   display: block;
+   width: 56px;
+   height: 56px;
+   margin: 0 auto;
+   margin: 20px auto 0;
+   position: relative;
+   @include transition(all .1s ease-out);
+   cursor: pointer;
+   background: #FFF;
+}
+
+.fab-button:active, .fab-button:focus, .fab-button:hover {
+   box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
+}
+
+.fab-button:not(:last-child) {
+   width: 40px;
+   height: 40px;
+   margin: 20px auto 0;
+   opacity: 0;
+   -webkit-transform: translateY(50px);
+   -ms-transform: translateY(50px);
+   transform: translateY(50px);
+}
+
+.fab-menu:hover .fab-button:not(:last-child) {
+   opacity: 1;
+   -webkit-transform: none;
+   -ms-transform: none;
+   transform: none;
+   margin: 15px auto 0;
+}
+
+/* Unessential styling for sliding up fab-button at differnt speeds */
+
+.fab-button:nth-last-child(1) {
+   -webkit-transition-delay: 25ms;
+   transition-delay: 25ms;
+   background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/77/Gear_icon.svg');
+   background-size: contain;
+}
+
+.fab-button:not(:last-child):nth-last-child(2) {
+   -webkit-transition-delay: 50ms;
+   transition-delay: 20ms;
+   background-image: url('http://www.lowcountryren.com/nestor/Documentation/ionicons-1.4.1/src/arrow-expand.svg');
+   background-size: contain;
+}
+
+.fab-button:not(:last-child):nth-last-child(3) {
+   -webkit-transition-delay: 75ms;
+   transition-delay: 40ms;
+   background-image: url('https://filters.social/icons/filter.svg');
+   background-size: contain;
+}
+
+[tooltip]:before {
+   bottom: 25%;
+   font-family: arial;
+   font-weight: 600;
+   border-radius: 2px;
+   background: #585858;
+   color: #fff;
+   content: attr(tooltip);
+   font-size: 12px;
+   visibility: hidden;
+   opacity: 0;
+   padding: 5px 7px;
+   margin-left: 12px;
+   position: absolute;
+   left: 100%;
+   white-space: nowrap;
+}
+
+[tooltip]:hover:before, [tooltip]:hover:after {
+   visibility: visible;
+   opacity: 1;
+}
+
+.summary {
+   height: 32px;
+   margin-bottom: 20px;
+
+   .s-title {
+      font-size: 1rem;
+      vertical-align: bottom;
+   }
+
+   .s-value {
+      font-size: 1.5rem;
+      position: relative;
+      bottom: -3px;
+   }
+
+   .legenda {
+      width: 12px;
+      height: 1.5rem;
+      display: inline-block;
+      position: relative;
+      left: 0;
+      // top: 0;
+      vertical-align: bottom;
+      margin-right: 10px;
+   }
+
+   .active {
+      width: 24px;
+      height: 1.5rem;
+      display: inline-block;
+      position: absolute;
+      right: 0;
+      // bottom: 0;
+      vertical-align: bottom;
+      background-color: #212121;
    }
 }

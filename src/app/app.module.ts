@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
@@ -16,6 +17,7 @@ import { LoginComponent } from './login/login.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { HomeComponent } from './home/home.component';
 import { CargaComponent } from './carga/carga.component';
+import { FilterDialog } from './filter-dialog/filter-dialog.component';
 
 @NgModule({
    declarations: [
@@ -23,19 +25,24 @@ import { CargaComponent } from './carga/carga.component';
       SidenavComponent,
       AppComponent,
       HomeComponent,
-      CargaComponent
+      CargaComponent,
+      FilterDialog
    ],
    imports: [
       BrowserModule,
       FormsModule,
       HttpModule,
       MaterialModule.forRoot(),
+      FlexLayoutModule.forRoot(),
       LoginRoutingModule,
       AppRoutingModule
    ],
    providers: [
       DialogService,
       DataService
+   ],
+   entryComponents: [
+      FilterDialog
    ],
    bootstrap: [ AppComponent ]
 })

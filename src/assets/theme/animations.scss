@@ -11,3 +11,11 @@
   70% { -webkit-transform: scaleY(1.2); transform: scaleY(1.2); }
   100% { -webkit-transform: scaleY(1); transform: scaleY(1); }
 }
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
