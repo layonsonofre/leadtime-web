@@ -26,8 +26,9 @@ export class CargaComponent implements OnInit {
 
    loadCargasViagem(refresher, force?: boolean) {
       this.dataService.loadCargasViagem(force).then(data => {
-         this.cargasViagem = data[0];
-         for (let i = 0; i < this.cargasViagem.viagens.length; i++) {
+         this.cargasViagem = data;
+         console.log(this.cargasViagem);
+         for (let i = 0; i < this.cargasViagem.length; i++) {
             this.detailedViagem[i] = false;
          }
          if (refresher) {
@@ -38,8 +39,8 @@ export class CargaComponent implements OnInit {
 
    loadCargasAguardando(refresher, force?: boolean) {
       this.dataService.loadCargasAguardando(force).then(data => {
-         this.cargasAguardando = data[0];
-         for (let i = 0; i < this.cargasAguardando.viagens.length; i++) {
+         this.cargasAguardando = data;
+         for (let i = 0; i < this.cargasAguardando.length; i++) {
             this.detailedAguardando[i] = false;
          }
          if (refresher) {

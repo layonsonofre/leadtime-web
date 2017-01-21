@@ -25,7 +25,8 @@
          <div class="card-list" fxFlex="100" fxFlex.xs="100" fxFlexOrder="2">
             <div *ngFor="let viagem of cargasViagem.viagens, let i = index">
                <md-card class="card" [ngClass]="viagem.status == 'ATRASADO' ? 'atrasado' : 'previsto'" (click)="detailedViagem[i] = !detailedViagem[i]" [class.detailed]="detailedViagem[i]">
-                  <div class="logo" [ngStyle]="{'background': 'url(' + viagem.transportadora.logo + ') no-repeat center #FFFFFF'}"></div>
+                  <div class="logo"></div>
+                  <!-- <div class="logo" [ngStyle]="{'background': 'url(' + viagem.transportadora.logo + ') no-repeat center #FFFFFF'}"></div> -->
                   <div class="card-content">
                      <div class="minimized-info">
                         <div class="info full chegada-prevista">

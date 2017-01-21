@@ -9,6 +9,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { KMMGateway } from './kmm/gateway';
 import { DialogService } from './dialog.service';
 import { DataService } from './data.service';
 
@@ -39,7 +40,8 @@ import { FilterDialog } from './filter-dialog/filter-dialog.component';
    ],
    providers: [
       DialogService,
-      DataService
+      DataService,
+      KMMGateway
    ],
    entryComponents: [
       FilterDialog

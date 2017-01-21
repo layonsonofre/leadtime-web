@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { KMMGateway } from './kmm/gateway';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -14,25 +15,22 @@ export class DataService {
 
    public firstLoad: boolean = false;
 
-   constructor(public http: Http) {
+   public _modulo: string = "LEADTIME";
+
+   constructor(public http: Http, private gateway: KMMGateway) {
    }
 
    /*
    * INICIO DO BLOCO DE CARGA
    */
    loadCargasViagem(force?: boolean): Promise<any> {
-      console.log('forcing' + force);
       if (this.cargasViagem == null || force) {
-         return new Promise(resolve => {
-            this.http.get('http://private-8d09d-leadtime.apiary-mock.com/cargas/viagem')
-            .map(res => res.json())
-            .subscribe(data => {
-               this.cargasViagem = data;
-               resolve(this.cargasViagem);
-            }, err => {
-               console.error(err);
-            });
-         });
+         return this.gateway.backendCall(this._modulo, "getViagem", null, false).then(
+            (result) => {
+               this.cargasViagem = result;
+               return this.cargasViagem;
+            }
+         );
       } else {
          return Promise.resolve(this.cargasViagem);
       }
