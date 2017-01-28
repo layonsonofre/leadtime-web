@@ -1,0 +1,78 @@
+@import "./icon-variables";
+
+@font-face {
+  font-family: 'leadtime';
+  src:  url('#{$leadtime-font-path}/leadtime.eot?s0o95e');
+  src:  url('#{$leadtime-font-path}/leadtime.eot?s0o95e#iefix') format('embedded-opentype'),
+    url('#{$leadtime-font-path}/leadtime.ttf?s0o95e') format('truetype'),
+    url('#{$leadtime-font-path}/leadtime.woff?s0o95e') format('woff'),
+    url('#{$leadtime-font-path}/leadtime.svg?s0o95e#leadtime') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'leadtime' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-agenda {
+  &:before {
+    content: $icon-agenda;
+  }
+}
+.icon-caminhao {
+  &:before {
+    content: $icon-caminhao;
+  }
+}
+.icon-card-background {
+  &:before {
+    content: $icon-card-background;
+  }
+}
+.icon-destino {
+  &:before {
+    content: $icon-destino;
+  }
+}
+.icon-mercadoria {
+  &:before {
+    content: $icon-mercadoria;
+  }
+}
+.icon-origem {
+  &:before {
+    content: $icon-origem;
+  }
+}
+.icon-relogio {
+  &:before {
+    content: $icon-relogio;
+  }
+}
+.icon-rodovia {
+  &:before {
+    content: $icon-rodovia;
+  }
+}
+.icon-telefone {
+  &:before {
+    content: $icon-telefone;
+  }
+}
+.icon-home {
+  &:before {
+    content: $icon-home;
+  }
+}

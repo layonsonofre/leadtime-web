@@ -7,11 +7,11 @@ export class KMMGateway {
    protected user: Usuario = Usuario.instance;
    //private loading: Loading;
 
-   public _base: string = 's02b10';
+   public _base: string = 's02b24';
    public url: string = 'http://' + this._base + '.kmm.com.br/modulos/leadtime/api/gateway.php';
 
    constructor(private _http: Http/*, private loadingCtrl: LoadingController, private alertCtrl: AlertController*/) {
-      this.user.token = 'eyJpYXQiOjE0ODQ5MzM3NjMsImp0aSI6Ik1UWTJNVGN5T1E9PSIsImlzcyI6InMwMmIxMC5rbW0uY29tLmJyIiwibmJmIjoxNDg0OTMzNzY4LCJleHAiOjE1MDA0ODU3NjgsImRhdGEiOnsiYWNlc3NvIjoibGVhZHRpbWUiLCJzZW5oYSI6IjEyMzQ1NiJ9fQ==.MzQ4ZmM3YTFmZTI5OTUxOWE0YmNkMjdiMmEwMTcyZjA3Yzc2NmJiOWJkYjgyMjdhYjk0NDQ0NmJlYjljZjg0MQ==';
+      this.user.token = 'eyJpYXQiOjE0ODUyNTUyNjMsImp0aSI6Ik16WXdNakEwT0E9PSIsImlzcyI6InMwMmIyNC5rbW0uY29tLmJyIiwibmJmIjoxNDg1MjU1MjY4LCJleHAiOjE1MDA4MDcyNjgsImRhdGEiOnsiYWNlc3NvIjoibGVhZHRpbWUiLCJzZW5oYSI6IjEyMzQ1NiJ9fQ==.ZGM0NTMwOGRhNTM2ODAyYTMyOGU2MWVlNzM0NDliMzM2MmMyNTJiOGIyYWMxODU5ZmViYWViZWViMGMyMjk0NQ==';
    }
 
    public setLoading(flag: boolean, loadingText?: string): Promise<any> {
@@ -112,7 +112,7 @@ public backendCall(module: string, operation: string, parameters?: any, showLoad
    ]
 });
 alert.present(alert);*/
-alert(errorM);
+//alert(errorM);
 }
 });
 });

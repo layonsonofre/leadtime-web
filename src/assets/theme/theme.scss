@@ -1,6 +1,7 @@
 @import './icons';
 @import './animations';
 @import './variables';
+@import './icon-style';
 
 html {
    font-size: 16px;
@@ -97,33 +98,33 @@ md-card {
          float: right;
       }
    }
-   &.chegada-prevista {
-      @include icon-agenda-white;
-   }
-   &.placa {
-      @include icon-caminhao-white;
-   }
-   &.romaneio {
-      @include icon-rodovia-white;
-   }
-   &.destino {
-      @include icon-destino-white;
-   }
-   &.mercadoria {
-      @include icon-mercadoria-white;
-   }
-   &.origem {
-      @include icon-origem-white;
-   }
-   &.pessoa {
-      @include icon-pessoa-white;
-   }
-   &.tempo {
-      @include icon-relogio-white;
-   }
-   &.telefone {
-      @include icon-telefone-white;
-   }
+   // &.chegada-prevista {
+   //    @include icon-agenda-white;
+   // }
+   // &.placa {
+   //    @include icon-caminhao-white;
+   // }
+   // &.romaneio {
+   //    @include icon-rodovia-white;
+   // }
+   // &.destino {
+   //    @include icon-destino-white;
+   // }
+   // &.mercadoria {
+   //    @include icon-mercadoria-white;
+   // }
+   // &.origem {
+   //    @include icon-origem-white;
+   // }
+   // &.pessoa {
+   //    @include icon-pessoa-white;
+   // }
+   // &.tempo {
+   //    @include icon-relogio-white;
+   // }
+   // &.telefone {
+   //    @include icon-telefone-white;
+   // }
 }
 .help-text {
    position: relative;
@@ -156,33 +157,33 @@ md-card {
       @extend .previsto-border;
    }
    .info {
-      &.chegada-prevista {
-         @include icon-agenda-black;
-      }
-      &.placa {
-         @include icon-caminhao-black;
-      }
-      &.romaneio {
-         @include icon-rodovia-black;
-      }
-      &.destino {
-         @include icon-destino-black;
-      }
-      &.mercadoria {
-         @include icon-mercadoria-black;
-      }
-      &.origem {
-         @include icon-origem-black;
-      }
-      &.pessoa {
-         @include icon-pessoa-black;
-      }
-      &.tempo {
-         @include icon-relogio-black;
-      }
-      &.telefone {
-         @include icon-telefone-black;
-      }
+      // &.chegada-prevista {
+      //    @include icon-agenda-black;
+      // }
+      // &.placa {
+      //    @include icon-caminhao-black;
+      // }
+      // &.romaneio {
+      //    @include icon-rodovia-black;
+      // }
+      // &.destino {
+      //    @include icon-destino-black;
+      // }
+      // &.mercadoria {
+      //    @include icon-mercadoria-black;
+      // }
+      // &.origem {
+      //    @include icon-origem-black;
+      // }
+      // &.pessoa {
+      //    @include icon-pessoa-black;
+      // }
+      // &.tempo {
+      //    @include icon-relogio-black;
+      // }
+      // &.telefone {
+      //    @include icon-telefone-black;
+      // }
    }
 }
 
@@ -247,7 +248,7 @@ hr {
 .fab-button:nth-last-child(1) {
    -webkit-transition-delay: 25ms;
    transition-delay: 25ms;
-   background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/77/Gear_icon.svg');
+   background-image: url('http://simpleicon.com/wp-content/uploads/gear-2.svg');
    background-size: contain;
 }
 

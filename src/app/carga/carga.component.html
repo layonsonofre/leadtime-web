@@ -30,49 +30,49 @@
                   <div class="card-content">
                      <div class="minimized-info">
                         <div class="info full chegada-prevista">
-                           {{ viagem.chegada_prevista }}
+                           <span class="chegada-prevista"></span>{{ viagem.carga_previsao_inicio }}
                            <div class="help-text">Chegada prevista</div>
                         </div>
-                        <div class="info half left placa">
-                           {{ viagem.placa }}
+                        <!-- <div class="info half left placa">
+                           {{ viagem.placa[0].placa }}
                            <div class="help-text">Placa</div>
-                        </div>
+                        </div> -->
                         <div class="info half right romaneio">
-                           {{ viagem.romaneio }}
+                           {{ viagem.num_romaneio }}
                            <div class="help-text">Romaneio</div>
                         </div>
                      </div>
                      <div class="detailed-info">
-                        <div class="info half left placa">
-                           {{ viagem.transportadora.nome_fantasia }}
+                        <!-- <div class="info half left placa">
+                           {{ viagem.empresa[0].nome_fantasia }}
                            <div class="help-text">Transportadora</div>
-                        </div>
+                        </div> -->
                         <div class="info half right chegada-prevista">
-                           {{ viagem.chegada_prevista }}
+                           {{ viagem.carga_previsao_fim }}
                            <div class="help-text">Chegada prevista</div>
                         </div>
                         <div class="info half left placa">
-                           {{ viagem.placa }}
+                           {{ viagem.placa[0].placa }}
                            <div class="help-text">Placa</div>
                         </div>
                         <div class="info half right romaneio">
-                           {{ viagem.romaneio }}
+                           {{ viagem.num_romaneio }}
                            <div class="help-text">Romaneio</div>
                         </div>
-                        <div class="info half left mercadoria">
-                           {{ viagem.mercadoria }}
+                        <!-- <div class="info half left mercadoria">
+                           {{ viagem.mercadoria[0].mercadoria }}
                            <div class="help-text">Mercadoria</div>
-                        </div>
+                        </div> -->
                         <div class="info half right pessoa">
-                           {{ viagem.motorista }}
+                           {{ viagem.motorista_cpf }}
                            <div class="help-text">Motorista</div>
                         </div>
                         <div class="info half left origem">
-                           {{ viagem.municipio_origem }}
+                           {{ viagem.origem_logradouro }}
                            <div class="help-text">Origem</div>
                         </div>
                         <div class="info half right destino">
-                           {{ viagem.municipio_destino }}
+                           {{ viagem.destino_logradouro }}
                            <div class="help-text">Destino</div>
                         </div>
                      </div>
@@ -84,7 +84,7 @@
       </div>
    </md-tab>
    <md-tab label="Aguardando" (click)="loadCargasAguardando(null, false)">
-      <div *ngFor="let viagem of cargasAguardando.viagens, let i = index" class="card-wrapper">
+      <!-- <div *ngFor="let viagem of cargasAguardando.viagens, let i = index" class="card-wrapper">
          <md-card class="card" [ngClass]="viagem.status == 'ATRASADO' ? 'atrasado' : 'previsto'" (click)="detailedViagem[i] = !detailedAguardando[i]" [class.detailed]="detailedAguardando[i]">
             <div class="logo" [ngStyle]="{'background': 'url(' + viagem.transportadora.logo + ') no-repeat center #FFFFFF'}"></div>
             <div class="card-content">
@@ -138,7 +138,7 @@
                </div>
             </div>
          </md-card>
-      </div>
+      </div> -->
    </md-tab>
 </md-tab-group>
 <div class="fab-menu">

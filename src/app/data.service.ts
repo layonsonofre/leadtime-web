@@ -24,13 +24,28 @@ export class DataService {
    * INICIO DO BLOCO DE CARGA
    */
    loadCargasViagem(force?: boolean): Promise<any> {
+      // if (this.cargasViagem == null || force) {
+      //    return this.gateway.backendCall(this._modulo, "getViagem", null, false).then(
+      //       (result) => {
+      //          this.cargasViagem = result;
+      //          console.log(this.cargasViagem);
+      //          return this.cargasViagem;
+      //       }
+      //    );
+      // } else {
+      //    return Promise.resolve(this.cargasViagem);
+      // }
       if (this.cargasViagem == null || force) {
-         return this.gateway.backendCall(this._modulo, "getViagem", null, false).then(
-            (result) => {
-               this.cargasViagem = result;
-               return this.cargasViagem;
-            }
-         );
+         return new Promise(resolve => {
+            this.http.get('http://private-8d09d-leadtime.apiary-mock.com/cargas/viagem')
+            .map(res => res.json())
+            .subscribe(data => {
+               this.cargasViagem = data[0];
+               resolve(this.cargasViagem);
+            }, err => {
+               console.error(err);
+            });
+         });
       } else {
          return Promise.resolve(this.cargasViagem);
       }

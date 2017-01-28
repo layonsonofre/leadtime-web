@@ -27,7 +27,6 @@ export class CargaComponent implements OnInit {
    loadCargasViagem(refresher, force?: boolean) {
       this.dataService.loadCargasViagem(force).then(data => {
          this.cargasViagem = data;
-         console.log(this.cargasViagem);
          for (let i = 0; i < this.cargasViagem.length; i++) {
             this.detailedViagem[i] = false;
          }
