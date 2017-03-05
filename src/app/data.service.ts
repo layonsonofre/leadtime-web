@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { KMMGateway } from './kmm/gateway';
+import { Usuario } from './kmm/usuario';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DataService {
+
+   protected user: Usuario = Usuario.instance;
 
    public cargasViagem: any = null;
    public cargasAguardando: any = null;
@@ -13,19 +16,39 @@ export class DataService {
    public transitTime: any = null;
    public indicadoresHome: any = null;
 
-   public firstLoad: boolean = false;
+   public isLoggedIn: boolean = false;
+   public redirectUrl: string;
 
+   public firstLoad: boolean = false;
    public _modulo: string = "LEADTIME";
 
    constructor(public http: Http, private gateway: KMMGateway) {
    }
 
+   login(): Promise<boolean> {
+      this.isLoggedIn = false;
+      return this.gateway.backendCall(this._modulo, "LOGON", null, false).then(
+         (result) => {
+            result.token = "eyJpYXQiOjE0ODc1NTI0OTYsImp0aSI6Ik1UTTVOemd4T1E9PSIsImlzcyI6InNpbmVyZ2lhMi5rbW0uY29tLmJyIiwibmJmIjoxNDg3NTUyNTAxLCJleHAiOjE1MDMxMDQ1MDEsImRhdGEiOnsiYWNlc3NvIjoibGVhZHRpbWUiLCJzZW5oYSI6IjEyMzQ1NiJ9fQ==.MjM4MGQxMmFhMWQyYzJlYTZkMzM1OWQwYTQ4YmEzZmU2ZTc1ZjA3MGQzNWRkZGJmNzJjMWYxYmQxNWY1NTVhZQ==";
+            if (result.token) {
+               this.isLoggedIn = true;
+               this.user.token = result.token;
+            }
+            return this.isLoggedIn;
+         }
+      );
+   }
+
+   logout(): void {
+      this.isLoggedIn = false;
+   }
+
    /*
    * INICIO DO BLOCO DE CARGA
    */
-   loadCargasViagem(force?: boolean): Promise<any> {
+   loadCargasViagem(force?: boolean, parameters?: string): Promise<any> {
       // if (this.cargasViagem == null || force) {
-      //    return this.gateway.backendCall(this._modulo, "getViagem", null, false).then(
+      //    return this.gateway.backendCall(this._modulo, "getViagem", parameters, false).then(
       //       (result) => {
       //          this.cargasViagem = result;
       //          console.log(this.cargasViagem);
@@ -58,7 +81,7 @@ export class DataService {
             this.http.get('http://private-8d09d-leadtime.apiary-mock.com/cargas/aguardando')
             .map(res => res.json())
             .subscribe(data => {
-               this.cargasAguardando = data;
+               this.cargasAguardando = data[0];
                resolve(this.cargasAguardando);
             }, err => {
                console.error(err);

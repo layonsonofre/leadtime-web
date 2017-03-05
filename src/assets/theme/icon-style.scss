@@ -1,12 +1,12 @@
-@import "./icon-variables";
+@import "icon-variables";
 
 @font-face {
   font-family: 'leadtime';
-  src:  url('#{$leadtime-font-path}/leadtime.eot?s0o95e');
-  src:  url('#{$leadtime-font-path}/leadtime.eot?s0o95e#iefix') format('embedded-opentype'),
-    url('#{$leadtime-font-path}/leadtime.ttf?s0o95e') format('truetype'),
-    url('#{$leadtime-font-path}/leadtime.woff?s0o95e') format('woff'),
-    url('#{$leadtime-font-path}/leadtime.svg?s0o95e#leadtime') format('svg');
+  src:  url('#{$icomoon-font-path}/leadtime.eot?fuxjeq');
+  src:  url('#{$icomoon-font-path}/leadtime.eot?fuxjeq#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/leadtime.ttf?fuxjeq') format('truetype'),
+    url('#{$icomoon-font-path}/leadtime.woff?fuxjeq') format('woff'),
+    url('#{$icomoon-font-path}/leadtime.svg?fuxjeq#leadtime') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -41,9 +41,44 @@
     content: $icon-card-background;
   }
 }
+.icon-carga-fim {
+  &:before {
+    content: $icon-carga-fim;
+  }
+}
+.icon-carga-inicio {
+  &:before {
+    content: $icon-carga-inicio;
+  }
+}
+.icon-carga-previsao {
+  &:before {
+    content: $icon-carga-previsao;
+  }
+}
+.icon-descarga-fim {
+  &:before {
+    content: $icon-descarga-fim;
+  }
+}
+.icon-descarga-inicio {
+  &:before {
+    content: $icon-descarga-inicio;
+  }
+}
+.icon-descarga-previsao {
+  &:before {
+    content: $icon-descarga-previsao;
+  }
+}
 .icon-destino {
   &:before {
     content: $icon-destino;
+  }
+}
+.icon-documento {
+  &:before {
+    content: $icon-documento;
   }
 }
 .icon-mercadoria {
@@ -51,14 +86,29 @@
     content: $icon-mercadoria;
   }
 }
+.icon-observacao {
+  &:before {
+    content: $icon-observacao;
+  }
+}
 .icon-origem {
   &:before {
     content: $icon-origem;
   }
 }
-.icon-relogio {
+.icon-pessoa {
   &:before {
-    content: $icon-relogio;
+    content: $icon-pessoa;
+  }
+}
+.icon-relogio1 {
+  &:before {
+    content: $icon-relogio1;
+  }
+}
+.icon-relogio2 {
+  &:before {
+    content: $icon-relogio2;
   }
 }
 .icon-rodovia {
@@ -69,6 +119,21 @@
 .icon-telefone {
   &:before {
     content: $icon-telefone;
+  }
+}
+.icon-terno {
+  &:before {
+    content: $icon-terno;
+  }
+}
+.icon-tipo1 {
+  &:before {
+    content: $icon-tipo1;
+  }
+}
+.icon-tipo2 {
+  &:before {
+    content: $icon-tipo2;
   }
 }
 .icon-home {

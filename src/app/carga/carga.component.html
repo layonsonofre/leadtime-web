@@ -1,148 +1,194 @@
-<md-tab-group>
-   <md-tab label="Viagem" (click)="loadCargasViagem(null, false)">
-      <div class="flex-container" fxLayout="row" fxLayoutGap="10px">
-         <div class="list-summary" fxFlex="30"  fxFlex.xs="100" fxFlexOrder="1">
+<div class="loader" *ngIf="loading">
+   <md-spinner class="app-spinner"></md-spinner>
+</div>
+<md-tab-group (focusChange)="loadData($event.index)" md-stretch-tabs="always">
+   <md-tab label="Viagem">
+      <div class="flex-container" fxLayout.gt-xs="row" fxLayout="column" fxLayoutGap="10px">
+         <div class="list-summary" fxFlex.gt-xs="30"  fxFlex="100" fxFlexOrder="1">
             <md-card>
-               <!-- <h2>Estatísticas</h2> -->
-               <div class="summary">
-                  <span class="s-title">Total: </span>
-                  <span class="s-value">17</span>
-               </div>
-               <div class="summary">
-                  <a href="#"><span class="legenda previsto"></span></a>
-                  <span class="s-title">Previstos: </span>
-                  <span class="s-value">12</span>
-                  <span class="active"></span>
-               </div>
-               <div class="summary">
-                  <a href="#"><span class="legenda atrasado"></span></a>
-                  <span class="s-title">Atrasados: </span>
-                  <span class="s-value">5</span>
-                  <span class="active"></span>
-               </div>
+               <form>
+                  <h4>Informações</h4>
+                  <ul class="summary">
+                     <li>Total: <span class="summary-value">17</span></li>
+                     <li (click)="statusFilter('previsto', cargasViagem)" class="action" [ngClass]="filtro.previsto === true ? 'animated pulse active' : ''"><div class="action-anim" [ngClass]="filtro.previsto === true ? 'animated pulse' : ''"><span class="icon-relogio1 f-previsto"></span></div>Previstos: <span class="summary-value">17</span></li>
+                     <li (click)="statusFilter('atrasado', cargasViagem)" class="action" [ngClass]="filtro.atrasado === true ? 'animated pulse active' : ''"><div class="action-anim" [ngClass]="filtro.atrasado === true ? 'animated pulse' : ''"><span class="icon-relogio2 f-atrasado"></span></div>Atrasados: <span class="summary-value">17</span></li>
+                  </ul>
+                  <hr>
+                  <h4>Filtros</h4>
+                  <div fxLayout="column">
+                     <div fxLayout="row">
+                        <md-input mdInput fxFlex="90" placeholder="Insira os parâmetros de sua pesquisa" [(ngModel)]="filtro.valor" name="valor"></md-input>
+                        <button md-button fxFlex="10" (click)="search()"><i class="material-icons">search</i></button>
+                     </div>
+                     <md-checkbox mdInput fxFlex [(ngModel)]="filtro.placa" name="placa">Placa</md-checkbox>
+                     <md-checkbox mdInput fxFlex [(ngModel)]="filtro.num_romaneio" name="num_romaneio">Romaneio</md-checkbox>
+                     <md-checkbox mdInput fxFlex [(ngModel)]="filtro.origem" name="origem">Origem</md-checkbox>
+                     <md-checkbox mdInput fxFlex [(ngModel)]="filtro.destino" name="destino">Destino</md-checkbox>
+                     <md-checkbox mdInput fxFlex [(ngModel)]="filtro.transportadora" name="transportadora">Transportadora</md-checkbox>
+                     <md-checkbox mdInput fxFlex [(ngModel)]="filtro.mercadoria" name="mercadoria">Mercadoria</md-checkbox>
+
+                     <ul class="summary">
+                        <li (click)="expand()" class="action"><span class="material-icons">fullscreen</span>Expandir/contrair todos</li>
+                        <li class="action">
+                           <span (click)="sort()" class="material-icons">import_export</span>
+                           <span (click)="sort()">Ordenação: {{filtro.orders_label[this.filtro.orderIndex]}}</span>
+                           <span (click)="setAscDesc()" *ngIf="filtro.ascending"><span class="material-icons">arrow_upward</span>Crescente</span>
+                           <span (click)="setAscDesc()" *ngIf="!filtro.ascending"><span class="material-icons">arrow_downward</span>Decrescente</span>
+                        </li>
+                     </ul>
+                  </div>
+               </form>
             </md-card>
+
          </div>
-         <div class="card-list" fxFlex="100" fxFlex.xs="100" fxFlexOrder="2">
-            <div *ngFor="let viagem of cargasViagem.viagens, let i = index">
-               <md-card class="card" [ngClass]="viagem.status == 'ATRASADO' ? 'atrasado' : 'previsto'" (click)="detailedViagem[i] = !detailedViagem[i]" [class.detailed]="detailedViagem[i]">
+         <div class="card-list" fxFlex.gt-xs="70" fxFlex="100" fxFlexOrder="2" (scroll)="onScroll($event)">
+            <div *ngFor="let viagem of cargasViagem, let i = index" [ngClass]="viagem.visible === true ? '' : 'hide'">
+               <md-card class="card" [ngClass]="viagem.status == 'ATRASADO' ? 'atrasado' : 'previsto'" (click)="viagem.details = !viagem.details" [class.detailed]="viagem.details">
                   <div class="logo"></div>
                   <!-- <div class="logo" [ngStyle]="{'background': 'url(' + viagem.transportadora.logo + ') no-repeat center #FFFFFF'}"></div> -->
                   <div class="card-content">
                      <div class="minimized-info">
-                        <div class="info full chegada-prevista">
-                           <span class="chegada-prevista"></span>{{ viagem.carga_previsao_inicio }}
+                        <div class="info full">
+                           <span class="icon-carga-previsao"></span>{{ viagem.carga_previsao_inicio }}
                            <div class="help-text">Chegada prevista</div>
                         </div>
-                        <!-- <div class="info half left placa">
-                           {{ viagem.placa[0].placa }}
+                        <div class="info">
+                           <span class="icon-caminhao"></span>{{ viagem.placa[0].placa }}
                            <div class="help-text">Placa</div>
-                        </div> -->
-                        <div class="info half right romaneio">
-                           {{ viagem.num_romaneio }}
+                        </div>
+                        <div class="info">
+                           <span class="icon-rodovia"></span>{{ viagem.num_romaneio }}
                            <div class="help-text">Romaneio</div>
                         </div>
                      </div>
                      <div class="detailed-info">
-                        <!-- <div class="info half left placa">
-                           {{ viagem.empresa[0].nome_fantasia }}
+                        <div class="info">
+                           <span class="icon-terno"></span>{{ viagem.empresa[0].nome_fantasia }}
                            <div class="help-text">Transportadora</div>
-                        </div> -->
-                        <div class="info half right chegada-prevista">
-                           {{ viagem.carga_previsao_fim }}
-                           <div class="help-text">Chegada prevista</div>
                         </div>
-                        <div class="info half left placa">
-                           {{ viagem.placa[0].placa }}
+                        <div class="info">
+                           <span class="icon-carga-fim"></span>{{ viagem.carga_previsao_fim }}
+                           <div class="help-text">Chegada prevista fim</div>
+                        </div>
+                        <div class="info">
+                           <span class="icon-caminhao"></span>{{ viagem.placa[0].placa }}
                            <div class="help-text">Placa</div>
                         </div>
-                        <div class="info half right romaneio">
-                           {{ viagem.num_romaneio }}
+                        <div class="info">
+                           <span class="icon-rodovia"></span>{{ viagem.num_romaneio }}
                            <div class="help-text">Romaneio</div>
                         </div>
-                        <!-- <div class="info half left mercadoria">
-                           {{ viagem.mercadoria[0].mercadoria }}
+                        <div class="info">
+                           <span class="icon-mercadoria"></span>{{ viagem.mercadoria[0].mercadoria }}
                            <div class="help-text">Mercadoria</div>
-                        </div> -->
-                        <div class="info half right pessoa">
-                           {{ viagem.motorista_cpf }}
+                        </div>
+                        <div class="info">
+                           <span class="icon-pessoa"></span>{{ viagem.motorista_cpf }}
                            <div class="help-text">Motorista</div>
                         </div>
-                        <div class="info half left origem">
-                           {{ viagem.origem_logradouro }}
+                        <div class="info">
+                           <span class="icon-origem"></span>{{ viagem.origem_logradouro }}
                            <div class="help-text">Origem</div>
                         </div>
-                        <div class="info half right destino">
-                           {{ viagem.destino_logradouro }}
+                        <div class="info">
+                           <span class="icon-destino"></span>{{ viagem.destino_logradouro }}
                            <div class="help-text">Destino</div>
                         </div>
                      </div>
                   </div>
                </md-card>
             </div>
-            <button md-button>+</button>
          </div>
       </div>
    </md-tab>
-   <md-tab label="Aguardando" (click)="loadCargasAguardando(null, false)">
-      <!-- <div *ngFor="let viagem of cargasAguardando.viagens, let i = index" class="card-wrapper">
-         <md-card class="card" [ngClass]="viagem.status == 'ATRASADO' ? 'atrasado' : 'previsto'" (click)="detailedViagem[i] = !detailedAguardando[i]" [class.detailed]="detailedAguardando[i]">
-            <div class="logo" [ngStyle]="{'background': 'url(' + viagem.transportadora.logo + ') no-repeat center #FFFFFF'}"></div>
-            <div class="card-content">
-               <div class="minimized-info">
-                  <div class="info full chegada-prevista">
-                     {{ viagem.chegada_prevista }}
-                     <div class="help-text">Chegada prevista</div>
+   <md-tab label="Aguardando">
+      <div class="flex-container" fxLayout.gt-xs="row" fxLayout="column" fxLayoutGap="10px">
+         <div class="list-summary" fxFlex.gt-xs="30"  fxFlex="100" fxFlexOrder="1">
+            <md-card>
+               <form>
+                  <h4>Informações</h4>
+                  <ul class="summary">
+                     <li>Total: <span class="summary-value">17</span></li>
+                     <li (click)="statusFilter('previsto', cargasAguardando)" class="action" [ngClass]="filtro.previsto === true ? 'animated pulse active' : ''"><div class="action-anim" [ngClass]="filtro.previsto === true ? 'animated pulse' : ''"><span class="icon-relogio1 f-previsto"></span></div>Previstos: <span class="summary-value">17</span></li>
+                     <li (click)="statusFilter('atrasado', cargasAguardando)" class="action" [ngClass]="filtro.atrasado === true ? 'animated pulse active' : ''"><div class="action-anim" [ngClass]="filtro.atrasado === true ? 'animated pulse' : ''"><span class="icon-relogio2 f-atrasado"></span></div>Atrasados: <span class="summary-value">17</span></li>
+                  </ul>
+                  <button md-button fxFlex (click)="expand()"><i class="material-icons">fullscreen</i>Expandir/contrair todos</button>
+                  <hr>
+                  <h4>Filtros</h4>
+                  <div fxLayout="column">
+                     <div fxLayout="row">
+                        <md-input mdInput fxFlex="90" placeholder="Insira os parâmetros de sua pesquisa" [(ngModel)]="filtro.valor" name="valor"></md-input>
+                        <button md-button fxFlex="10" (click)="search()"><i class="material-icons">search</i></button>
+                     </div>
+                     <md-checkbox mdInput fxFlex [(ngModel)]="filtro.placa" name="placa">Placa</md-checkbox>
+                     <md-checkbox mdInput fxFlex [(ngModel)]="filtro.num_romaneio" name="num_romaneio">Romaneio</md-checkbox>
+                     <md-checkbox mdInput fxFlex [(ngModel)]="filtro.origem" name="origem">Origem</md-checkbox>
+                     <md-checkbox mdInput fxFlex [(ngModel)]="filtro.destino" name="destino">Destino</md-checkbox>
+                     <md-checkbox mdInput fxFlex [(ngModel)]="filtro.transportadora" name="transportadora">Transportadora</md-checkbox>
+                     <md-checkbox mdInput fxFlex [(ngModel)]="filtro.mercadoria" name="mercadoria">Mercadoria</md-checkbox>
                   </div>
-                  <div class="info half left placa">
-                     {{ viagem.placa }}
-                     <div class="help-text">Placa</div>
+               </form>
+            </md-card>
+
+         </div>
+         <div class="card-list" fxFlex.gt-xs="70" fxFlex="100" fxFlexOrder="2" (scroll)="onScroll($event)">
+            <div *ngFor="let viagem of cargasAguardando, let i = index" [ngClass]="viagem.visible === true ? '' : 'hide'">
+               <md-card class="card" [ngClass]="viagem.status == 'ATRASADO' ? 'atrasado' : 'previsto'" (click)="viagem.details = !viagem.details" [class.detailed]="viagem.details">
+                  <div class="logo"></div>
+                  <!-- <div class="logo" [ngStyle]="{'background': 'url(' + viagem.transportadora.logo + ') no-repeat center #FFFFFF'}"></div> -->
+                  <div class="card-content">
+                     <div class="minimized-info">
+                        <div class="info full">
+                           <span class="icon-carga-previsao"></span>{{ viagem.carga_previsao_inicio }}
+                           <div class="help-text">Chegada prevista</div>
+                        </div>
+                        <div class="info">
+                           <span class="icon-caminhao"></span>{{ viagem.placa[0].placa }}
+                           <div class="help-text">Placa</div>
+                        </div>
+                        <div class="info">
+                           <span class="icon-rodovia"></span>{{ viagem.num_romaneio }}
+                           <div class="help-text">Romaneio</div>
+                        </div>
+                     </div>
+                     <div class="detailed-info">
+                        <div class="info">
+                           <span class="icon-terno"></span>{{ viagem.empresa[0].nome_fantasia }}
+                           <div class="help-text">Transportadora</div>
+                        </div>
+                        <div class="info">
+                           <span class="icon-carga-fim"></span>{{ viagem.carga_previsao_fim }}
+                           <div class="help-text">Chegada prevista fim</div>
+                        </div>
+                        <div class="info">
+                           <span class="icon-caminhao"></span>{{ viagem.placa[0].placa }}
+                           <div class="help-text">Placa</div>
+                        </div>
+                        <div class="info">
+                           <span class="icon-rodovia"></span>{{ viagem.num_romaneio }}
+                           <div class="help-text">Romaneio</div>
+                        </div>
+                        <div class="info">
+                           <span class="icon-mercadoria"></span>{{ viagem.mercadoria[0].mercadoria }}
+                           <div class="help-text">Mercadoria</div>
+                        </div>
+                        <div class="info">
+                           <span class="icon-pessoa"></span>{{ viagem.motorista_cpf }}
+                           <div class="help-text">Motorista</div>
+                        </div>
+                        <div class="info">
+                           <span class="icon-origem"></span>{{ viagem.origem_logradouro }}
+                           <div class="help-text">Origem</div>
+                        </div>
+                        <div class="info">
+                           <span class="icon-destino"></span>{{ viagem.destino_logradouro }}
+                           <div class="help-text">Destino</div>
+                        </div>
+                     </div>
                   </div>
-                  <div class="info half right romaneio">
-                     {{ viagem.romaneio }}
-                     <div class="help-text">Romaneio</div>
-                  </div>
-               </div>
-               <div class="detailed-info">
-                  <div class="info half left placa">
-                     {{ viagem.transportadora.nome_fantasia }}
-                     <div class="help-text">Transportadora</div>
-                  </div>
-                  <div class="info half right chegada-prevista">
-                     {{ viagem.chegada_prevista }}
-                     <div class="help-text">Chegada prevista</div>
-                  </div>
-                  <div class="info half left placa">
-                     {{ viagem.placa }}
-                     <div class="help-text">Placa</div>
-                  </div>
-                  <div class="info half right romaneio">
-                     {{ viagem.romaneio }}
-                     <div class="help-text">Romaneio</div>
-                  </div>
-                  <div class="info half left mercadoria">
-                     {{ viagem.mercadoria }}
-                     <div class="help-text">Mercadoria</div>
-                  </div>
-                  <div class="info half right pessoa">
-                     {{ viagem.motorista }}
-                     <div class="help-text">Motorista</div>
-                  </div>
-                  <div class="info half left origem">
-                     {{ viagem.municipio_origem }}
-                     <div class="help-text">Origem</div>
-                  </div>
-                  <div class="info half right destino">
-                     {{ viagem.municipio_destino }}
-                     <div class="help-text">Destino</div>
-                  </div>
-               </div>
+               </md-card>
             </div>
-         </md-card>
-      </div> -->
+         </div>
+      </div>
    </md-tab>
 </md-tab-group>
-<div class="fab-menu">
-   <a class="fab-button" (click)="openFilter()" tooltip="Filtro"></a>
-   <a class="fab-button" (click)="expand()" tooltip="Expandir/Contrair"></a>
-   <a class="fab-button" tooltip="Opções"></a>
-</div>

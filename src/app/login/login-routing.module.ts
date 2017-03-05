@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth-guard.service';
-import { AuthService } from '../auth.service';
+import { DataService } from '../data.service';
 import { LoginComponent } from './login.component';
 
 const loginRoutes: Routes = [
-   { path: 'login', component: LoginComponent }
+   { path: 'login', component: LoginComponent, data: { title: 'Login | Lead Time'} }
 ];
 
 @NgModule({
@@ -17,7 +17,7 @@ const loginRoutes: Routes = [
    ],
    providers: [
       AuthGuard,
-      AuthService
+      DataService
    ]
 })
 export class LoginRoutingModule {}

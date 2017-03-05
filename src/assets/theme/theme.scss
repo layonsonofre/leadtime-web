@@ -1,7 +1,13 @@
+@import "~bourbon/app/assets/stylesheets/_bourbon";
 @import './icons';
 @import './animations';
 @import './variables';
 @import './icon-style';
+
+@font-face {
+   font-family: 'Bree Serif';
+   src: font-files('assets/fonts/BreeSerif-Regular.ttf');
+}
 
 html {
    font-size: 16px;
@@ -21,7 +27,7 @@ md-toolbar, md-toolbar-row {
    background-color: map-get($colors, app-background)!important;
    height: 90vh;
    max-height: 90vh;
-   overflow: hidden;
+   overflow: scroll;
 }
 
 .atrasado {
@@ -51,7 +57,7 @@ md-card {
    display: flex;
    cursor: pointer;
    .logo {
-      width: 40%;
+      width: 30%;
       height: inherit;
       float: left;
       overflow: hidden;
@@ -62,7 +68,7 @@ md-card {
    }
 }
 .card-content {
-   width: 60%!important;
+   width: 70%!important;
    padding: 5px 5px 5px 10px !important;
    position: relative;
    float: right;
@@ -71,61 +77,41 @@ md-card {
    font-size: 1rem!important;
    font-weight: normal;
    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+
    .minimized-info {
-      display: block;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: flex-start;
       color: map-get($colors, light);
    }
    .detailed-info {
       display: none;
    }
 }
+
+.hide {
+   display: none;
+}
+
 .info {
    position: relative;
    line-height: 90%;
-   margin-bottom: 3px;
-   margin-top: 3px;
-   &.full {
-      display: block;
-      width: 100%;
-   }
-   &.half {
-      width: 40%;
-      display: inline-block;
-      &.left {
-         float: left;
-      }
-      &.right {
-         float: right;
-      }
-   }
-   // &.chegada-prevista {
-   //    @include icon-agenda-white;
-   // }
-   // &.placa {
-   //    @include icon-caminhao-white;
-   // }
-   // &.romaneio {
-   //    @include icon-rodovia-white;
-   // }
-   // &.destino {
-   //    @include icon-destino-white;
-   // }
-   // &.mercadoria {
-   //    @include icon-mercadoria-white;
-   // }
-   // &.origem {
-   //    @include icon-origem-white;
-   // }
-   // &.pessoa {
-   //    @include icon-pessoa-white;
-   // }
-   // &.tempo {
-   //    @include icon-relogio-white;
-   // }
-   // &.telefone {
-   //    @include icon-telefone-white;
-   // }
+   margin: 3px 10px 10px 10px;
+   flex-grow: 1;
+   width: 32%;
+   font-size: 1em;
 }
+@media (min-width: 1368px) {
+   .info {
+      font-size: 1.6em;
+   }
+}
+
+[class^="icon-"], [class*=" icon-"] {
+   margin-right: 5px;
+}
+
 .help-text {
    position: relative;
    margin-top: 2px;
@@ -135,7 +121,8 @@ md-card {
 }
 .detailed {
    height: 100%;
-   @include animation(grow 300ms cubic-bezier(0, 0.45, 0.30, 2.4));
+   // @include animation(grow 300ms cubic-bezier(0, 0.45, 0.30, 2.4));
+   @include animation(grow2 300ms ease-in-out);
    color: map-get($colors, dark);
 
    .minimized-info {
@@ -145,7 +132,10 @@ md-card {
       width: 100%!important;
    }
    .detailed-info {
-      display: block;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-around;
    }
    .logo {
       display: none;
@@ -156,35 +146,6 @@ md-card {
    &.previsto {
       @extend .previsto-border;
    }
-   .info {
-      // &.chegada-prevista {
-      //    @include icon-agenda-black;
-      // }
-      // &.placa {
-      //    @include icon-caminhao-black;
-      // }
-      // &.romaneio {
-      //    @include icon-rodovia-black;
-      // }
-      // &.destino {
-      //    @include icon-destino-black;
-      // }
-      // &.mercadoria {
-      //    @include icon-mercadoria-black;
-      // }
-      // &.origem {
-      //    @include icon-origem-black;
-      // }
-      // &.pessoa {
-      //    @include icon-pessoa-black;
-      // }
-      // &.tempo {
-      //    @include icon-relogio-black;
-      // }
-      // &.telefone {
-      //    @include icon-telefone-black;
-      // }
-   }
 }
 
 .card-list {
@@ -193,136 +154,200 @@ md-card {
 }
 
 hr {
-   // border-top: 1px solid #f4f4f4;
-   // margin-top: 20px;
-   // margin-bottom: 20px;
+   border-top: 1px solid #f4f4f4;
+   margin-top: 20px;
+   margin-bottom: 20px;
 }
 
+.list-summary {
+   font-size: 1em;
 
-.fab-menu {
-   bottom: 30px;
-   position: absolute;
-   margin: 2em;
-   left: 0px;
-   z-index: 2;
-}
-
-.fab-button {
-   box-shadow: 0px 5px 11px -2px rgba(0, 0, 0, 0.18), 0px 4px 12px -7px rgba(0, 0, 0, 0.15);
-   border-radius: 50%;
-   display: block;
-   width: 56px;
-   height: 56px;
-   margin: 0 auto;
-   margin: 20px auto 0;
-   position: relative;
-   @include transition(all .1s ease-out);
-   cursor: pointer;
-   background: #FFF;
-}
-
-.fab-button:active, .fab-button:focus, .fab-button:hover {
-   box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
-}
-
-.fab-button:not(:last-child) {
-   width: 40px;
-   height: 40px;
-   margin: 20px auto 0;
-   opacity: 0;
-   -webkit-transform: translateY(50px);
-   -ms-transform: translateY(50px);
-   transform: translateY(50px);
-}
-
-.fab-menu:hover .fab-button:not(:last-child) {
-   opacity: 1;
-   -webkit-transform: none;
-   -ms-transform: none;
-   transform: none;
-   margin: 15px auto 0;
-}
-
-/* Unessential styling for sliding up fab-button at differnt speeds */
-
-.fab-button:nth-last-child(1) {
-   -webkit-transition-delay: 25ms;
-   transition-delay: 25ms;
-   background-image: url('http://simpleicon.com/wp-content/uploads/gear-2.svg');
-   background-size: contain;
-}
-
-.fab-button:not(:last-child):nth-last-child(2) {
-   -webkit-transition-delay: 50ms;
-   transition-delay: 20ms;
-   background-image: url('http://www.lowcountryren.com/nestor/Documentation/ionicons-1.4.1/src/arrow-expand.svg');
-   background-size: contain;
-}
-
-.fab-button:not(:last-child):nth-last-child(3) {
-   -webkit-transition-delay: 75ms;
-   transition-delay: 40ms;
-   background-image: url('https://filters.social/icons/filter.svg');
-   background-size: contain;
-}
-
-[tooltip]:before {
-   bottom: 25%;
-   font-family: arial;
-   font-weight: 600;
-   border-radius: 2px;
-   background: #585858;
-   color: #fff;
-   content: attr(tooltip);
-   font-size: 12px;
-   visibility: hidden;
-   opacity: 0;
-   padding: 5px 7px;
-   margin-left: 12px;
-   position: absolute;
-   left: 100%;
-   white-space: nowrap;
-}
-
-[tooltip]:hover:before, [tooltip]:hover:after {
-   visibility: visible;
-   opacity: 1;
+   md-checkbox {
+      margin: 0 0 10px 0!important;
+   }
 }
 
 .summary {
-   height: 32px;
-   margin-bottom: 20px;
+   list-style: none;
+   padding-left: 0;
 
-   .s-title {
-      font-size: 1rem;
-      vertical-align: bottom;
-   }
 
-   .s-value {
-      font-size: 1.5rem;
-      position: relative;
-      bottom: -3px;
-   }
-
-   .legenda {
-      width: 12px;
-      height: 1.5rem;
-      display: inline-block;
-      position: relative;
-      left: 0;
-      // top: 0;
-      vertical-align: bottom;
-      margin-right: 10px;
+   li {
+      margin: 0 0 10px 0;
    }
 
    .active {
-      width: 24px;
-      height: 1.5rem;
-      display: inline-block;
-      position: absolute;
-      right: 0;
-      // bottom: 0;
-      vertical-align: bottom;
-      background-color: #212121;
+      &::after {
+         display: inline-block;
+         content: '';
+         width: 0;
+         height: 0;
+         border-bottom: 10px solid rgba(0, 0, 0, 0.3);
+         border-left: 10px solid transparent;
+         margin-left: 5px;
+      }
+   }
+
+   .action {
+      background-color: rgba(255, 255, 255, 0)!important;
+   }
+   .action:hover {
+      cursor: pointer;
+   }
+
+   .f-previsto {
+      color: map-get($colors, previsto);
+   }
+
+   .f-atrasado {
+      color: map-get($colors, atrasado);
+   }
+
+   .summary-value {
+      font-size: 1.2em;
+   }
+}
+
+.action-anim {
+   display: inline-block;
+   @animation-iteration-count: 10;
+}
+
+.tab-action {
+   position: absolute;
+   height: 64px;
+   width: 64px;
+   z-index: 99;
+   right: 0;
+   top: 0;
+}
+
+.loader {
+   display: flex;
+   position: absolute;
+   right: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.20);
+   z-index: 99;
+   align-items: center;
+   justify-content: center;
+}
+
+.app-sidenav {
+   min-width: 100px;
+}
+
+.app-content {
+   padding: 20px;
+}
+
+.app-content md-card {
+   margin: 20px;
+}
+
+.app-content md-checkbox {
+   margin: 10px;
+}
+
+.app-toolbar-filler {
+   flex: 1 1 auto;
+}
+
+.app-toolbar-menu {
+   padding: 0 14px 0 14px;
+   color: white;
+}
+
+.app-icon-button {
+   box-shadow: none;
+   user-select: none;
+   background: none;
+   border: none;
+   cursor: pointer;
+   filter: none;
+   font-weight: normal;
+   height: auto;
+   line-height: inherit;
+   margin: 0;
+   min-width: 0;
+   padding: 0;
+   text-align: left;
+   text-decoration: none;
+}
+
+.app-action {
+   display: inline-block;
+   position: fixed;
+   bottom: 20px;
+   right: 20px;
+}
+
+.app-spinner {
+   height: 30px;
+   width: 30px;
+   display: inline-block;
+}
+
+.app-input-icon {
+   font-size: 16px;
+}
+
+.app-list {
+   border: 1px solid rgba(0,0,0,0.12);
+   width: 350px;
+   margin: 20px;
+}
+
+.app-progress {
+   margin: 20px;
+}
+
+.login-background {
+   content: '';
+   position: absolute;
+   right: 0;
+   top: 0;
+   width: 110vw;
+   height: 100vh;
+   background-image: url('assets/img/background.jpg');
+   background-position: center center;
+   background-size: cover;
+   background-repeat: no-repeat;
+   z-index: 90;
+   @include filter(blur, 5px);
+   overflow-x: hidden;
+   overflow-y: hidden;
+}
+
+.login-overlay {
+   position: absolute;
+   right: 0;
+   top: 0;
+   width: 100vw;
+   height: 100vh;
+   z-index: 99;
+
+   font-family: 'Bree Serif', sans-serif;
+   color: #fff;
+
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-around;
+
+}
+
+.login-content {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-around;
+
+   img {
+      margin-bottom: 20px;
+      max-width: 200px;
+      width: 200px;
    }
 }

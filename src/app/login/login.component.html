@@ -1,6 +1,11 @@
-<h2>LOGIN</h2>
-<p>{{message}}</p>
-<p>
-   <button (click)="login()"  *ngIf="!authService.isLoggedIn">Login</button>
-   <button (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
-</p>
+<div class="login-background"></div>
+<div class="login-overlay">
+   <div class="login-content">
+      <img src="assets/img/logo-white.png" alt="Lead Time">
+      <div><md-input color="accent" mdInput type="text" placeholder="CNPJ/CUIT"></md-input></div>
+      <div><md-input color="accent" mdInput type="password" placeholder="Senha"></md-input></div>
+      <div><button md-button (click)="login()"  *ngIf="!dataService.isLoggedIn">Login</button></div>
+      <div><button md-button (click)="logout()" *ngIf="dataService.isLoggedIn">Logout</button></div>
+      <div><p>{{message}}</p>
+   </div>
+</div>

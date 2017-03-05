@@ -10,8 +10,9 @@ import { CargaComponent } from './carga/carga.component';
 import { AppComponent } from './app.component';
 
 const indexRoutes: Routes = [
-   { path: 'home', canActivateChild: [AuthGuard], component: HomeComponent },
-   { path: 'carga', canActivateChild: [AuthGuard], component: CargaComponent }
+   { path: '', canActivateChild: [AuthGuard], component: HomeComponent, data: {title: 'Início | Lead Time' } },
+   { path: 'home', canActivateChild: [AuthGuard], component: HomeComponent, data: {title: 'Início | Lead Time' } },
+   { path: 'carga', canActivateChild: [AuthGuard], component: CargaComponent, data: {title: 'Cargas | Lead Time'} }
 ];
 
 @NgModule({

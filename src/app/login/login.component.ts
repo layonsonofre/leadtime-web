@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { DataService } from '../data.service';
 
 @Component({
    selector: 'login',
@@ -10,39 +10,34 @@ import { AuthService } from '../auth.service';
 export class LoginComponent {
    message: string;
 
-   constructor(public authService: AuthService, public router: Router) {
+   constructor(private dataService: DataService, public router: Router) {
       this.setMessage();
    }
 
    setMessage() {
-      this.message = 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out');
+      this.message = 'Seu acesso ao Lead Time está ' + (this.dataService.isLoggedIn ? 'liberado' : 'expirado' + '.');
    }
 
    login() {
-      this.message = 'Trying to log in ...';
+      this.message = 'Verificando acesso...';
 
-      this.authService.login().subscribe(() => {
+      this.dataService.login().then(() => {
          this.setMessage();
-         if (this.authService.isLoggedIn) {
-            // Get the redirect URL from our auth service
-            // If no redirect has been set, use the default
-            let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/home';
+         if (this.dataService.isLoggedIn) {
+            let redirect = this.dataService.redirectUrl ? this.dataService.redirectUrl : '/home';
 
-            // Set our navigation extras object
-            // that passes on our global query params and fragment
             let navigationExtras: NavigationExtras = {
                preserveQueryParams: false,
                preserveFragment: false
             };
 
-            // Redirect the user
             this.router.navigate([redirect], navigationExtras);
          }
       });
    }
 
    logout() {
-      this.authService.logout();
+      this.dataService.logout();
       this.setMessage();
    }
 }
