@@ -96,15 +96,17 @@ export class CargaComponent implements OnInit {
          } else {
             dataArray[i].visible = false;
          }
+         console.log(dataArray[i]);
 
          if (this.filtro.valor) {
-            let temp = this.filtro.toLowerCase();
+            let temp = this.filtro.valor.toLowerCase();
+            this.searchMercadoria(dataArray[i].mercadoria, temp);
             if (this.filtro.placa && dataArray[i].placa && temp === dataArray[i].placa.toLowerCase()
-            || this.filtro.num_romaneio && dataArray[i].num_romaneio && temp === dataArray[i].num_romaneio.toLowerCase()
-            || this.filtro.origem && dataArray[i].origem && temp === dataArray[i].origem.toLowerCase()
-            || this.filtro.destino && dataArray[i].destino && temp === dataArray[i].destino.toLowerCase()
-            || this.filtro.transportadora && dataArray[i].transportadora && temp === dataArray[i].transportadora.toLowerCase()
-            || this.filtro.mercadoria && dataArray[i].mercadorias && this.searchItems(dataArray[i].mercadorias, 'mercadoria', temp)
+               || this.filtro.num_romaneio && dataArray[i].num_romaneio && temp === dataArray[i].num_romaneio.toLowerCase()
+               || this.filtro.origem && dataArray[i].origem && temp === dataArray[i].origem.toLowerCase()
+               || this.filtro.destino && dataArray[i].destino && temp === dataArray[i].destino.toLowerCase()
+               || this.filtro.transportadora && dataArray[i].transportadora && temp === dataArray[i].transportadora.toLowerCase()
+               || this.filtro.mercadoria && dataArray[i].mercadorias && this.searchMercadoria(dataArray[i].mercadorias, temp)
             ) {
                dataArray[i].visible = true;
             } else {
@@ -114,14 +116,11 @@ export class CargaComponent implements OnInit {
       }
    }
 
-   searchItems(item: any, attribute: string, value: string): boolean {
-      if (item.mercadorias) {
-          for (let i = 0; i < item.length; i++) {
-             // TODO: get attribute name and compare with 'attribute' parameters
-              if (value === item[i].mercadoria.toLowerCase()) {
-                  return true;
-              }
-          }
+   searchMercadoria(item: any, value: string): boolean {
+      for (let i = 0; i < item.length; i++) {
+         if (item[i].mercadoria && value === item[i].mercadoria.toLowerCase()) {
+            return true;
+         }
       }
       return false;
    }

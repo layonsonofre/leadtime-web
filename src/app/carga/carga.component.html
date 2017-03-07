@@ -18,7 +18,7 @@
                   <div fxLayout="column">
                      <div fxLayout="row">
                         <md-input mdInput fxFlex="90" placeholder="Insira os parâmetros de sua pesquisa" [(ngModel)]="filtro.valor" name="valor"></md-input>
-                        <button md-button fxFlex="10" (click)="search()"><i class="material-icons">search</i></button>
+                        <button md-button fxFlex="10" (click)="search(cargasViagem)"><i class="material-icons">search</i></button>
                      </div>
                      <md-checkbox mdInput fxFlex [(ngModel)]="filtro.placa" name="placa">Placa</md-checkbox>
                      <md-checkbox mdInput fxFlex [(ngModel)]="filtro.num_romaneio" name="num_romaneio">Romaneio</md-checkbox>
@@ -118,7 +118,7 @@
                   <div fxLayout="column">
                      <div fxLayout="row">
                         <md-input mdInput fxFlex="90" placeholder="Insira os parâmetros de sua pesquisa" [(ngModel)]="filtro.valor" name="valor"></md-input>
-                        <button md-button fxFlex="10" (click)="search()"><i class="material-icons">search</i></button>
+                        <button md-button fxFlex="10" (click)="search(cargasAguardando)"><i class="material-icons">search</i></button>
                      </div>
                      <md-checkbox mdInput fxFlex [(ngModel)]="filtro.placa" name="placa">Placa</md-checkbox>
                      <md-checkbox mdInput fxFlex [(ngModel)]="filtro.num_romaneio" name="num_romaneio">Romaneio</md-checkbox>
