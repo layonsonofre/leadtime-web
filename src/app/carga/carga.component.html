@@ -14,8 +14,8 @@
                      <li (click)="statusFilter('atrasado', cargasViagem)" class="action" [ngClass]="filtro.atrasado === true ? 'animated pulse active' : ''"><div class="action-anim" [ngClass]="filtro.atrasado === true ? 'animated pulse' : ''"><span class="icon-relogio2 f-atrasado"></span></div>Atrasados: <span class="summary-value">17</span></li>
                   </ul>
                   <hr>
-                  <h4>Filtros</h4>
-                  <div fxLayout="column">
+                  <h4 class="header-link" (click)="showFilter = !showFilter">Filtros</h4>
+                  <div *ngIf="showFilter" fxLayout="column">
                      <div fxLayout="row">
                         <md-input mdInput fxFlex="90" placeholder="Insira os parâmetros de sua pesquisa" [(ngModel)]="filtro.valor" name="valor"></md-input>
                         <button md-button fxFlex="10" (click)="search(cargasViagem)"><i class="material-icons">search</i></button>
@@ -32,8 +32,8 @@
                         <li class="action">
                            <span (click)="sort()" class="material-icons">import_export</span>
                            <span (click)="sort()">Ordenação: {{filtro.orders_label[this.filtro.orderIndex]}}</span>
-                           <span (click)="setAscDesc()" *ngIf="filtro.ascending"><span class="material-icons">arrow_upward</span>Crescente</span>
-                           <span (click)="setAscDesc()" *ngIf="!filtro.ascending"><span class="material-icons">arrow_downward</span>Decrescente</span>
+                           <span (click)="setAscDesc()" *ngIf="filtro.ascending" class="material-icons">arrow_upward</span>
+                           <span (click)="setAscDesc()" *ngIf="!filtro.ascending" class="material-icons">arrow_downward</span>
                         </li>
                      </ul>
                   </div>

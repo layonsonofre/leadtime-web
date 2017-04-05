@@ -1,5 +1,4 @@
 @import "~bourbon/app/assets/stylesheets/_bourbon";
-@import './icons';
 @import './animations';
 @import './variables';
 @import './icon-style';
@@ -22,20 +21,21 @@ md-toolbar, md-toolbar-row {
    max-height: 10vh!important;
    overflow: hidden;
 }
+.header-link:hover {
+   cursor: pointer;
+}
 
 .app-content {
    background-color: map-get($colors, app-background)!important;
-   height: 90vh;
-   max-height: 90vh;
-   overflow: scroll;
+   min-height: 80vh;
+   max-height: 80vh;
+   overflow-y: scroll;
 }
 
 .atrasado {
-   @include card-background;
    background-color: map-get($colors, atrasado)!important;
 }
 .previsto {
-   @include card-background;
    background-color: map-get($colors, previsto)!important;
 }
 .atrasado-border {
@@ -149,8 +149,8 @@ md-card {
 }
 
 .card-list {
-   max-height: 80vh;
-   overflow-y: scroll;
+   // max-height: 100vh;
+   // overflow-y: scroll;
 }
 
 hr {
@@ -160,7 +160,7 @@ hr {
 }
 
 .list-summary {
-   font-size: 1em;
+   font-size: 0.9em;
 
    md-checkbox {
       margin: 0 0 10px 0!important;

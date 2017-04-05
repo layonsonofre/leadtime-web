@@ -16,6 +16,7 @@ export class CargaComponent implements OnInit {
    private expanded: boolean = false;
    private filtro: any = {};
    public loading: boolean = true;
+   public showFilter: boolean = false;
 
    private pagination_inf: number;
    private pagination_sup: number;
