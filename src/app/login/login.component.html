@@ -2,8 +2,8 @@
 <div class="login-overlay">
    <div class="login-content">
       <img src="assets/img/logo-white.png" alt="Lead Time">
-      <div><md-input color="accent" mdInput type="text" placeholder="CNPJ/CUIT"></md-input></div>
-      <div><md-input color="accent" mdInput type="password" placeholder="Senha"></md-input></div>
+      <div><md-input-container><input color="accent" mdInput type="text" placeholder="CNPJ/CUIT"></md-input-container></div>
+      <div><md-input-container><input color="accent" mdInput type="password" placeholder="Senha"></md-input-container></div>
       <div><button md-button (click)="login()"  *ngIf="!dataService.isLoggedIn">Login</button></div>
       <div><button md-button (click)="logout()" *ngIf="dataService.isLoggedIn">Logout</button></div>
       <div><p>{{message}}</p>

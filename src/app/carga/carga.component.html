@@ -17,7 +17,9 @@
                   <h4 class="header-link" (click)="showFilter = !showFilter">Filtros</h4>
                   <div *ngIf="showFilter" fxLayout="column">
                      <div fxLayout="row">
-                        <md-input mdInput fxFlex="90" placeholder="Insira os parâmetros de sua pesquisa" [(ngModel)]="filtro.valor" name="valor"></md-input>
+                        <md-input-container>
+                           <input mdInput fxFlex="90" placeholder="Insira os parâmetros de sua pesquisa" [(ngModel)]="filtro.valor" name="valor">
+                        </md-input-container>
                         <button md-button fxFlex="10" (click)="search(cargasViagem)"><i class="material-icons">search</i></button>
                      </div>
                      <md-checkbox mdInput fxFlex [(ngModel)]="filtro.placa" name="placa">Placa</md-checkbox>
@@ -117,7 +119,9 @@
                   <h4>Filtros</h4>
                   <div fxLayout="column">
                      <div fxLayout="row">
-                        <md-input mdInput fxFlex="90" placeholder="Insira os parâmetros de sua pesquisa" [(ngModel)]="filtro.valor" name="valor"></md-input>
+                        <md-input-container>
+                           <input mdInput fxFlex="90" placeholder="Insira os parâmetros de sua pesquisa" [(ngModel)]="filtro.valor" name="valor">
+                        </md-input-container>
                         <button md-button fxFlex="10" (click)="search(cargasAguardando)"><i class="material-icons">search</i></button>
                      </div>
                      <md-checkbox mdInput fxFlex [(ngModel)]="filtro.placa" name="placa">Placa</md-checkbox>

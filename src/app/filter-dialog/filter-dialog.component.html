@@ -1,7 +1,9 @@
 <div class="filter">
    <h2 md-dialog-title>Filtros</h2>
    <div md-dialog-content fxLayout="column">
-      <md-input fxFlex="100" placeholder="Insira os parâmetros de sua pesquisa"></md-input>
+      <md-input-container>
+         <input fxFlex="100" placeholder="Insira os parâmetros de sua pesquisa">
+      </md-input-container>
       <md-checkbox fxFlex="100" [checked]="true">Placa</md-checkbox>
       <md-checkbox fxFlex="100" [checked]="false">Romaneio</md-checkbox>
       <md-checkbox fxFlex="100" [checked]="false">Cidade</md-checkbox>

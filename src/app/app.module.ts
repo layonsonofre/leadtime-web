@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpModule } from '@angular/http';
 
@@ -34,7 +35,7 @@ import { FilterDialog } from './filter-dialog/filter-dialog.component';
       FormsModule,
       HttpModule,
       MaterialModule.forRoot(),
-      FlexLayoutModule.forRoot(),
+      BrowserAnimationsModule,
       LoginRoutingModule,
       AppRoutingModule
    ],
