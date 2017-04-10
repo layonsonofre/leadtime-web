@@ -1,10 +1,1 @@
-/* You can add global styles to this file, and also import other style files */
-// @import "../material2-app-theme";
-@import "~bourbon/app/assets/stylesheets/_bourbon";
-@import "~@angular2-material/core/overlay/overlay.css";
 @import "./assets/theme/theme";
-
-html, body {
-   margin: 0;
-   padding: 0;
-}

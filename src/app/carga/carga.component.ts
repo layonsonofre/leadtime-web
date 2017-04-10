@@ -1,8 +1,6 @@
 import { Component, OnInit, Optional } from '@angular/core';
 import { DataService } from '../data.service';
-import { MdDialog, MdDialogRef } from '@angular/material';
 import { Title } from '@angular/platform-browser';
-import { MaterialModule } from '@angular/material';
 
 @Component({
    selector: 'carga',
@@ -28,7 +26,7 @@ export class CargaComponent implements OnInit {
    private orders: string[];
    private orderIndex: number;
 
-   constructor(private dataService: DataService, public dialog: MdDialog, private titleService: Title) { }
+   constructor(private dataService: DataService, private titleService: Title) { }
 
    ngOnInit() {
       this.filtro.orders_label = ["Realizada", "Prevista", "Tempo atraso"];
@@ -135,6 +133,7 @@ export class CargaComponent implements OnInit {
    }
 
    onScroll(event: any, tabIndex: number) {
+      console.log('onScroll', event.srcElement.scrollTop);
       if (event.srcElement.scrollTop > (event.srcElement.scrollHeight - event.srcElement.scrollHeight/3)) {
          this.filtro.pagination_inf += this.filtro.pagination_amount;
          this.filtro.pagination_sup += this.filtro.pagination_amount;

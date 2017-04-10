@@ -1,7 +1,5 @@
-$text-color:        #f8f8f8;
-$background-color:  #f8f8f8;
-
 $colors: (
+  white:                #FFFFFF,
   primary:              #539770,
   secondary:            #8BC34A,
   atrasado:             #FF3D00,
@@ -14,5 +12,12 @@ $colors: (
   indicadorDescarga:    #FFD432,
   indicadorTransitTime: #E84B30,
   primary-darker:       #186138,
-  app-background:       #EEEEEE
+  teal:                 #009688,
+  teal-lighter:         #e0f2f1,
+  teal-dark:            #004D40,
+  teal-darker:          #001D18,
+  app-background:       #EEEEEE,
+  menu:                 rgba(255, 255, 255, 0.5),
+  menu-highlight:       rgba(255, 255, 255, 1),
+  fade:                 rgba(0, 0, 0, 0.05)
 );

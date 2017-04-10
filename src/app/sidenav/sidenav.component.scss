@@ -1,123 +1,139 @@
+@import '../../assets/theme/variables.scss';
+
 .nav {
-   font-family: sans-serif;
-   list-style: none;
-   width: 250px;
-   padding: 0;
-   margin-top: 0;
-   padding-bottom: 60px;
-   background-color: #fff;
-   overflow-y: auto;
-   will-change: transform;
-   backface-visibility: hidden;
+   position: fixed;
+   top: 0px;
+   left: 0px;
+   width: 5vw;
+   height: 100vh;
+   z-index: 1;
+   background-color: map-get($colors, teal-dark);
+   transition: width 300ms ease-in-out;
+   overflow-x: hidden;
+   text-align: left;
+   color: map-get($colors, light);
+   text-decoration: none;
 
-   li {
-      float: none;
+   & > .user {
+      height: 120px;
       width: 100%;
-
-      &.active {
-         background-color: rgba(0,0,0,.05);
-      }
-
-      &.menuoption {
-         display: block;
-         height: 32px;
-      }
-   }
-
-   a {
-      color: rgba(0, 0, 0, 0.7);
-      display: block;
-      font-size: 0.9rem;
-      font-weight: bolder;
-      height: 100%;
-      line-height: 100%;
-      padding: 0 10px;
-      text-decoration: none;
-
-      &:hover {
-         background-color: rgba(0, 0, 0, .05);
-         cursor: pointer;
-      }
-   }
-
-   a > span {
-      height: 24px;
-      line-height: 100%;
-      margin-right: 10px;
-      width: 12px;
-      color: rgba(0,0,0,.54);
-   }
-
-   .divider {
-      margin: 10px 0 10px 0;
-      width: 100%;
-      background-color: rgba(0, 0, 0, 0.2);
-      height: 1px;
-   }
-
-   .subheader {
-      &:hover {
-         background-color: transparent;
-      }
-
-      cursor: initial;
-      pointer-events: none;
-      color: rgba(0,0,0,.54);
-      font-size: 1rem;
-      font-weight: bold;
-      line-height: 30px;
-   }
-
-   .user {
-      color: #fff;
       position: relative;
-      padding: 10px 10px 0;
-      margin-bottom: 15px;
+      overflow: hidden;
 
-      & > a {
-         height: auto;
-         padding: 0;
-         &:hover {
-            background-color: transparent;
-         }
+      & > img {
+         width: auto;
+         height: 100%;
       }
 
-      .background {
-         overflow: hidden;
+      & > .user-details {
          position: absolute;
-         top: 0;
-         right: 0;
-         bottom: 0;
-         left: 0;
-         z-index: -1;
-      }
-
-      .circle, .name, .email {
-         display: block;
-      }
-
-      .circle {
-         height: 64px;
-         width: 64px;
-         border-radius: 32px;
-         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-         border: 2px solid rgba(255, 255, 255, 0.5);
-      }
-
-      .name, .email {
+         top: 0px;
+         color: map-get($colors, light);
+         background: rgba(0, 77, 64, 0.05);
+         background: linear-gradient(rgba(0, 77, 64, 0.05), rgba(0, 77, 64, 1));
+         width: 100%;
+         height: 100%;
          font-size: 0.9rem;
          line-height: 24px;
          text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+
+         & > .user-info {
+            position: absolute;
+            bottom: 1vh;
+            left: 1vw;
+            display: none;
+            cursor: pointer;
+            & > span {
+               font-weight: normal;
+
+               &:first-child {
+                  font-weight: bolder;
+               }
+            }
+         }
+      }
+   }
+
+   & > .menu {
+      text-align: center;
+      margin-top: 30px;
+      & > a {
+         color: map-get($colors, menu);
+         display: block;
+         padding-top: 12px;
+         padding-bottom: 12px;
+         text-decoration: none;
+         height: 100%;
+         width: 100%;
+         &:hover {
+            cursor: pointer;
+            color: map-get($colors, menu-highlight);
+         }
+
+         [class^="icon-"], [class*=" icon-"] {
+            font-size: 1.6rem;
+         }
+
+         & > span.menu-text {
+            display: none;
+         }
+      }
+   }
+
+   & > .logo {
+      width: 100%;
+      height: 64px;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      text-align: center;
+      font-family: 'Bree Serif';
+      position: absolute;
+      bottom: 0;
+      opacity: 0.2;
+      & > .text {
+         display: none;
+         flex-grow: 2;
+      }
+      & > .img > img {
+         height: 80%;
+         width: auto;
+      }
+   }
+
+   //transition
+   &:hover {
+      width: 15vw;
+
+      .user > .user-details > .user-info {
+         display: block;
+         padding-right: 1vw;
+      }
+      .user > img {
+         width: 100%;
+         height: auto;
       }
 
-      .name {
-         margin-top: 16px;
-         font-weight: bolder;
+      & > .logo {
+         opacity: 0.4;
+         & > .text {
+            display: block;
+            text-align: center;
+            vertical-align: middle;
+            height: 100%;
+            font-size: 2rem;
+         }
+         & > .img {
+            flex-grow: 1;
+         }
       }
 
-      .email {
-         padding-bottom: 16px;
-         font-weight: normal;
+      & > .menu {
+         text-align: left;
+         padding-left: 2vw;
+         & > a > span.menu-text {
+            display: inline-block;
+         }
       }
    }
 }

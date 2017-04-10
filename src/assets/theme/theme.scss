@@ -1,93 +1,167 @@
-@import "~bourbon/app/assets/stylesheets/_bourbon";
 @import './animations';
 @import './variables';
 @import './icon-style';
 
 @font-face {
    font-family: 'Bree Serif';
-   src: font-files('assets/fonts/BreeSerif-Regular.ttf');
+   src: url('assets/fonts/BreeSerif-Regular.ttf') format("truetype");
 }
 
+@font-face {
+   font-family: 'Roboto';
+   src: url('https://fonts.googleapis.com/css?family=Roboto');
+}
+
+html, body {
+   margin: 0;
+   padding: 0;
+}
 html {
-   font-size: 16px;
+   font-family: 'Roboto', sans-serif;
+   font-size: 14px;
+   font-weight: lighter;
 }
+h1, h2, h3, h4, h5, h6 {
+   font-weight: lighter;
+}
+
 body {
-   overflow: hidden;
+   min-height: 100vh;
+   overflow-x: hidden;
 }
 
-md-toolbar, md-toolbar-row {
-   height: 10vh!important;
-   min-height: 10vh!important;
-   max-height: 10vh!important;
-   overflow: hidden;
-}
-.header-link:hover {
-   cursor: pointer;
-}
-
-.app-content {
-   background-color: map-get($colors, app-background)!important;
-   min-height: 80vh;
-   max-height: 80vh;
-   overflow-y: scroll;
+.container {
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   min-height: 100vh;
+   width: 100%;
+   padding: 0;
+   background-color: map-get($colors, light);
 }
 
-.atrasado {
-   background-color: map-get($colors, atrasado)!important;
-}
-.previsto {
-   background-color: map-get($colors, previsto)!important;
-}
-.atrasado-border {
-   background-color: #FFF!important;
-   border-left: 4px solid map-get($colors, atrasado);
-}
-.previsto-border {
-   background-color: #FFF!important;
-   border-left: 4px solid map-get($colors, previsto);
+.padded {
+   margin-left: auto;
+   margin-right: auto;
+   padding-left: 20vw;
+   padding-right: 10vw;
+   padding-top: 2vw;
+   transition: 300ms ease-in-out;
 }
 
+.header {
+   height: 116px;
+   color: map-get($colors, dark);
+   background-color: map-get($colors, fade);
 
-md-card {
-   margin: 20px;
+   &:before {
+      width: 100%;
+      height: 116px;
+      background-image: url('assets/img/background.jpg');
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      @include filter(blur, 5px);
+   }
+}
+
+.content {
+   padding-bottom: 10vh;
+}
+
+.page-title {
+   font-family: 'Bree Serif';
+   text-transform: capitalize;
+   height: 32px;
+   margin-bottom: 32px;
+}
+
+.tabs {
+   display: flex;
+   align-content: stretch;
+   text-align: center;
+   height: 32px;
+   margin-right: 200px;
+   & > a {
+      min-width: 10vw;
+      cursor: pointer;
+
+      &:hover, &.active {
+         font-weight: bold;
+         border-bottom: 2px solid orangered;
+      }
+   }
 }
 
 .card {
-   padding: 0 !important;
+   width: 100%;
+   height: 100%;
+   padding: 0;
+   border-radius: 2px;
+   margin-top: 1vh;
+   margin-bottom: 1vh;
+   background-color: map-get($colors, white);
+   box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.1);
+   transition: box-shadow 100ms ease-in-out;
    display: flex;
-   cursor: pointer;
-   .logo {
+
+   &:hover {
+      cursor: pointer;
+      box-shadow: 4px 4px 5px 1px rgba(0, 0, 0, 0.05);
+   }
+
+   & > .card-logo {
       width: 30%;
-      height: inherit;
+      margin-top: 0;
+      margin-bottom: 0;
       float: left;
       overflow: hidden;
-      background-color: #fff;
+      background-color: map-get($colors, white);
       box-shadow: 2px 0px 0px rgba(0, 0, 0, 0.2);
       padding: 5px;
       vertical-align: middle;
    }
-}
-.card-content {
-   width: 70%!important;
-   padding: 5px 5px 5px 10px !important;
-   position: relative;
-   float: right;
-   font-weight: bolder;
-   vertical-align: top;
-   font-size: 1rem!important;
-   font-weight: normal;
-   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 
-   .minimized-info {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-end;
-      justify-content: flex-start;
-      color: map-get($colors, light);
+   & > .card-content {
+      width: 70%;
+      padding: 5px 5px 5px 10px;
+      position: relative;
+      float: right;
+      font-weight: bolder;
+      vertical-align: top;
+      font-size: 1.2rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+
+      .minimized-info {
+         display: flex;
+         flex-wrap: wrap;
+         align-items: flex-end;
+         justify-content: flex-start;
+         color: map-get($colors, light);
+      }
+
+      .detailed-info {
+         display: none;
+      }
    }
-   .detailed-info {
-      display: none;
-   }
+}
+
+.atrasado {
+   background-color: map-get($colors, atrasado);
+}
+
+.previsto {
+   background-color: map-get($colors, previsto);
+}
+
+.atrasado-border {
+   background-color: map-get($colors, white);
+   border-left: 4px solid map-get($colors, atrasado);
+}
+
+.previsto-border {
+   background-color: map-get($colors, white);
+   border-left: 4px solid map-get($colors, previsto);
 }
 
 .hide {
@@ -102,9 +176,10 @@ md-card {
    width: 32%;
    font-size: 1em;
 }
+
 @media (min-width: 1368px) {
    .info {
-      font-size: 1.6em;
+      font-size: 1.4em;
    }
 }
 
@@ -119,6 +194,7 @@ md-card {
    font-size: 0.8em;
    opacity: 0.5;
 }
+
 .detailed {
    height: 100%;
    // @include animation(grow 300ms cubic-bezier(0, 0.45, 0.30, 2.4));
@@ -129,7 +205,7 @@ md-card {
       display: none;
    }
    .card-content {
-      width: 100%!important;
+      width: 100%;
    }
    .detailed-info {
       display: flex;
@@ -137,7 +213,7 @@ md-card {
       align-items: flex-end;
       justify-content: space-around;
    }
-   .logo {
+   .card-logo {
       display: none;
    }
    &.atrasado {
@@ -148,78 +224,67 @@ md-card {
    }
 }
 
-.card-list {
-   // max-height: 100vh;
-   // overflow-y: scroll;
-}
-
 hr {
    border-top: 1px solid #f4f4f4;
    margin-top: 20px;
    margin-bottom: 20px;
 }
 
-.list-summary {
-   font-size: 0.9em;
 
-   md-checkbox {
-      margin: 0 0 10px 0!important;
+.header-link {
+   cursor: pointer;
+   text-decoration: none;
+
+   &:hover, &.active {
+      font-weight: bolder;
    }
 }
 
 .summary {
-   list-style: none;
-   padding-left: 0;
+   height: 100%;
 
-
-   li {
-      margin: 0 0 10px 0;
-   }
-
-   .active {
-      &::after {
+   & > .summary-info-block {
+      display: block;
+      margin-bottom: 50px;
+      & > .summary-info {
          display: inline-block;
-         content: '';
-         width: 0;
-         height: 0;
-         border-bottom: 10px solid rgba(0, 0, 0, 0.3);
-         border-left: 10px solid transparent;
-         margin-left: 5px;
+         width: 100px;
+         margin-right: 50px;
+
+         & > h1, & > h3 {
+            margin: 0;
+         }
+
+         &.action {
+            cursor: pointer;
+         }
+         &.active {
+            &::after {
+               content: '';
+               width: 0;
+               height: 0;
+               border-bottom: 10px solid rgba(0, 0, 0, 0.3);
+               border-left: 10px solid transparent;
+               position: absolute;
+               bottom: 0;
+               right: 0;
+            }
+         }
+
+         & > .f-previsto {
+            color: map-get($colors, previsto);
+         }
+
+         & > .f-atrasado {
+            color: map-get($colors, atrasado);
+         }
       }
    }
 
-   .action {
-      background-color: rgba(255, 255, 255, 0)!important;
+   & > .filters {
+      display: inline-block;
+      height: 100%;
    }
-   .action:hover {
-      cursor: pointer;
-   }
-
-   .f-previsto {
-      color: map-get($colors, previsto);
-   }
-
-   .f-atrasado {
-      color: map-get($colors, atrasado);
-   }
-
-   .summary-value {
-      font-size: 1.2em;
-   }
-}
-
-.action-anim {
-   display: inline-block;
-   @animation-iteration-count: 10;
-}
-
-.tab-action {
-   position: absolute;
-   height: 64px;
-   width: 64px;
-   z-index: 99;
-   right: 0;
-   top: 0;
 }
 
 .loader {
@@ -235,74 +300,6 @@ hr {
    justify-content: center;
 }
 
-.app-sidenav {
-   min-width: 100px;
-}
-
-.app-content {
-   padding: 20px;
-}
-
-.app-content md-card {
-   margin: 20px;
-}
-
-.app-content md-checkbox {
-   margin: 10px;
-}
-
-.app-toolbar-filler {
-   flex: 1 1 auto;
-}
-
-.app-toolbar-menu {
-   padding: 0 14px 0 14px;
-   color: white;
-}
-
-.app-icon-button {
-   box-shadow: none;
-   user-select: none;
-   background: none;
-   border: none;
-   cursor: pointer;
-   filter: none;
-   font-weight: normal;
-   height: auto;
-   line-height: inherit;
-   margin: 0;
-   min-width: 0;
-   padding: 0;
-   text-align: left;
-   text-decoration: none;
-}
-
-.app-action {
-   display: inline-block;
-   position: fixed;
-   bottom: 20px;
-   right: 20px;
-}
-
-.app-spinner {
-   height: 30px;
-   width: 30px;
-   display: inline-block;
-}
-
-.app-input-icon {
-   font-size: 16px;
-}
-
-.app-list {
-   border: 1px solid rgba(0,0,0,0.12);
-   width: 350px;
-   margin: 20px;
-}
-
-.app-progress {
-   margin: 20px;
-}
 
 .login-background {
    content: '';
@@ -330,7 +327,7 @@ hr {
    z-index: 99;
 
    font-family: 'Bree Serif', sans-serif;
-   color: #fff;
+   color: map-get($colors, white);
 
    display: flex;
    flex-direction: column;

@@ -2,9 +2,7 @@ import 'hammerjs';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
@@ -19,7 +17,6 @@ import { LoginComponent } from './login/login.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { HomeComponent } from './home/home.component';
 import { CargaComponent } from './carga/carga.component';
-import { FilterDialog } from './filter-dialog/filter-dialog.component';
 
 @NgModule({
    declarations: [
@@ -27,14 +24,12 @@ import { FilterDialog } from './filter-dialog/filter-dialog.component';
       SidenavComponent,
       AppComponent,
       HomeComponent,
-      CargaComponent,
-      FilterDialog
+      CargaComponent
    ],
    imports: [
       BrowserModule,
       FormsModule,
       HttpModule,
-      MaterialModule.forRoot(),
       BrowserAnimationsModule,
       LoginRoutingModule,
       AppRoutingModule
@@ -44,9 +39,7 @@ import { FilterDialog } from './filter-dialog/filter-dialog.component';
       DataService,
       KMMGateway
    ],
-   entryComponents: [
-      FilterDialog
-   ],
+   entryComponents: [],
    bootstrap: [ AppComponent ]
 })
 export class AppModule { }
