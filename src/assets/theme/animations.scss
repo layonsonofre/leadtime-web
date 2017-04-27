@@ -53,3 +53,6 @@
    -o-filter: $filter-type+unquote('(#{$filter-amount})');
    filter: $filter-type+unquote('(#{$filter-amount})');
 }
+
+
+@mixin transitionAll {transition: all .3s ease-in-out;}

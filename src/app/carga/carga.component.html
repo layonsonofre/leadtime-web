@@ -24,24 +24,43 @@
                <h3 class="f-atrasado">Atrasados</h3>
             </div>
          </div>
-         <div class="filters" *ngIf="showFilter">
-            <form>
-               <div>
+         <div class="filters animated fadeIn" *ngIf="showFilter">
+            <form (submit)="search(cargasViagem)">
+               <div class="input-wrap text full">
+                  <span class="icon">test</span>
                   <input placeholder="Insira os parâmetros de sua pesquisa" [(ngModel)]="filtro.valor" name="valor">
-                  <button (click)="search(cargasViagem)"><i class="material-icons">search</i></button>
+                  <button type="submit"><i class="material-icons">search</i></button>
                </div>
-               <input type="checkbox" [(ngModel)]="filtro.placa" name="placa">Placa
-               <input type="checkbox" [(ngModel)]="filtro.num_romaneio" name="num_romaneio">Romaneio
-               <input type="checkbox" [(ngModel)]="filtro.origem" name="origem">Origem
-               <input type="checkbox" [(ngModel)]="filtro.destino" name="destino">Destino
-               <input type="checkbox" [(ngModel)]="filtro.transportadora" name="transportadora">Transportadora
-               <input type="checkbox" [(ngModel)]="filtro.mercadoria" name="mercadoria">Mercadoria
+               <div class="input-wrap action">
+                  <input type="checkbox" [(ngModel)]="filtro.placa" id="placa" name="placa">
+                  <label for="placa">Placa</label>
+               </div>
+               <div class="input-wrap action">
+                  <input type="checkbox" [(ngModel)]="filtro.num_romaneio" id="num_romaneio" name="num_romaneio">
+                  <label for="num_romaneio">Romaneio</label>
+               </div>
+               <div class="input-wrap action">
+                  <input type="checkbox" [(ngModel)]="filtro.origem" id="origem" name="origem">
+                  <label for="origem">Origem</label>
+               </div>
+               <div class="input-wrap action">
+                  <input type="checkbox" [(ngModel)]="filtro.destino" id="destino" name="destino">
+                  <label for="destino">Destino</label>
+               </div>
+               <div class="input-wrap action">
+                  <input type="checkbox" [(ngModel)]="filtro.transportadora" id="transportadora" name="transportadora">
+                  <label for="transportadora">Transportadora</label>
+               </div>
+               <div class="input-wrap action">
+                  <input type="checkbox" [(ngModel)]="filtro.mercadoria" id="mercadoria" name="mercadoria">
+                  <label for="mercadoria">Mercadoria</label>
+               </div>
 
-               <ul class="summary_old">
-                  <li (click)="expand()" class="action"><span class="material-icons">fullscreen</span>Expandir/contrair todos</li>
-                  <li class="action">
+               <ul class="filter-actions">
+                  <li (click)="expand()"><span class="material-icons">fullscreen</span>Expandir/contrair todos</li>
+                  <li>
                      <span (click)="sort()" class="material-icons">import_export</span>
-                     <span (click)="sort()">Ordenação: {{filtro.orders_label[this.filtro.orderIndex]}}</span>
+                     <span (click)="sort()">Ordenar: {{filtro.orders_label[this.filtro.orderIndex]}}</span>
                      <span (click)="setAscDesc()" *ngIf="filtro.ascending" class="material-icons">arrow_upward</span>
                      <span (click)="setAscDesc()" *ngIf="!filtro.ascending" class="material-icons">arrow_downward</span>
                   </li>
@@ -49,7 +68,7 @@
             </form>
          </div>
       </div>
-      <div *ngFor="let viagem of cargasViagem, let i = index" [ngClass]="viagem.visible === true ? '' : 'hide'">
+      <div *ngFor="let viagem of cargasViagem | sortCards : filtro.order_by : filtro.asc_desc, let i = index" [ngClass]="viagem.visible === true ? '' : 'hide'">
          <div class="card" [ngClass]="viagem.status == 'ATRASADO' ? 'atrasado' : 'previsto'" (click)="viagem.details = !viagem.details" [class.detailed]="viagem.details">
             <!-- <div class="card-logo" [ngStyle]="{'background': 'url(' + viagem.transportadora.logo + ') no-repeat center #FFFFFF'}"></div> -->
             <div class="card-logo"></div>
@@ -105,5 +124,7 @@
             </div>
          </div>
       </div>
+      <h1 *ngIf="empty" class="empty-list">Não foi encontrada nenhuma viagem para mostrar :-(</h1>
+      <a class="load-more" (click)="loadMore()"><i class="material-icons">refresh</i>{{empty ? 'Atualizar' : 'Ver mais'}}</a>
    </div>
 </div>

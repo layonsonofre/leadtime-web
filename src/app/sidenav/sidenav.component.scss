@@ -75,7 +75,11 @@
          }
 
          & > span.menu-text {
-            display: none;
+            visibility: hidden;
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            z-index: -9999;
          }
       }
    }
@@ -131,8 +135,13 @@
       & > .menu {
          text-align: left;
          padding-left: 2vw;
+         vertical-align: middle;
          & > a > span.menu-text {
+            visibility: visible;
             display: inline-block;
+            position: relative;
+            left: 0;
+            top: 0;
          }
       }
    }

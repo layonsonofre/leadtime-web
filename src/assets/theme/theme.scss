@@ -8,8 +8,7 @@
 }
 
 @font-face {
-   font-family: 'Roboto';
-   src: url('https://fonts.googleapis.com/css?family=Roboto');
+   @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700');
 }
 
 html, body {
@@ -23,11 +22,21 @@ html {
 }
 h1, h2, h3, h4, h5, h6 {
    font-weight: lighter;
+
+   &.empty-list {
+      margin-top: 50px;
+      width: 50%;
+      margin: 0 auto;
+      font-weight: bolder;
+      text-align: center;
+      color: rgba(0, 0, 0, 0.2);
+   }
 }
 
 body {
    min-height: 100vh;
    overflow-x: hidden;
+   background-color: map-get($colors, light);
 }
 
 .container {
@@ -46,7 +55,7 @@ body {
    padding-left: 20vw;
    padding-right: 10vw;
    padding-top: 2vw;
-   transition: 300ms ease-in-out;
+   @include transitionAll;
 }
 
 .header {
@@ -102,11 +111,10 @@ body {
    margin-bottom: 1vh;
    background-color: map-get($colors, white);
    box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.1);
-   transition: box-shadow 100ms ease-in-out;
    display: flex;
+   cursor: pointer;
 
    &:hover {
-      cursor: pointer;
       box-shadow: 4px 4px 5px 1px rgba(0, 0, 0, 0.05);
    }
 
@@ -132,7 +140,8 @@ body {
       font-size: 1.2rem;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 
-      .minimized-info {
+      & > .minimized-info {
+         visibility: visible;
          display: flex;
          flex-wrap: wrap;
          align-items: flex-end;
@@ -140,10 +149,49 @@ body {
          color: map-get($colors, light);
       }
 
-      .detailed-info {
-         display: none;
+      & > .detailed-info {
+         visibility: hidden;
+         height: 0;
       }
    }
+}
+
+.detailed {
+
+   & > .card-content {
+      width: 100%;
+      & > .minimized-info {
+         visibility: hidden;
+         height: 0;
+      }
+      & > .detailed-info {
+         visibility: visible;
+         display: flex;
+         flex-wrap: wrap;
+         align-items: stretch;
+         justify-content: flex-start;
+         color: map-get($colors, dark);
+         height: 100%;
+      }
+   }
+   & > .card-logo {
+      display: none;
+   }
+
+   &.atrasado {
+      @extend .atrasado-border;
+   }
+   &.previsto {
+      @extend .previsto-border;
+   }
+}
+
+.help-text {
+   position: relative;
+   margin-top: 2px;
+   display: block;
+   font-size: 0.8em;
+   opacity: 0.5;
 }
 
 .atrasado {
@@ -175,6 +223,10 @@ body {
    flex-grow: 1;
    width: 32%;
    font-size: 1em;
+
+   &.full {
+      width: 100%;
+   }
 }
 
 @media (min-width: 1368px) {
@@ -185,43 +237,6 @@ body {
 
 [class^="icon-"], [class*=" icon-"] {
    margin-right: 5px;
-}
-
-.help-text {
-   position: relative;
-   margin-top: 2px;
-   display: block;
-   font-size: 0.8em;
-   opacity: 0.5;
-}
-
-.detailed {
-   height: 100%;
-   // @include animation(grow 300ms cubic-bezier(0, 0.45, 0.30, 2.4));
-   @include animation(grow2 300ms ease-in-out);
-   color: map-get($colors, dark);
-
-   .minimized-info {
-      display: none;
-   }
-   .card-content {
-      width: 100%;
-   }
-   .detailed-info {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-end;
-      justify-content: space-around;
-   }
-   .card-logo {
-      display: none;
-   }
-   &.atrasado {
-      @extend .atrasado-border;
-   }
-   &.previsto {
-      @extend .previsto-border;
-   }
 }
 
 hr {
@@ -244,12 +259,20 @@ hr {
    height: 100%;
 
    & > .summary-info-block {
-      display: block;
+      display: flex;
+      margin: auto;
+      max-width: 100%;
+      justify-content: space-around;
+      align-items: stretch;
+      flex-flow: row wrap;
       margin-bottom: 50px;
+
       & > .summary-info {
+         position: relative;
+         padding: 10px 20px 25px;
+         width: 25%;
+         cursor: pointer;
          display: inline-block;
-         width: 100px;
-         margin-right: 50px;
 
          & > h1, & > h3 {
             margin: 0;
@@ -259,7 +282,7 @@ hr {
             cursor: pointer;
          }
          &.active {
-            &::after {
+            &:after {
                content: '';
                width: 0;
                height: 0;
@@ -284,6 +307,152 @@ hr {
    & > .filters {
       display: inline-block;
       height: 100%;
+   }
+}
+a > i, a > span {
+   vertical-align: middle;
+   margin-right: 10px;
+   text-align: center;
+}
+.load-more {
+   display: block;
+   position: relative;
+   font-size: 1.2rem;
+   margin-top: 50px;
+   width: 100%;
+   height: 75px;
+   text-align: center;
+   vertical-align: middle;
+   cursor: pointer;
+   color: map-get($colors, previsto);
+
+   &:hover {
+      color: map-get($colors, dark);
+   }
+}
+form {
+   display: flex;
+   margin: auto;
+   max-width: 100%;
+   justify-content: space-around;
+   align-items: stretch;
+   flex-flow: row wrap;
+}
+
+.input-wrap {
+   display: flex;
+   justify-content: flex-start;
+   align-items: stretch;
+   flex-flow: row wrap;
+   margin-bottom: 5px;
+   color: map-get($colors, teal-darker);
+   @include transitionAll;
+   letter-spacing: 2px;
+   height: 32px;
+
+   &.full {
+      width: 100%;
+   }
+
+   &.text {
+      border-bottom: 1px solid map-get($colors, teal);
+
+      &:hover, &:focus {
+         border-bottom: 1px solid map-get($colors, teal-dark);
+      }
+   }
+
+   &.action {
+      display: inline-block;
+      width: 32%;
+      vertical-align: middle;
+   }
+
+   & > input, & > button, & > ul {
+      outline: none;
+      border: none;
+      background: none;
+      padding: 0;
+   }
+
+   & > input {
+      flex-grow: 2;
+      padding-left: 5px;
+      padding-right: 5px;
+   }
+
+   & > button {
+      cursor: pointer;
+
+      &:hover {
+         color: map-get($colors, teal);
+      }
+   }
+
+   & > label {
+      padding-left: 24px;
+      user-select: none;
+
+      &:before, &:after {
+         content: '';
+         display: block;
+         width: 16px;
+         height: 16px;
+         position: absolute;
+         top: 50%;
+         transform: translateY(-50%);
+      }
+
+      &:before {
+         left: 0;
+         border: 1px solid #e6e6e6;
+         box-shadow: inset 1px 1px rgba(0, 0, 0, 0.03);
+      }
+
+         &:after {
+           left: 3px;
+           background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/9487/icon-check.svg") no-repeat center center;
+           display: none;
+      }
+   }
+
+   & > input[type=radio]:checked + & > label:before,
+   & > input[type=checkbox]:checked + & > label:before {
+     background-color: #19191a;
+     border: none;
+     box-shadow: none;
+   }
+
+   & > input[type=radio]:checked + & > label:after,
+   & > input[type=checkbox]:checked + & > label:after {
+     display: block;
+   }
+
+   & > .icon {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+   }
+}
+ul > li > span {
+   vertical-align: middle;
+   margin-right: 4px;
+}
+
+.filter-actions {
+   list-style: none;
+   display: flex;
+   align-items: center;
+   height: 32px;
+   width: 100%;
+
+   & > li {
+      margin-right: 20px;
+      cursor: pointer;
+
+      &:hover{
+         font-weight: bold;
+      }
    }
 }
 
