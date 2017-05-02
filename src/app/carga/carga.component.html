@@ -3,11 +3,11 @@
    <div class="padded header">
       <h1 class="page-title">Cargas</h1>
       <div class="tabs">
-         <a class="active">Viagem</a>
-         <a>Aguardando</a>
+         <a [class.active]="selected === 'viagem'" (click)="tab('viagem')">Viagem</a>
+         <a [class.active]="selected === 'aguard'" (click)="tab('aguard')">Aguardando</a>
       </div>
    </div>
-   <div class="padded content">
+   <div class="padded content" *ngIf="selected === 'viagem'">
       <div class="summary" >
          <h4>Informações / <a class="header-link" [ngClass]="showFilter === true ? 'active' : ''"(click)="showFilter = !showFilter">Filtros</a></h4>
          <div class="summary-info-block" *ngIf="!showFilter">

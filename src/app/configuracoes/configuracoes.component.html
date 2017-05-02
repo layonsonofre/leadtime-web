@@ -1,0 +1,57 @@
+<div class="container">
+   <div class="loader" *ngIf="loading"></div>
+   <div class="padded header">
+      <h1 class="page-title">Configurações</h1>
+      <div class="tabs">
+         <a [class.active]="selectedTab === 'perfil'" (click)="tab('perfil')">Perfil</a>
+         <a [class.active]="selectedTab === 'mercad'" (click)="tab('mercad')">Mercadorias</a>
+      </div>
+   </div>
+   <div class="padded content" *ngIf="selectedTab === 'perfil'">
+      <h3 class="header-link" [class.active]="showChangePassword" (click)="showChangePassword = !showChangePassword">Alterar senha</h3>
+      <form *ngIf="showChangePassword">
+         <div class="input-wrap text">
+            <!-- <label for="atual">Senha Atual</label> -->
+            <input type="password" name="atual" placeholder="Insira a senha atual">
+         </div>
+         <div class="input-wrap text">
+            <!-- <label for="nova">Nova senha</label> -->
+            <input type="password" name="nova" placeholder="Insira uma nova senha">
+         </div>
+         <div class="input-wrap text">
+            <!-- <label for="confirmacao">Confirmação de senha</label> -->
+            <input type="password" name="confirmacao" placeholder="Confirme a senha inserida">
+         </div>
+         <br>
+         <div class="input-wrap right-align">
+            <button class="btn danger">Cancelar</button>
+            <button class="btn success">Confirmar</button>
+         </div>
+      </form>
+   </div>
+   <div class="padded content" *ngIf="selectedTab === 'mercad'">
+      <table>
+         <thead>
+            <th>Mercadoria</th>
+            <th>Mercadoria LeadTime</th>
+         </thead>
+         <tbody>
+            <tr *ngFor="let m of mercadoriaCliente; let i = index">
+               <td>{{m.mercadoria_api}}</td>
+               <td>
+                  <div class="input-wrap full">
+                     <select [(ngModel)]="selectMercadoria[i]">
+                        <option disabled selected>Selecione a correspondência no LeadTime</option>
+                        <option *ngFor="let mlt of mercadoriaLeadTime" [ngValue]="mlt">{{mlt.mercadoria}}</option>
+                     </select>
+                  </div>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+      <div class="input-wrap right-align">
+         <button class="btn danger">Cancelar</button>
+         <button class="btn success">Confirmar</button>
+      </div>
+   </div>
+</div>

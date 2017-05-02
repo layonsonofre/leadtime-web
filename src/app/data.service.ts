@@ -15,6 +15,8 @@ export class DataService {
    public descargasTempo: any = null;
    public transitTime: any = null;
    public indicadoresHome: any = null;
+   public mercadoriaCliente: any = null;
+   public mercadoriaLeadTime: any = null;
 
    public isLoggedIn: boolean = false;
    public redirectUrl: string;
@@ -178,5 +180,36 @@ export class DataService {
       } else {
          return Promise.resolve(this.indicadoresHome);
       }
+   }
+
+
+   loadMercadoriaCliente(force?: boolean, parameters?: string): Promise<any> {
+      // if (this.mercadoriaCliente == null || force) {
+      //    return this.gateway.backendCall(this._modulo, "getMercadoriaMap", parameters, false).then(
+      //       (result) => {
+      //          this.mercadoriaCliente = result;
+      //          console.log(this.mercadoriaCliente);
+      //          return this.mercadoriaCliente;
+      //       }
+      //    );
+      // } else {
+         return Promise.resolve({"NOME":[{"mercadoria_de_para_id": 1, "mercadoria_api": "Mercadoria2", "mercadoria_id":1},{"mercadoria_de_para_id": 2, "mercadoria_api": "Mercadoria1", "mercadoria_id":2}]});
+         //return Promise.resolve(this.mercadoriaCliente);
+      // }
+   }
+
+   loadMercadoriaLeadTime(force?: boolean, parameters?: string): Promise<any> {
+      // if (this.mercadoriaLeadTime == null || force) {
+      //    return this.gateway.backendCall(this._modulo, "getMercadoria", parameters, false).then(
+      //       (result) => {
+      //          this.mercadoriaLeadTime = result;
+      //          console.log(this.mercadoriaLeadTime);
+      //          return this.mercadoriaLeadTime;
+      //       }
+      //    );
+      // } else {
+         return Promise.resolve({"mercadoria":[{"mercadoria_id": 1, "natureza_id": 1, "mercadoria":"Teste1"},{"mercadoria_id": 2, "natureza_id": 1, "mercadoria":"Teste2"}]});
+         //return Promise.resolve(this.mercadoriaLeadTime);
+      // }
    }
 }

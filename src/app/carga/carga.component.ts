@@ -18,6 +18,7 @@ export class CargaComponent implements OnInit {
    public showFilter: boolean = false;
    private empty = true;
    public ordenacao : string = "['+carga_previsao_inicio']";
+   private selected : string = 'viagem';
 
    private pagination_inf: number;
    private pagination_sup: number;
@@ -106,61 +107,65 @@ export class CargaComponent implements OnInit {
 
          if (this.filtro.valor) {
             let temp = this.filtro.valor.toLowerCase();
-               if (this.filtro.placa && dataArray[i].placa && (dataArray[i].placa[0].placa.toLowerCase().indexOf(temp) >= 0)
-               || this.filtro.num_romaneio && dataArray[i].num_romaneio && (dataArray[i].num_romaneio.toLowerCase().indexOf(temp) >= 0)
-               || this.filtro.origem && dataArray[i].origem && (dataArray[i].origem.toLowerCase().indexOf(temp) >= 0)
-               || this.filtro.destino && dataArray[i].destino && (dataArray[i].destino.toLowerCase().indexOf(temp) >= 0)
-               || this.filtro.transportadora && dataArray[i].transportadora && (dataArray[i].transportadora.toLowerCase().indexOf(temp) >= 0)
-               || this.filtro.mercadoria && dataArray[i].mercadoria && this.searchMercadoria(dataArray[i].mercadoria, temp)
-            ) {
-               dataArray[i].visible = true;
-               hasOne = true;
-            } else {
-               dataArray[i].visible = false;
-            }
+            if (this.filtro.placa && dataArray[i].placa && (dataArray[i].placa[0].placa.toLowerCase().indexOf(temp) >= 0)
+            || this.filtro.num_romaneio && dataArray[i].num_romaneio && (dataArray[i].num_romaneio.toLowerCase().indexOf(temp) >= 0)
+            || this.filtro.origem && dataArray[i].origem && (dataArray[i].origem.toLowerCase().indexOf(temp) >= 0)
+            || this.filtro.destino && dataArray[i].destino && (dataArray[i].destino.toLowerCase().indexOf(temp) >= 0)
+            || this.filtro.transportadora && dataArray[i].transportadora && (dataArray[i].transportadora.toLowerCase().indexOf(temp) >= 0)
+            || this.filtro.mercadoria && dataArray[i].mercadoria && this.searchMercadoria(dataArray[i].mercadoria, temp)
+         ) {
+            dataArray[i].visible = true;
+            hasOne = true;
+         } else {
+            dataArray[i].visible = false;
          }
       }
-      this.empty = !hasOne && this.filtro.valor;
    }
+   this.empty = !hasOne && this.filtro.valor;
+}
 
-   searchMercadoria(item: any, value: string): boolean {
-      for (let i = 0; i < item.length; i++) {
-         if (item[i].mercadoria && (item[i].mercadoria.toLowerCase().indexOf(value) >= 0)) {
-            return true;
-         }
-      }
-      return false;
-   }
-
-   loadData(tabIndex: number) {
-      if (tabIndex === 0) {
-         this.loadCargasViagem(false);
-      } else {
-         this.loadCargasAguardando(false);
+searchMercadoria(item: any, value: string): boolean {
+   for (let i = 0; i < item.length; i++) {
+      if (item[i].mercadoria && (item[i].mercadoria.toLowerCase().indexOf(value) >= 0)) {
+         return true;
       }
    }
+   return false;
+}
 
-   loadMore() {
-      this.filtro.pagination_inf += this.filtro.pagination_amount;
-      this.filtro.pagination_sup += this.filtro.pagination_amount;
-
-      if (this.page === 'carga') {
-         this.loadCargasViagem(true);
-      } else {
-         this.loadCargasAguardando(true);
-      }
+loadData(tabIndex: number) {
+   if (tabIndex === 0) {
+      this.loadCargasViagem(false);
+   } else {
+      this.loadCargasAguardando(false);
    }
+}
 
-   sort() {
-      this.filtro.orderIndex++;
-      if (this.filtro.orderIndex >= this.filtro.orders.length) {
-         this.filtro.orderIndex = 0;
-      }
-      this.filtro.order_by = this.filtro.orders_label[this.filtro.orderIndex];
-   }
+loadMore() {
+   this.filtro.pagination_inf += this.filtro.pagination_amount;
+   this.filtro.pagination_sup += this.filtro.pagination_amount;
 
-   setAscDesc() {
-      this.filtro.ascending = !this.filtro.ascending;
-      this.filtro.asc_desc = this.filtro.ascending === true ? 'asc' : 'desc';
+   if (this.page === 'carga') {
+      this.loadCargasViagem(true);
+   } else {
+      this.loadCargasAguardando(true);
    }
+}
+
+sort() {
+   this.filtro.orderIndex++;
+   if (this.filtro.orderIndex >= this.filtro.orders.length) {
+      this.filtro.orderIndex = 0;
+   }
+   this.filtro.order_by = this.filtro.orders_label[this.filtro.orderIndex];
+}
+
+setAscDesc() {
+   this.filtro.ascending = !this.filtro.ascending;
+   this.filtro.asc_desc = this.filtro.ascending === true ? 'asc' : 'desc';
+}
+
+tab(menu : string) {
+   this.selected = menu;
+}
 }

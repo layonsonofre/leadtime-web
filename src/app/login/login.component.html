@@ -1,11 +1,22 @@
-<div class="login-background"></div>
-<div class="login-overlay">
-   <div class="login-content">
-      <img src="assets/img/logo-white.png" alt="Lead Time">
-      <div><input color="accent" type="text" placeholder="CNPJ/CUIT"></div>
-      <div><input color="accent" type="password" placeholder="Senha"></div>
-      <div><button (click)="login()"  *ngIf="!dataService.isLoggedIn">Login</button></div>
-      <div><button (click)="logout()" *ngIf="dataService.isLoggedIn">Logout</button></div>
-      <div><p>{{message}}</p>
+<div class="login-container">
+   <div class="login-background"></div>
+   <div class="login-overlay">
+      <div class="login-content">
+         <img src="assets/img/logo-white.png" alt="Lead Time">
+         <br>
+         <div class="input-wrap text full opacity">
+            <span class="icon icon-pessoa"></span>
+            <input type="email" placeholder="CNPJ/CUIT/Email" [(ngModel)]="acesso" name="acesso">
+         </div>
+         <div class="input-wrap text full opacity">
+            <span class="icon icon-pessoa"></span>
+            <input type="password" placeholder="Senha" [(ngModel)]="password" name="password">
+         </div>
+         <div class="input-wrap opacity">
+            <button (click)="login()"  *ngIf="!dataService.isLoggedIn">Login</button>
+            <button (click)="logout()" *ngIf="dataService.isLoggedIn">Logout</button>
+         </div>
+         <p>{{message}}</p>
+      </div>
    </div>
 </div>

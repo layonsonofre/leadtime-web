@@ -18,6 +18,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { HomeComponent } from './home/home.component';
 import { CargaComponent } from './carga/carga.component';
 import { SortCardsPipe } from './sort-cards.pipe';
+import { ConfiguracoesComponent } from './configuracoes/configuracoes.component';
 
 @NgModule({
    declarations: [
@@ -26,7 +27,8 @@ import { SortCardsPipe } from './sort-cards.pipe';
       AppComponent,
       HomeComponent,
       CargaComponent,
-      SortCardsPipe
+      SortCardsPipe,
+      ConfiguracoesComponent
    ],
    imports: [
       BrowserModule,
