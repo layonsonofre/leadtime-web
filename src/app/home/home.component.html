@@ -1,35 +1,51 @@
-<div class="padded header">
-   <h2 class="page-title">{{title}}</h2>
-   <div class="tabs">
-      <a class="active">Teste</a>
-      <a>Teste</a>
+<div class="container">
+   <div class="loader" *ngIf="loading"><div class="spinner"></div></div>
+   <div class="padded header">
+      <h1 class="page-title">{{title}}</h1>
    </div>
-</div>
-<div class="padded content">
-   <div class="summary">
-      <h3>{{title}}</h3>
-      <div class="filters">
-         teste
+   <div class="padded content">
+      <div class="summary">
+         <div class="summary-info-block">
+            <div class="card summary-info">
+               <h1>12</h1>
+               <h3>Descarga</h3>
+               <img class="info-icon" src="http://2.bp.blogspot.com/-2RewSLZUzRg/U-9o6SD4M6I/AAAAAAAADIE/voax99AbRx0/s1600/14%2B-%2B1%2B%281%29.jpg">
+               <div class="info-small">
+                  <h2>10</h2>
+                  <h4 class="f-previsto">Previstos</h4>
+               </div>
+               <div class="info-small">
+                  <h2>2</h2>
+                  <h4 class="f-atrasado">Atrasados</h4>
+               </div>
+            </div>
+            <div class="card summary-info">
+               <h1>10</h1>
+               <h3>Carga</h3>
+               <img class="info-icon" src="http://2.bp.blogspot.com/-2RewSLZUzRg/U-9o6SD4M6I/AAAAAAAADIE/voax99AbRx0/s1600/14%2B-%2B1%2B%281%29.jpg">
+               <div class="info-small">
+                  <h2>7</h2>
+                  <h4 class="f-previsto">Previstos</h4>
+               </div>
+               <div class="info-small">
+                  <h2>3</h2>
+                  <h4 class="f-atrasado">Atrasados</h4>
+               </div>
+            </div>
+            <div class="card summary-info">
+               <h1>22</h1>
+               <h3>Trânsito</h3>
+               <img class="info-icon" src="http://2.bp.blogspot.com/-2RewSLZUzRg/U-9o6SD4M6I/AAAAAAAADIE/voax99AbRx0/s1600/14%2B-%2B1%2B%281%29.jpg">
+               <div class="info-small">
+                  <h2>17</h2>
+                  <h4 class="f-previsto">Previstos</h4>
+               </div>
+               <div class="info-small">
+                  <h2>5</h2>
+                  <h4 class="f-atrasado">Atrasados</h4>
+               </div>
+            </div>
+         </div>
       </div>
-   </div>
-   <div class="card info">
-      <h6>{{title}}</h6>
-      <h6>{{title}}</h6>
-      <h6>{{title}}</h6>
-   </div>
-   <div class="card info">
-      <h6>{{title}}</h6>
-      <h6>{{title}}</h6>
-      <h6>{{title}}</h6>
-   </div>
-   <div class="card info">
-      <h6>{{title}}</h6>
-      <h6>{{title}}</h6>
-      <h6>{{title}}</h6>
-   </div>
-   <div class="card info">
-      <h6>{{title}}</h6>
-      <h6>{{title}}</h6>
-      <h6>{{title}}</h6>
    </div>
 </div>

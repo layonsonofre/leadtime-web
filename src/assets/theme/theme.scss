@@ -293,8 +293,24 @@ hr {
          cursor: pointer;
          display: inline-block;
 
-         & > h1, & > h3 {
+         & > h1, & > h2, & > h3, & > h4,
+         & > div > h1, & > div > h2, & > div > h3, & > div > h4 {
             margin: 0;
+         }
+
+         & > .info-small {
+            display: inline-block;
+            margin-top: 15px;
+            text-align: center;
+            width: 45%;
+         }
+
+         & > img.info-icon {
+            width: 40%;
+            position: absolute;
+            right: 5px;
+            top: -50%;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
          }
 
          &.action {
@@ -312,14 +328,6 @@ hr {
                right: 0;
             }
          }
-
-         & > .f-previsto {
-            color: map-get($colors, previsto);
-         }
-
-         & > .f-atrasado {
-            color: map-get($colors, atrasado);
-         }
       }
    }
 
@@ -328,6 +336,15 @@ hr {
       height: 100%;
    }
 }
+
+.f-previsto {
+   color: map-get($colors, previsto);
+}
+
+.f-atrasado {
+   color: map-get($colors, atrasado);
+}
+
 a > i, a > span {
    vertical-align: middle;
    margin-right: 10px;
@@ -545,7 +562,7 @@ ul > li > span {
 
 .loader {
    display: flex;
-   position: absolute;
+   position: fixed;
    right: 0;
    top: 0;
    width: 100%;
@@ -554,6 +571,40 @@ ul > li > span {
    z-index: 99;
    align-items: center;
    justify-content: center;
+}
+
+
+.spinner {
+   width: 100px;
+   height: 100px;
+   border-radius: 50%;
+   position: relative;
+   margin: 50px;
+   display: inline-block;
+
+   &:after, &:before {
+      content: '';
+      display: block;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+   }
+
+   &:after {
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      border: 4px solid transparent;
+      border-top-color: orangered;
+      border-bottom-color: orangered;
+      animation: spinny 1s linear infinite;
+   }
+}
+
+@keyframes spinny {
+   0% { transform: rotate(0deg) scale(1); }
+   50% { transform: rotate(45deg) scale(1.2); }
+   100% { transform: rotate(360deg) scale(1); }
 }
 
 .login-container {
