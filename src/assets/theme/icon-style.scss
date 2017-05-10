@@ -1,12 +1,11 @@
 @import "icon-variables";
-
 @font-face {
   font-family: 'leadtime';
-  src:  url('#{$icomoon-font-path}/leadtime.eot?fuxjeq');
-  src:  url('#{$icomoon-font-path}/leadtime.eot?fuxjeq#iefix') format('embedded-opentype'),
-    url('#{$icomoon-font-path}/leadtime.ttf?fuxjeq') format('truetype'),
-    url('#{$icomoon-font-path}/leadtime.woff?fuxjeq') format('woff'),
-    url('#{$icomoon-font-path}/leadtime.svg?fuxjeq#leadtime') format('svg');
+  src:  url('#{$icomoon-font-path}/leadtime.eot?dcny0a');
+  src:  url('#{$icomoon-font-path}/leadtime.eot?dcny0a#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/leadtime.ttf?dcny0a') format('truetype'),
+    url('#{$icomoon-font-path}/leadtime.woff?dcny0a') format('woff'),
+    url('#{$icomoon-font-path}/leadtime.svg?dcny0a#leadtime') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -136,8 +135,93 @@
     content: $icon-tipo2;
   }
 }
+.icon-transit-time {
+  &:before {
+    content: $icon-transit-time;
+  }
+}
+.icon-descarga {
+  &:before {
+    content: $icon-descarga;
+  }
+}
+.icon-carga {
+  &:before {
+    content: $icon-carga;
+  }
+}
 .icon-home {
   &:before {
     content: $icon-home;
+  }
+}
+.icon-key {
+  &:before {
+    content: $icon-key;
+  }
+}
+.icon-lock {
+  &:before {
+    content: $icon-lock;
+  }
+}
+.icon-unlocked {
+  &:before {
+    content: $icon-unlocked;
+  }
+}
+.icon-wrench {
+  &:before {
+    content: $icon-wrench;
+  }
+}
+.icon-equalizer {
+  &:before {
+    content: $icon-equalizer;
+  }
+}
+.icon-cog {
+  &:before {
+    content: $icon-cog;
+  }
+}
+.icon-bin {
+  &:before {
+    content: $icon-bin;
+  }
+}
+.icon-switch {
+  &:before {
+    content: $icon-switch;
+  }
+}
+.icon-plus {
+  &:before {
+    content: $icon-plus;
+  }
+}
+.icon-minus {
+  &:before {
+    content: $icon-minus;
+  }
+}
+.icon-cross {
+  &:before {
+    content: $icon-cross;
+  }
+}
+.icon-checkmark {
+  &:before {
+    content: $icon-checkmark;
+  }
+}
+.icon-loop2 {
+  &:before {
+    content: $icon-loop2;
+  }
+}
+.icon-filter {
+  &:before {
+    content: $icon-filter;
   }
 }
