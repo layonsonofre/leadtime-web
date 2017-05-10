@@ -12,6 +12,7 @@ import { KMMGateway } from './kmm/gateway';
 import { DialogService } from './dialog.service';
 import { DataService } from './data.service';
 
+import { ChartsModule } from 'ng2-charts';
 import { LoginRoutingModule } from './login/login-routing.module';
 import { LoginComponent } from './login/login.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
@@ -36,7 +37,8 @@ import { ConfiguracoesComponent } from './configuracoes/configuracoes.component'
       HttpModule,
       BrowserAnimationsModule,
       LoginRoutingModule,
-      AppRoutingModule
+      AppRoutingModule,
+      ChartsModule
    ],
    providers: [
       DialogService,
