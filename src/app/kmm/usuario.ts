@@ -3,108 +3,108 @@ interface Config {
 }
 
 export class Usuario {
-   private _usuario: string;
-   private _senha: string;
-   private _url: string;
-   private _codGestao: number;
-   private _identificador: string;
-   private _filiais: string;
-   private _token: string;
+   private acesso: string;
+   private senha: string;
+   private url: string;
+   private cod_gestao: number;
+   private identificador: string;
+   private filiais: string;
+   private token: string;
    private _isLogged: boolean;
    private _isDebug: boolean;
 
-   private static _instance: Usuario;
+   private static instance: Usuario;
 
-   public static get instance(): Usuario {
-      if (this._instance == null) {
-         this._instance = new Usuario();
+   public static getInstance(): Usuario {
+      if (this.instance == null) {
+         this.instance = new Usuario();
       }
-      return this._instance;
+      return this.instance;
    }
 
    constructor() {
-      this.isDebug = false;
+      this._isDebug = false;
    }
 
-   public get usuario(): string {
-      return this._usuario;
+   public get getAcesso(): string {
+      return this.acesso;
    }
 
-   public set usuario(value: string) {
-      this._usuario = value != null ? value.toLowerCase() : value;
+   public setAcesso(value: string) {
+      this.acesso = value != null ? value.toLowerCase() : value;
       this.save();
    }
 
-   public get senha(): string {
-      return this._senha;
+   public getSenha(): string {
+      return this.senha;
    }
 
-   public set senha(value: string) {
-      this._senha = value;
+   public setSenha(value: string) {
+      this.senha = value;
       this.save();
    }
 
-   public get url(): string {
-      return this._url;
+   public getUrl(): string {
+      return this.url;
    }
 
-   public set url(value: string) {
+   public setUrl(value: string) {
       if (value && value.length && value[value.length - 1] != "/") {
          value += "/";
       }
-      this._url = value;
+      this.url = value;
       this.save();
    }
 
-   public get codGestao(): number {
-      return this._codGestao;
+   public getCodGestao(): number {
+      return this.cod_gestao;
    }
 
-   public set codGestao(value: number) {
-      this._codGestao = value;
+   public setCodGestao(value: number) {
+      this.cod_gestao = value;
       this.save();
    }
 
-   public get identificador(): string {
-      return this._identificador;
+   public getIdentificador(): string {
+      return this.identificador;
    }
 
-   public set identificador(value: string) {
-      this._identificador = value;
+   public setIdentificador(value: string) {
+      this.identificador = value;
       this.save();
    }
 
-   public get filiais(): string {
-      return this._filiais;
+   public getFiliais(): string {
+      return this.filiais;
    }
 
-   public set filiais(value: string) {
-      this._filiais = value;
+   public setFiliais(value: string) {
+      this.filiais = value;
       this.save();
    }
 
-   public get token(): string {
-      return this._token;
+   public getToken(): string {
+      return this.token;
    }
 
-   public set token(value: string) {
-      this._token = value;
+   public setToken(value: string) {
+      this.token = value;
       this.save();
    }
 
-   public get isDebug(): boolean {
+   public isDebug(): boolean {
       return this._isDebug;
    }
 
-   public set isDebug(value: boolean) {
+   public setDebug(value: boolean) {
       this._isDebug = value;
    }
 
-   public get isLogged(): boolean {
+   public isLogged(): boolean {
       return this._isLogged != null ? this._isLogged : false;
    }
 
-   public set isLogged(value: boolean) {
+   public setIsLogged(value: boolean) {
       this._isLogged = value;
       this.save();
    }
@@ -113,33 +113,33 @@ export class Usuario {
       // Busca do storage se está logado ou não
       var data = JSON.parse(localStorage.getItem("usuario"));
       if (data == null) {
-         this.usuario = "";
+         this.acesso = "";
          this.url = "";
-         this.codGestao = -1;
+         this.cod_gestao = -1;
          this.token = "";
          this.identificador = "";
-         this.isLogged = false;
+         this._isLogged = false;
       } else {
          this.url = data.url;
-         this._identificador = data.identificador;
+         this.identificador = data.identificador;
          this._isLogged = data.isLogged;
          if (data.token != null) {
             try {
                let tokenData = JSON.parse(atob(data.token.split(".")[0])).data;
-               this.usuario = tokenData.username;
-               this.codGestao = tokenData.cod_gestao;
+               this.acesso = tokenData.username;
+               this.cod_gestao = tokenData.cod_gestao;
                this.filiais = tokenData.filiais;
                this.token = data.token;
-               this.isLogged = true;
+               this._isLogged = true;
             } catch (error) {
 
             }
          } else {
-            this._usuario = data.usuario;
-            this._senha = data.senha;
-            this._codGestao = data.codGestao;
-            this._filiais = data.filiais;
-            this._token = data.token;
+            this.acesso = data.acesso;
+            this.senha = data.senha;
+            this.cod_gestao = data.cod_gestao;
+            this.filiais = data.filiais;
+            this.token = data.token;
             this.save();
          }
       }
@@ -149,22 +149,22 @@ export class Usuario {
 
    public save(): void {
       let data = {
-         usuario: this._usuario,
-         url: this._url,
-         codGestao: this._codGestao,
-         filiais: this._filiais,
-         token: this._token,
+         acesso: this.acesso,
+         url: this.url,
+         cod_gestao: this.cod_gestao,
+         filiais: this.filiais,
+         token: this.token,
          isLogged: this._isLogged,
-         identificador: this._identificador
+         identificador: this.identificador
       };
       localStorage.setItem("usuario", JSON.stringify(data));
    }
 
    public logout() {
-      this.codGestao = null;
+      this.cod_gestao = null;
       this.filiais = null;
       this.token = null;
-      this.isLogged = false;
+      this._isLogged = false;
       this.identificador = null;
    }
 }

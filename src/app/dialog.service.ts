@@ -8,7 +8,7 @@ export class DialogService {
    */
    confirm(message?: string) {
       return new Promise<boolean>(resolve => {
-         console.error(message);
+         console.error("dialogService", message);
          return resolve(true);
          //return resolve(window.confirm(message || 'Confirma?'));
       });

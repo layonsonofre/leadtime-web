@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class DataService {
 
-   protected user: Usuario = Usuario.instance;
+   protected user: Usuario = Usuario.getInstance();
 
    public cargasViagem: any = null;
    public cargasAguardando: any = null;
@@ -27,14 +27,13 @@ export class DataService {
    constructor(public http: Http, private gateway: KMMGateway) {
    }
 
-   login(): Promise<boolean> {
+   login(parameters?: any): Promise<boolean> {
       this.isLoggedIn = false;
-      return this.gateway.backendCall(this._modulo, "LOGON", null, false).then(
+      return this.gateway.backendCall(this._modulo, "LOGON", parameters, false).then(
          (result) => {
-            result.token = "eyJpYXQiOjE0ODc1NTI0OTYsImp0aSI6Ik1UTTVOemd4T1E9PSIsImlzcyI6InNpbmVyZ2lhMi5rbW0uY29tLmJyIiwibmJmIjoxNDg3NTUyNTAxLCJleHAiOjE1MDMxMDQ1MDEsImRhdGEiOnsiYWNlc3NvIjoibGVhZHRpbWUiLCJzZW5oYSI6IjEyMzQ1NiJ9fQ==.MjM4MGQxMmFhMWQyYzJlYTZkMzM1OWQwYTQ4YmEzZmU2ZTc1ZjA3MGQzNWRkZGJmNzJjMWYxYmQxNWY1NTVhZQ==";
             if (result.token) {
                this.isLoggedIn = true;
-               this.user.token = result.token;
+               this.user.setToken(result.token);
             }
             return this.isLoggedIn;
          }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { DataService } from '../data.service';
+import { Usuario } from '../kmm/usuario';
 
 @Component({
    selector: 'login',
@@ -8,7 +9,8 @@ import { DataService } from '../data.service';
    styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-   message: string;
+   public message: string;
+   protected user: Usuario = Usuario.getInstance();
 
    constructor(private dataService: DataService, public router: Router) {
       this.setMessage();
@@ -21,7 +23,7 @@ export class LoginComponent {
    login() {
       this.message = 'Verificando acesso...';
 
-      this.dataService.login().then(() => {
+      this.dataService.login(this.user).then(() => {
          this.setMessage();
          if (this.dataService.isLoggedIn) {
             let redirect = this.dataService.redirectUrl ? this.dataService.redirectUrl : '/home';
