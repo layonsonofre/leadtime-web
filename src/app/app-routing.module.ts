@@ -11,10 +11,10 @@ import { ConfiguracoesComponent } from './configuracoes/configuracoes.component'
 import { AppComponent } from './app.component';
 
 const indexRoutes: Routes = [
-   { path: '', canActivateChild: [AuthGuard], component: HomeComponent, data: {title: 'Início | Lead Time' } },
-   { path: 'home', canActivateChild: [AuthGuard], component: HomeComponent, data: {title: 'Início | Lead Time' } },
-   { path: 'carga', canActivateChild: [AuthGuard], component: CargaComponent, data: {title: 'Cargas | Lead Time'} },
-   { path: 'config', canActivateChild: [AuthGuard], component: ConfiguracoesComponent, data: {title: 'Configurações | Lead Time' } }
+   { path: '', canActivate: [AuthGuard], component: HomeComponent, data: {title: 'Início | Lead Time' } },
+   { path: 'home', canActivate: [AuthGuard], component: HomeComponent, data: {title: 'Início | Lead Time' } },
+   { path: 'carga', canActivate: [AuthGuard], component: CargaComponent, data: {title: 'Cargas | Lead Time'} },
+   { path: 'config', canActivate: [AuthGuard], component: ConfiguracoesComponent, data: {title: 'Configurações | Lead Time' } }
 ];
 
 @NgModule({

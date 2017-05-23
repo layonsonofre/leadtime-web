@@ -22,17 +22,14 @@ export class LoginComponent {
 
    login() {
       this.message = 'Verificando acesso...';
-
       this.dataService.login(this.user).then(() => {
          this.setMessage();
          if (this.dataService.isLoggedIn) {
             let redirect = this.dataService.redirectUrl ? this.dataService.redirectUrl : '/home';
-
             let navigationExtras: NavigationExtras = {
                preserveQueryParams: false,
                preserveFragment: false
             };
-
             this.router.navigate([redirect], navigationExtras);
          }
       });

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ViewContainerRef } from '@angular/core';
 import { Http } from '@angular/http';
 import { KMMGateway } from './kmm/gateway';
 import { Usuario } from './kmm/usuario';
@@ -24,7 +24,7 @@ export class DataService {
    public firstLoad: boolean = false;
    public _modulo: string = "LEADTIME";
 
-   constructor(public http: Http, private gateway: KMMGateway) {
+   constructor(public http: Http, private gateway: KMMGateway ) {
    }
 
    login(parameters?: any): Promise<boolean> {
@@ -48,31 +48,31 @@ export class DataService {
    * INICIO DO BLOCO DE CARGA
    */
    loadCargasViagem(force?: boolean, parameters?: string): Promise<any> {
-      // if (this.cargasViagem == null || force) {
-      //    return this.gateway.backendCall(this._modulo, "getViagem", parameters, false).then(
-      //       (result) => {
-      //          this.cargasViagem = result;
-      //          console.log(this.cargasViagem);
-      //          return this.cargasViagem;
-      //       }
-      //    );
-      // } else {
-      //    return Promise.resolve(this.cargasViagem);
-      // }
       if (this.cargasViagem == null || force) {
-         return new Promise(resolve => {
-            this.http.get('http://private-8d09d-leadtime.apiary-mock.com/cargas/viagem')
-            .map(res => res.json())
-            .subscribe(data => {
-               this.cargasViagem = data[0];
-               resolve(this.cargasViagem);
-            }, err => {
-               console.error(err);
-            });
-         });
+         return this.gateway.backendCall(this._modulo, "getViagem", parameters, false).then(
+            (result) => {
+               this.cargasViagem = result;
+               console.log(this.cargasViagem);
+               return this.cargasViagem;
+            }
+         );
       } else {
          return Promise.resolve(this.cargasViagem);
       }
+      // if (this.cargasViagem == null || force) {
+      //    return new Promise(resolve => {
+      //       this.http.get('http://private-8d09d-leadtime.apiary-mock.com/cargas/viagem')
+      //       .map(res => res.json())
+      //       .subscribe(data => {
+      //          this.cargasViagem = data[0];
+      //          resolve(this.cargasViagem);
+      //       }, err => {
+      //          console.error(err);
+      //       });
+      //    });
+      // } else {
+      //    return Promise.resolve(this.cargasViagem);
+      // }
    }
 
    loadCargasAguardando(force?: boolean): Promise<any> {

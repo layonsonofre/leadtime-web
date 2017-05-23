@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { KMMGateway } from './kmm/gateway';
-import { DialogService } from './dialog.service';
+import { ModalComponent } from './modal.component';
 import { DataService } from './data.service';
 
 import { ChartsModule } from 'ng2-charts';
@@ -36,12 +36,11 @@ import { ConfiguracoesComponent } from './configuracoes/configuracoes.component'
       FormsModule,
       HttpModule,
       BrowserAnimationsModule,
-      LoginRoutingModule,
       AppRoutingModule,
+      LoginRoutingModule,
       ChartsModule
    ],
    providers: [
-      DialogService,
       DataService,
       KMMGateway
    ],

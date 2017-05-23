@@ -4,21 +4,23 @@
       <div class="login-content">
          <img src="assets/img/logo-white.png" alt="Lead Time">
          <br>
-         <form (submit)="login()">
+         <form (submit)="login()" class="w50">
             <div class="input-wrap text full opacity">
                <span class="icon-pessoa"></span>
-               <input type="email" placeholder="CNPJ/CUIT/Email" [(ngModel)]="user.acesso" name="acesso">
+               <input type="email" placeholder="CNPJ/CUIT/Email" [(ngModel)]="user.acesso" name="acesso" id="acesso">
             </div>
             <div class="input-wrap text full opacity">
                <span class="icon-key"></span>
-               <input type="password" placeholder="Senha" [(ngModel)]="user.senha" name="senha">
+               <input type="password" placeholder="Senha" [(ngModel)]="user.senha" name="senha" id="senha">
             </div>
-            <div class="input-wrap opacity">
+            <div class="input-wrap full center-align opacity">
                <button type="submit" *ngIf="!dataService.isLoggedIn"><span class="icon-unlocked"></span>Login</button>
                <button (click)="logout()" *ngIf="dataService.isLoggedIn"><span class="icon-lock"></span>Logout</button>
             </div>
             <p>{{message}}</p>
          </form>
+         <br><br><br>
+         <button (click)="test()"><span class="icon-lock"></span>Test</button>
       </div>
    </div>
 </div>

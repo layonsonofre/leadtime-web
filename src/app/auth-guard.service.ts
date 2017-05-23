@@ -8,7 +8,6 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
       let url: string = state.url;
-
       return this.checkLogin(url);
    }
 
@@ -27,12 +26,9 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
          return true;
       }
       this.dataService.redirectUrl = url;
-      let sessionId = 123456789;
       let navigationExtras: NavigationExtras = {
-         queryParams: { 'session_id': sessionId },
-         fragment: 'anchor'
+         fragment: 'acesso'
       };
-
       this.router.navigate(['/login'], navigationExtras);
       return false;
    }
