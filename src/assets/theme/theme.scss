@@ -446,7 +446,7 @@ form {
          padding-left: 40px;
          padding-right: 40px;
          min-width: 100px;
-         color: white;
+         color: map-get($colors, previsto);
          text-align: center;
          vertical-align: middle;
          cursor: pointer;
@@ -458,6 +458,8 @@ form {
 
          &:hover {
             box-shadow: $shadow-hover;
+            color: white;
+            background-color: map-get($colors, previsto);
          }
 
          &.danger {
@@ -618,7 +620,7 @@ ul > li > span {
 
 .login-container {
    overflow: hidden;
-   position: absolute;
+   position: fixed;
    top: 0;
    left: 0;
    width: 100%;
@@ -733,4 +735,59 @@ table {
 
 .w60 {
    width: 60%;
+}
+
+
+
+
+
+
+notification {
+  /* modals are hidden by default */
+  display: none;
+
+  .notification {
+    /* notification container fixed across whole screen */
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    /* z-index must be higher than .notification-background */
+    z-index: 1000;
+
+    /* enables scrolling for tall notifications */
+    overflow: auto;
+
+    .notification-body {
+      padding: 20px;
+      padding-bottom: 40px;
+      color: #fff;
+      font-weight: bold;
+      border-bottom: 1px solid map-get($colors, teal);
+      margin: 40px;
+    }
+  }
+
+  .notification-background {
+    /* notification background fixed across whole screen */
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    /* semi-transparent black  */
+    background-color: #000;
+    opacity: 0.75;
+
+    /* z-index must be below .notification and above everything else  */
+    z-index: 999;
+  }
+}
+
+body.notification-open {
+  /* body overflow is hidden to hide main scrollbar when modal window is open */
+  overflow: hidden;
 }

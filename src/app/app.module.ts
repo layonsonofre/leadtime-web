@@ -9,7 +9,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { KMMGateway } from './kmm/gateway';
-import { ModalComponent } from './modal.component';
+import { NotificationService } from './notification/notification.service';
+import { NotificationComponent } from './notification/notification.component';
 import { DataService } from './data.service';
 
 import { ChartsModule } from 'ng2-charts';
@@ -29,7 +30,8 @@ import { ConfiguracoesComponent } from './configuracoes/configuracoes.component'
       HomeComponent,
       CargaComponent,
       SortCardsPipe,
-      ConfiguracoesComponent
+      ConfiguracoesComponent,
+      NotificationComponent
    ],
    imports: [
       BrowserModule,
@@ -42,6 +44,7 @@ import { ConfiguracoesComponent } from './configuracoes/configuracoes.component'
    ],
    providers: [
       DataService,
+      NotificationService,
       KMMGateway
    ],
    entryComponents: [],
