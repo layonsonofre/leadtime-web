@@ -1,7 +1,7 @@
 import { Component, OnInit, Optional } from '@angular/core';
 import { DataService } from '../data.service';
-import { Title } from '@angular/platform-browser';
 import { SortCardsPipe } from '../sort-cards.pipe';
+import { NotificationService } from '../notification/notification.service';
 
 @Component({
    selector: 'carga',
@@ -30,7 +30,7 @@ export class CargaComponent implements OnInit {
    private orders: string[];
    private orderIndex: number;
 
-   constructor(private dataService: DataService, private titleService: Title) { }
+   constructor(private dataService: DataService, private notificationService: NotificationService) { }
 
    ngOnInit() {
       this.filtro.orders_label = ["Realizada", "Prevista", "Tempo atraso"];
@@ -56,12 +56,18 @@ export class CargaComponent implements OnInit {
       this.loading = true;
       this.empty = true;
       this.dataService.loadCargasViagem(force, this.filtro).then(data => {
+        this.loading = false;
+        console.log(data);
          if (data.viagens) {
             this.cargasViagem = this.cargasViagem.concat(data.viagens);
-
             this.empty = false;
+         } else {
+           this.notificationService.title = 'Algo deu errado';
+           this.notificationService.code = data.detail.error;
+           this.notificationService.message = data.message;
+           this.notificationService.stacktrace = data.detail.stacktrace;
+           this.notificationService.open('load-error');
          }
-         this.loading = false;
       });
    }
 

@@ -767,6 +767,8 @@ notification {
       font-weight: bold;
       border-bottom: 1px solid map-get($colors, teal);
       margin: 40px;
+      background-color: #000;
+      opacity: 0.75;
     }
   }
 
@@ -780,7 +782,7 @@ notification {
 
     /* semi-transparent black  */
     background-color: #000;
-    opacity: 0.75;
+    opacity: 0.50;
 
     /* z-index must be below .notification and above everything else  */
     z-index: 999;

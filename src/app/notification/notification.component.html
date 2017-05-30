@@ -3,9 +3,10 @@
     <div class="input-wrap right-align">
       <button (click)="close(id)" class="btn success">&#10006;</button>
     </div>
-    <h1 id="title">{{title}}</h1>
-    <h6>Código: <span id="code">{{code}}</span></h6>
-    <p id="message">{{message}}</p>
+    <h1>{{title}}</h1>
+    <h2>{{message}}</h2>
+    <h4>Código {{code}}</h4>
+    <h4>Detalhes<br>{{stacktrace}}</h4>
   </div>
 </div>
 <div class="notification-background"></div>

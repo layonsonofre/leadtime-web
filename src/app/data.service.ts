@@ -58,20 +58,6 @@ export class DataService {
       } else {
          return Promise.resolve(this.cargasViagem);
       }
-      // if (this.cargasViagem == null || force) {
-      //    return new Promise(resolve => {
-      //       this.http.get('http://private-8d09d-leadtime.apiary-mock.com/cargas/viagem')
-      //       .map(res => res.json())
-      //       .subscribe(data => {
-      //          this.cargasViagem = data[0];
-      //          resolve(this.cargasViagem);
-      //       }, err => {
-      //          console.error(err);
-      //       });
-      //    });
-      // } else {
-      //    return Promise.resolve(this.cargasViagem);
-      // }
    }
 
    loadCargasAguardando(force?: boolean): Promise<any> {

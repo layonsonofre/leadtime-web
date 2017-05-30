@@ -13,16 +13,18 @@ export class NotificationComponent implements OnInit, OnDestroy {
   @Input() title: string;
   @Input() code: string;
   @Input() message: string;
+  @Input() stacktrace: string;
   private element: JQuery;
 
   constructor(private notificationService: NotificationService, private el: ElementRef) {
     this.element = $(el.nativeElement);
   }
 
-  set(title: string, code: string, message: string) {
+  set(title: string, code: string, message: string, stacktrace: string) {
     this.title = title;
     this.code = code;
     this.message = message;
+    this.stacktrace = stacktrace;
   }
 
   ngOnInit(): void {

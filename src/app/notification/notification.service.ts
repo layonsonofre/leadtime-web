@@ -4,6 +4,7 @@ export class NotificationService {
   public title: string;
   public code: string;
   public message: string;
+  public stacktrace: string;
 
   find(id: string) : any {
     for (let note of this.notifications) {
@@ -28,7 +29,7 @@ export class NotificationService {
   open(id: string) {
     let note = this.find(id);
     if (note) {
-      note.set(this.title, this.code, this.message);
+      note.set(this.title, this.code, this.message, this.stacktrace);
       note.open();
     }
   }
