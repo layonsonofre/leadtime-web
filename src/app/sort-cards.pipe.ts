@@ -21,7 +21,6 @@ export class SortCardsPipe implements PipeTransform {
    }
 
    transform(input: any, field: any, order: string = 'desc') : any {
-      console.log("test", input, field, order);
       if(!Array.isArray(input)) return input;
 
       // if(!Array.isArray(field) || (Array.isArray(field) && field.length == 1)){

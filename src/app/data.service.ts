@@ -49,10 +49,9 @@ export class DataService {
    */
    loadCargasViagem(force?: boolean, parameters?: string): Promise<any> {
       if (this.cargasViagem == null || force) {
-         return this.gateway.backendCall(this._modulo, "getViagem", parameters, false).then(
+         return this.gateway.backendCall(this._modulo, "getViagem", null, false).then(
             (result) => {
                this.cargasViagem = result;
-               console.log(this.cargasViagem);
                return this.cargasViagem;
             }
          );

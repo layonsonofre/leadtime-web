@@ -58,6 +58,7 @@ export class CargaComponent implements OnInit {
       this.dataService.loadCargasViagem(force, this.filtro).then(data => {
          if (data.viagens) {
             this.cargasViagem = this.cargasViagem.concat(data.viagens);
+
             this.empty = false;
          }
          this.loading = false;

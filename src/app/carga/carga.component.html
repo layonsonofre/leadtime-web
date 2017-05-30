@@ -68,56 +68,68 @@
             </form>
          </div>
       </div>
-      <div *ngFor="let viagem of cargasViagem | sortCards : filtro.order_by : filtro.asc_desc, let i = index" [ngClass]="viagem.visible === true ? '' : 'hide'">
+      <div *ngFor="let viagem of cargasViagem | sortCards : filtro.order_by : filtro.asc_desc, let i = index" [ngClass]="viagem.visible === undefined || viagem.visible === true ? '' : 'hide'">
          <div class="card" [ngClass]="viagem.status == 'ATRASADO' ? 'atrasado' : 'previsto'" (click)="viagem.details = !viagem.details" [class.detailed]="viagem.details">
             <!-- <div class="card-logo" [ngStyle]="{'background': 'url(' + viagem.transportadora.logo + ') no-repeat center #FFFFFF'}"></div> -->
             <div class="card-logo"></div>
             <div class="card-content">
                <div class="minimized-info">
+                  <div class="info">
+                    <span class="icon-rodovia"></span>{{ viagem.num_romaneio }}
+                    <div class="help-text">Romaneio</div>
+                  </div>
+                  <div class="info">
+                     <span class="icon-caminhao"></span>{{ viagem.num_cliente }}
+                     <div class="help-text">Identificação</div>
+                  </div>
                   <div class="info full">
-                     <span class="icon-carga-previsao"></span>{{ viagem.carga_previsao_inicio }}
-                     <div class="help-text">Chegada prevista</div>
-                  </div>
-                  <div class="info">
-                     <span class="icon-caminhao"></span>{{ viagem.placa[0].placa }}
-                     <div class="help-text">Placa</div>
-                  </div>
-                  <div class="info">
-                     <span class="icon-rodovia"></span>{{ viagem.num_romaneio }}
-                     <div class="help-text">Romaneio</div>
+                    <span class="icon-carga-previsao"></span>{{ viagem.carga_previsao_fim }}
+                    <div class="help-text">Final previsto da carga</div>
                   </div>
                </div>
                <div class="detailed-info">
                   <div class="info">
-                     <span class="icon-terno"></span>{{ viagem.empresa[0].nome_fantasia }}
-                     <div class="help-text">Transportadora</div>
+                    <span class="icon-rodovia"></span>{{ viagem.num_romaneio }}
+                    <div class="help-text">Romaneio</div>
                   </div>
                   <div class="info">
-                     <span class="icon-carga-fim"></span>{{ viagem.carga_previsao_fim }}
-                     <div class="help-text">Chegada prevista fim</div>
+                     <span class="icon-caminhao"></span>{{ viagem.num_cliente }}
+                     <div class="help-text">Identificação</div>
                   </div>
                   <div class="info">
-                     <span class="icon-caminhao"></span>{{ viagem.placa[0].placa }}
-                     <div class="help-text">Placa</div>
+                     <span class="icon-rodovia"></span>{{ viagem.carga_previsao_inicio }}
+                     <div class="help-text">Início previsto da carga</div>
                   </div>
                   <div class="info">
-                     <span class="icon-rodovia"></span>{{ viagem.num_romaneio }}
-                     <div class="help-text">Romaneio</div>
+                     <span class="icon-rodovia"></span>{{ viagem.carga_previsao_fim }}
+                     <div class="help-text">Fim previsto da carga</div>
                   </div>
                   <div class="info">
-                     <span class="icon-mercadoria"></span>{{ viagem.mercadoria[0].mercadoria }}
-                     <div class="help-text">Mercadoria</div>
+                     <span class="icon-rodovia"></span>{{ viagem.descarga_previsao_inicio }}
+                     <div class="help-text">Início previsto da descarga</div>
                   </div>
                   <div class="info">
-                     <span class="icon-pessoa"></span>{{ viagem.motorista_cpf }}
+                     <span class="icon-rodovia"></span>{{ viagem.descarga_previsao_fim }}
+                     <div class="help-text">Fim previsto da descarga</div>
+                  </div>
+                  <div class="info">
+                     <span class="icon-pessoa"></span>{{ viagem.motorista }}
                      <div class="help-text">Motorista</div>
                   </div>
                   <div class="info">
-                     <span class="icon-origem"></span>{{ viagem.origem_logradouro }}
+                     <span class="icon-pessoa"></span>{{ viagem.motorista_celular }}
+                     <div class="help-text">Telefone</div>
+                  </div>
+                  <div class="info">
+                     <span class="icon-pessoa"></span>{{ viagem.motorista_cpf }}
+                     <div class="help-text">CPF</div>
+                  </div>
+                  <div class="info">
+                     <span class="icon-origem"></span>{{ viagem.origem_cidade }}
                      <div class="help-text">Origem</div>
                   </div>
                   <div class="info">
-                     <span class="icon-destino"></span>{{ viagem.destino_logradouro }}
+                     <span class="icon-destino"></span>{{ viagem.destino_cidade }}
                      <div class="help-text">Destino</div>
                   </div>
                </div>
