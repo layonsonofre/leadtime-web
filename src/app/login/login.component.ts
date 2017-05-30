@@ -5,8 +5,7 @@ import { Usuario } from '../kmm/usuario';
 
 @Component({
    selector: 'login',
-   templateUrl: './login.component.html',
-   styleUrls: ['./login.component.scss']
+   templateUrl: './login.component.html'
 })
 export class LoginComponent {
    public message: string;

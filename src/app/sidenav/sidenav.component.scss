@@ -14,18 +14,18 @@
    color: map-get($colors, light);
    text-decoration: none;
 
-   & > .user {
+   & .user {
       height: 120px;
       width: 100%;
       position: relative;
       overflow: hidden;
 
-      & > img {
+      & img {
          width: auto;
          height: 100%;
       }
 
-      & > .user-details {
+      & .user-details {
          position: absolute;
          top: 0px;
          color: map-get($colors, light);
@@ -37,13 +37,13 @@
          line-height: 24px;
          text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 
-         & > .user-info {
+         & .user-info {
             position: absolute;
             bottom: 1vh;
             left: 1vw;
             display: none;
             cursor: pointer;
-            & > span {
+            & span {
                font-weight: normal;
 
                &:first-child {
@@ -54,10 +54,10 @@
       }
    }
 
-   & > .menu {
+   & .menu {
       text-align: center;
       margin-top: 30px;
-      & > a {
+      & a {
          color: map-get($colors, menu);
          display: block;
          padding-top: 12px;
@@ -74,7 +74,7 @@
             font-size: 1.6rem;
          }
 
-         & > span.menu-text {
+         & span.menu-text {
             visibility: hidden;
             position: absolute;
             top: -10px;
@@ -84,7 +84,7 @@
       }
    }
 
-   & > .logo {
+   & .logo {
       width: 100%;
       height: 64px;
       display: flex;
@@ -95,11 +95,11 @@
       position: absolute;
       bottom: 0;
       opacity: 0.2;
-      & > .text {
+      & .text {
          display: none;
          flex-grow: 2;
       }
-      & > .img > img {
+      & .img img {
          height: 80%;
          width: auto;
       }
@@ -109,34 +109,34 @@
    &:hover {
       width: 15vw;
 
-      .user > .user-details > .user-info {
+      .user .user-details .user-info {
          display: block;
          padding-right: 1vw;
       }
-      .user > img {
+      .user img {
          width: 100%;
          height: auto;
       }
 
-      & > .logo {
+      & .logo {
          opacity: 0.4;
-         & > .text {
+         & .text {
             display: block;
             text-align: center;
             vertical-align: middle;
             height: 100%;
             font-size: 2rem;
          }
-         & > .img {
+         & .img {
             flex-grow: 1;
          }
       }
 
-      & > .menu {
+      & .menu {
          text-align: left;
          padding-left: 2vw;
          vertical-align: middle;
-         & > a > span.menu-text {
+         & a span.menu-text {
             visibility: visible;
             display: inline-block;
             position: relative;

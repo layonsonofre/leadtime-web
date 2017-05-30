@@ -5,8 +5,7 @@ import { NotificationService } from '../notification/notification.service';
 
 @Component({
    selector: 'carga',
-   templateUrl: './carga.component.html',
-   styleUrls: ['./carga.component.scss']
+   templateUrl: './carga.component.html'
 })
 export class CargaComponent implements OnInit {
    private cargasViagem: Array<any> = [];

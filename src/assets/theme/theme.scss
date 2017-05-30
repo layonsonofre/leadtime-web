@@ -91,7 +91,7 @@ body {
    text-align: center;
    height: 32px;
    margin-right: 200px;
-   & > a {
+   & a {
       min-width: 10vw;
       cursor: pointer;
 
@@ -118,19 +118,19 @@ body {
       box-shadow: $shadow-hover;
    }
 
-   & > .card-logo {
+   & .card-logo {
       width: 30%;
       margin-top: 0;
       margin-bottom: 0;
       float: left;
       overflow: hidden;
       background-color: map-get($colors, white);
-      box-shadow: $shadow;
+      box-shadow: 2px 0px 1px 1px rgba(0, 0, 0, 0.1);
       padding: 5px;
       vertical-align: middle;
    }
 
-   & > .card-content {
+   & .card-content {
       width: 70%;
       padding: 5px 5px 5px 10px;
       position: relative;
@@ -140,7 +140,7 @@ body {
       font-size: 1.2rem;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 
-      & > .minimized-info {
+      & .minimized-info {
          visibility: visible;
          display: flex;
          flex-wrap: wrap;
@@ -149,7 +149,7 @@ body {
          color: map-get($colors, light);
       }
 
-      & > .detailed-info {
+      & .detailed-info {
          visibility: hidden;
          height: 0;
       }
@@ -158,13 +158,13 @@ body {
 
 .detailed {
 
-   & > .card-content {
+   & .card-content {
       width: 100%;
-      & > .minimized-info {
+      & .minimized-info {
          visibility: hidden;
          height: 0;
       }
-      & > .detailed-info {
+      & .detailed-info {
          visibility: visible;
          display: flex;
          flex-wrap: wrap;
@@ -174,7 +174,7 @@ body {
          height: 100%;
       }
    }
-   & > .card-logo {
+   & .card-logo {
       display: none;
    }
 
@@ -277,7 +277,7 @@ hr {
 .summary {
    height: 100%;
 
-   & > .summary-info-block {
+   & .summary-info-block {
       display: flex;
       margin: auto;
       max-width: 100%;
@@ -286,7 +286,7 @@ hr {
       flex-flow: row wrap;
       margin-bottom: 50px;
 
-      & > .summary-info {
+      & .summary-info {
          position: relative;
          padding: 10px 20px 25px;
          width: 25%;
@@ -298,14 +298,14 @@ hr {
             margin: 0;
          }
 
-         & > .info-small {
+         & .info-small {
             display: inline-block;
             margin-top: 15px;
             text-align: center;
             width: 45%;
          }
 
-         & > [class^="icon-"], & > [class*=" icon-"] {
+         & [class^="icon-"], & > [class*=" icon-"] {
             width: 40%;
             height: 50%;
             position: absolute;
@@ -340,7 +340,7 @@ hr {
       }
    }
 
-   & > .filters {
+   & .filters {
       display: inline-block;
       height: 100%;
    }
@@ -354,7 +354,7 @@ hr {
    color: map-get($colors, atrasado);
 }
 
-a > i, a > span {
+a i, a > span {
    vertical-align: middle;
    margin-right: 10px;
    text-align: center;
@@ -429,13 +429,13 @@ form {
       font-family: 'Roboto';
    }
 
-   & > input {
+   & input {
       flex-grow: 2;
       padding-left: 5px;
       padding-right: 5px;
    }
 
-   & > button {
+   & button {
       cursor: pointer;
 
       &:hover {
@@ -482,7 +482,7 @@ form {
       }
    }
 
-   & > label {
+   & label {
       padding-left: 24px;
       user-select: none;
       vertical-align: middle;
@@ -510,19 +510,19 @@ form {
       }
    }
 
-   & > input[type=radio]:checked + & > label:before,
-   & > input[type=checkbox]:checked + & > label:before {
+   & input[type=radio]:checked + & > label:before,
+   & input[type=checkbox]:checked + & > label:before {
       background-color: #19191a;
       border: none;
       box-shadow: none;
    }
 
-   & > input[type=radio]:checked + & > label:after,
-   & > input[type=checkbox]:checked + & > label:after {
+   & input[type=radio]:checked + & > label:after,
+   & input[type=checkbox]:checked + & > label:after {
       display: block;
    }
 
-   & > select {
+   & select {
       border: none;
       background-color: transparent;
       border-bottom: 1px solid map-get($colors, teal);
@@ -533,7 +533,7 @@ form {
       }
    }
 
-   & > .icon {
+   & .icon {
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -549,7 +549,7 @@ form {
       }
    }
 }
-ul > li > span {
+ul li span {
    vertical-align: middle;
    margin-right: 4px;
 }
@@ -561,7 +561,7 @@ ul > li > span {
    height: 32px;
    width: 100%;
 
-   & > li {
+   & li {
       margin-right: 20px;
       cursor: pointer;
 

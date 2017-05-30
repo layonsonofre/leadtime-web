@@ -4,8 +4,7 @@ import { SortCardsPipe } from '../sort-cards.pipe';
 
 @Component({
    selector: 'app-configuracoes',
-   templateUrl: './configuracoes.component.html',
-   styleUrls: ['./configuracoes.component.scss']
+   templateUrl: './configuracoes.component.html'
 })
 export class ConfiguracoesComponent implements OnInit {
 
