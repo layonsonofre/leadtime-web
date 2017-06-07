@@ -17,6 +17,9 @@ export class DataService {
    public indicadoresHome: any = null;
    public mercadoriaCliente: any = null;
    public mercadoriaLeadTime: any = null;
+   //Heder
+   public indicadores: any = null;
+
 
    public isLoggedIn: boolean = false;
    public redirectUrl: string;
@@ -44,12 +47,31 @@ export class DataService {
       this.isLoggedIn = false;
    }
 
+  /*
+   * INICIO DO BLOCO DE INDICADORES
+   */
+  loadIndicadores(force?: boolean, parameters?: string): Promise<any> {
+    if (this.indicadores == null || force) {
+      return this.gateway.backendCall(this._modulo, "getIndicadores", parameters, false).then(
+        (result) => {
+          this.indicadores = result;
+          return this.indicadores;
+        }
+      );
+    } else {
+      return Promise.resolve(this.cargasViagem);
+    }
+  }
+  /*
+   * FIM DO BLOCO DE INDICADORES
+   */
+
    /*
    * INICIO DO BLOCO DE CARGA
    */
    loadCargasViagem(force?: boolean, parameters?: string): Promise<any> {
-      if (this.cargasViagem == null || force) {
-         return this.gateway.backendCall(this._modulo, "getViagem", null, false).then(
+       if (this.cargasViagem == null || force) {
+         return this.gateway.backendCall(this._modulo, "getViagem", parameters, false).then(
             (result) => {
                this.cargasViagem = result;
                return this.cargasViagem;

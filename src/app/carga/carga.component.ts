@@ -5,7 +5,8 @@ import { NotificationService } from '../notification/notification.service';
 
 @Component({
    selector: 'carga',
-   templateUrl: './carga.component.html'
+   templateUrl: './carga.component.html',
+   styleUrls: ['./carga.component.scss']
 })
 export class CargaComponent implements OnInit {
    private cargasViagem: Array<any> = [];
@@ -19,10 +20,15 @@ export class CargaComponent implements OnInit {
    public ordenacao : string = "['+carga_previsao_inicio']";
    private selected : string = 'viagem';
 
+   // HEDER
+   private indicadores: Array<any> = [];
+
+
    private pagination_inf: number;
    private pagination_sup: number;
    private pagination_amount: number;
    private page: string;
+   private aba: string;
    private asc_desc: string;
    private ascending: boolean;
    private order_by: string;
@@ -45,6 +51,7 @@ export class CargaComponent implements OnInit {
       this.filtro.pagination_amount = 10;
 
       this.filtro.page = "carga";
+      this.filtro.aba = "destinado";
 
       this.loadCargasViagem(true);
       this.filtro.previsto = true;
@@ -69,6 +76,25 @@ export class CargaComponent implements OnInit {
          }
       });
    }
+
+  loadIndicadores(force?: boolean) {
+    this.loading = true;
+    this.empty = true;
+    this.dataService.loadIndicadores(force, this.filtro).then(data => {
+      this.loading = false;
+      console.log(data);
+      if (data.indicadores) {
+        this.indicadores = this.indicadores.concat(data.indicadores);
+        this.empty = false;
+      } else {
+        this.notificationService.title = 'Algo deu errado';
+        this.notificationService.code = data.detail.error;
+        this.notificationService.message = data.message;
+        this.notificationService.stacktrace = data.detail.stacktrace;
+        this.notificationService.open('load-error');
+      }
+    });
+  }
 
    loadCargasAguardando(force?: boolean) {
       this.loading = true;
