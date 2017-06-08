@@ -4,7 +4,7 @@
    position: fixed;
    top: 0px;
    left: 0px;
-   width: 5vw;
+   width: 64px;
    height: 100vh;
    z-index: 1;
    background-color: map-get($colors, teal-dark);
@@ -39,16 +39,14 @@
 
          & .user-info {
             position: absolute;
-            bottom: 1vh;
-            left: 1vw;
+            bottom: 5px;
+            left: 15px;
             display: none;
+            word-break: break-all;
             cursor: pointer;
-            & span {
-               font-weight: normal;
 
-               &:first-child {
-                  font-weight: bolder;
-               }
+            p:first-child {
+              font-weight: bolder;
             }
          }
       }
@@ -63,8 +61,6 @@
          padding-top: 12px;
          padding-bottom: 12px;
          text-decoration: none;
-         height: 100%;
-         width: 100%;
          &:hover {
             cursor: pointer;
             color: map-get($colors, menu-highlight);
@@ -107,11 +103,12 @@
 
    //transition
    &:hover {
-      width: 15vw;
+      width: 192px;
 
       .user .user-details .user-info {
          display: block;
-         padding-right: 1vw;
+         padding-right: 15px;
+         word-wrap: break-word;
       }
       .user img {
          width: 100%;
@@ -134,7 +131,7 @@
 
       & .menu {
          text-align: left;
-         padding-left: 2vw;
+         padding-left: 15px;
          vertical-align: middle;
          & a span.menu-text {
             visibility: visible;

@@ -13,23 +13,23 @@
          <h4>Informações / <a class="header-link" [ngClass]="showFilter === true ? 'active' : ''"(click)="showFilter = !showFilter">Filtros</a></h4>
          <div class="summary-info-block" *ngIf="!showFilter">
             <div class="summary-info">
-               <h1>{{ indicadores[0].page === 'destinado' ? indicadores[0].total_page : 0 }}</h1>
+               <h1>{{ total_destinados }}</h1>
                <h3>Total</h3>
             </div>
             <div class="summary-info action" (click)="statusFilter('previsto', cargasDestinado)" [ngClass]="filtro.previsto === true ? 'animated pulse active' : ''">
-               <h1>17</h1>
+               <h1>{{ destinados_previstos }}</h1>
                <h3 class="f-previsto">Previstos</h3>
             </div>
             <div class="summary-info action" (click)="statusFilter('atrasado', cargasDestinado)" [ngClass]="filtro.atrasado === true ? 'animated pulse active' : ''">
-               <h1>17</h1>
+               <h1>{{ destinados_atrasados }}</h1>
                <h3 class="f-atrasado">Atrasados</h3>
             </div>
          </div>
          <div class="filters animated fadeIn" *ngIf="showFilter">
             <form (submit)="search(cargasDestinado)">
                <div class="input-wrap text full">
-                  <span class="icon">test</span>
-                  <input placeholder="Insira os parâmetros de sua pesquisa" [(ngModel)]="filtro.valor" name="valor">
+                  <label for="valor">Parâmetro</label>
+                  <input type="search" placeholder="Insira os parâmetros de sua pesquisa aqui" [(ngModel)]="filtro.valor" name="valor" id="valor">
                   <button type="submit"><i class="material-icons">search</i></button>
                </div>
                <div class="input-wrap action">
@@ -69,7 +69,7 @@
             </form>
          </div>
       </div>
-      <div *ngFor="let viagem of cargasDestinado | sortCards : filtro.order_by : filtro.asc_desc, let i = index" [ngClass]="viagem.visible === undefined || viagem.visible === true ? '' : 'hide'">
+      <div *ngFor="let viagem of cargasDestinado | sortCards : filtro.order_by : filtro.asc_desc, let i = index" [ngClass]="viagem.visible == undefined || viagem.visible === true ? '' : 'hide'">
          <div class="card" [ngClass]="viagem.status == 'ATRASADO' ? 'atrasado' : 'previsto'" (click)="viagem.details = !viagem.details" [class.detailed]="viagem.details">
             <!-- <div class="card-logo" [ngStyle]="{'background': 'url(' + viagem.transportadora.logo + ') no-repeat center #FFFFFF'}"></div> -->
             <div class="card-logo"></div>
@@ -146,23 +146,23 @@
          <h4>Informações / <a class="header-link" [ngClass]="showFilter === true ? 'active' : ''"(click)="showFilter = !showFilter">Filtros</a></h4>
          <div class="summary-info-block" *ngIf="!showFilter">
             <div class="summary-info">
-               <h1>17</h1>
+               <h1>{{ total_aguardando }}</h1>
                <h3>Total</h3>
             </div>
             <div class="summary-info action" (click)="statusFilter('previsto', cargasAguardando)" [ngClass]="filtro.previsto === true ? 'animated pulse active' : ''">
-               <h1>17</h1>
+               <h1>{{ aguardando_previstos }}</h1>
                <h3 class="f-previsto">Previstos</h3>
             </div>
             <div class="summary-info action" (click)="statusFilter('atrasado', cargasAguardando)" [ngClass]="filtro.atrasado === true ? 'animated pulse active' : ''">
-               <h1>17</h1>
+               <h1>{{ aguardando_atrasados }}</h1>
                <h3 class="f-atrasado">Atrasados</h3>
             </div>
          </div>
          <div class="filters animated fadeIn" *ngIf="showFilter">
             <form (submit)="search(cargasAguardando)">
                <div class="input-wrap text full">
-                  <span class="icon">test</span>
-                  <input placeholder="Insira os parâmetros de sua pesquisa" [(ngModel)]="filtro.valor" name="valor">
+                  <label for="valor">Parâmetro</label>
+                  <input type="search" placeholder="Insira os parâmetros de sua pesquisa aqui" [(ngModel)]="filtro.valor" name="valor" id="valor">
                   <button type="submit"><i class="material-icons">search</i></button>
                </div>
                <div class="input-wrap action">

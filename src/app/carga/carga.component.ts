@@ -17,7 +17,6 @@ export class CargaComponent implements OnInit {
    private empty = true;
    private ordenacao: string = "['+carga_previsao_inicio']";
    private firstTabChange: boolean;
-   private indicadores: Array<any> = [];
 
    private pagination_inf: number;
    private pagination_sup: number;
@@ -29,6 +28,13 @@ export class CargaComponent implements OnInit {
    private order_by: string;
    private orders: string[];
    private orderIndex: number;
+
+   private total_destinados: number;
+   private destinados_atrasados: number;
+   private destinados_previstos: number;
+   private total_aguardando: number;
+   private aguardando_atrasados: number;
+   private aguardando_previstos: number;
 
    constructor(private dataService: DataService, private notificationService: NotificationService) { }
 
@@ -50,10 +56,17 @@ export class CargaComponent implements OnInit {
       this.filtro.page = "carga";
       this.filtro.aba = 'destinado';
 
-      this.loadIndicadores(true);
+      this.total_destinados = 0;
+      this.destinados_atrasados = 0;
+      this.destinados_previstos = 0;
+      this.total_aguardando = 0;
+      this.aguardando_atrasados = 0;
+      this.aguardando_previstos = 0;
+
       this.loadViagens(true);
       this.filtro.previsto = true;
       this.filtro.atrasado = true;
+
    }
 
    loadViagens(force: boolean) {
@@ -61,7 +74,6 @@ export class CargaComponent implements OnInit {
       this.empty = true;
       this.dataService.loadViagens(this.filtro.page + '_' + this.filtro.aba, force, this.filtro).then(data => {
          this.loading = false;
-         console.error('BACKEND:', data);
          if (data.viagens) {
             if (this.filtro.aba === 'destinado') {
                if (force) {
@@ -81,15 +93,31 @@ export class CargaComponent implements OnInit {
             this.notificationService.open('load-error');
          }
       });
+      this.loadIndicadores(force);
    }
 
    loadIndicadores(force?: boolean) {
       this.loading = true;
       this.dataService.loadIndicadores(force, null).then(data => {
          this.loading = false;
-         console.error('indicadores', data.indicadores);
          if (data.indicadores) {
-            this.indicadores = data.indicadores;
+            for (let entry of data.indicadores) {
+              if (entry.page === 'destinado') {
+                  this.total_destinados = entry.total_page;
+                  if (entry.tipo === 'atrasado') {
+                      this.destinados_atrasados = entry.total_tipo;
+                  } else if (entry.tipo === 'previsto') {
+                      this.destinados_previstos = entry.total_tipo;
+                  }
+              } else if (entry.page === 'aguardando') {
+                  this.total_aguardando = entry.total_page;
+                  if (entry.tipo === 'atrasado') {
+                      this.aguardando_atrasados = entry.total_tipo;
+                  } else if (entry.tipo === 'previsto') {
+                      this.aguardando_previstos = entry.total_tipo;
+                  }
+              }
+            }
          } else {
             this.notificationService.title = 'Algo deu errado';
             this.notificationService.code = data.detail.error;
@@ -122,27 +150,34 @@ export class CargaComponent implements OnInit {
    search(dataArray: any) {
       let hasOne : boolean = false;
       for(let i = 0; i < dataArray.length; i++) {
-         if ((dataArray[i].status === 'ATRASADO' && this.filtro.atrasado && this.filtro.atrasado === true)
-         || (dataArray[i].status === 'PREVISTO' && this.filtro.previsto && this.filtro.previsto === true)) {
+         if (!this.filtro.valor || (dataArray[i].status === 'ATRASADO' && this.filtro.atrasado && this.filtro.atrasado === true)
+              || (dataArray[i].status === 'PREVISTO' && this.filtro.previsto && this.filtro.previsto === true)) {
             dataArray[i].visible = true;
          } else {
             dataArray[i].visible = false;
          }
-
+//|| (this.filtro.num_romaneio && dataArray[i].num_romaneio && (dataArray[i].num_romaneio.toLowerCase().indexOf(temp) >= 0))
          if (this.filtro.valor) {
             let temp = this.filtro.valor.toLowerCase();
-            if (this.filtro.placa && dataArray[i].placa && (dataArray[i].placa[0].placa.toLowerCase().indexOf(temp) >= 0)
-               || this.filtro.num_romaneio && dataArray[i].num_romaneio && (dataArray[i].num_romaneio.toLowerCase().indexOf(temp) >= 0)
-               || this.filtro.origem && dataArray[i].origem && (dataArray[i].origem.toLowerCase().indexOf(temp) >= 0)
-               || this.filtro.destino && dataArray[i].destino && (dataArray[i].destino.toLowerCase().indexOf(temp) >= 0)
-               || this.filtro.transportadora && dataArray[i].transportadora && (dataArray[i].transportadora.toLowerCase().indexOf(temp) >= 0)
-               || this.filtro.mercadoria && dataArray[i].mercadoria && this.searchMercadoria(dataArray[i].mercadoria, temp)
+            if ((this.filtro.placa && dataArray[i].placa && (dataArray[i].placa[0].placa.toLowerCase().indexOf(temp) >= 0))
+               || (this.filtro.num_romaneio && dataArray[i].num_romaneio && (String(dataArray[i].num_romaneio).toLowerCase().indexOf(temp) >= 0))
+               || (this.filtro.origem && dataArray[i].origem && (dataArray[i].origem.toLowerCase().indexOf(temp) >= 0))
+               || (this.filtro.destino && dataArray[i].destino && (dataArray[i].destino.toLowerCase().indexOf(temp) >= 0))
+               || (this.filtro.transportadora && dataArray[i].transportadora && (dataArray[i].transportadora.toLowerCase().indexOf(temp) >= 0))
+               || (this.filtro.mercadoria && dataArray[i].mercadoria && this.searchMercadoria(dataArray[i].mercadoria, temp))
             ) {
                dataArray[i].visible = true;
                hasOne = true;
             } else {
                dataArray[i].visible = false;
             }
+         } else {
+           this.filtro.placa = null;
+           this.filtro.num_romaneio = null;
+           this.filtro.origem = null;
+           this.filtro.destino = null;
+           this.filtro.transportadora = null;
+           this.filtro.mercadoria = null;
          }
       }
       this.empty = !hasOne && this.filtro.valor;

@@ -33,6 +33,30 @@ h1, h2, h3, h4, h5, h6 {
    }
 }
 
+.w10 {
+   width: 10%;
+}
+
+.w20 {
+   width: 20%;
+}
+
+.w30 {
+   width: 30%;
+}
+
+.w40 {
+   width: 40%;
+}
+
+.w50 {
+   width: 50%;
+}
+
+.w60 {
+   width: 60%;
+}
+
 body {
    min-height: 100vh;
    overflow-x: hidden;
@@ -59,23 +83,14 @@ body {
 }
 
 .header {
+   width: 100%;
    height: 116px;
    color: map-get($colors, dark);
    background-color: map-get($colors, fade);
-
-   &:before {
-      width: 100%;
-      height: 116px;
-      background-image: url('assets/img/background.jpg');
-      background-position: center center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      @include filter(blur, 5px);
-   }
 }
 
 .content {
-   padding-bottom: 10vh;
+   padding-bottom: 100px;
 }
 
 .page-title {
@@ -90,9 +105,8 @@ body {
    align-content: stretch;
    text-align: center;
    height: 32px;
-   margin-right: 200px;
-   & a {
-      min-width: 10vw;
+   a {
+      min-width: 150px;
       cursor: pointer;
 
       &:hover, &.active {
@@ -106,7 +120,7 @@ body {
    width: 100%;
    height: 100%;
    padding: 0;
-   border-radius: 2px;
+   border-radius: 0px;
    margin-top: 1vh;
    margin-bottom: 1vh;
    background-color: map-get($colors, white);
@@ -119,7 +133,7 @@ body {
    }
 
    & .card-logo {
-      width: 30%;
+      width: 25%;
       margin-top: 0;
       margin-bottom: 0;
       float: left;
@@ -131,7 +145,7 @@ body {
    }
 
    & .card-content {
-      width: 70%;
+      width: 75%;
       padding: 5px 5px 5px 10px;
       position: relative;
       float: right;
@@ -293,8 +307,7 @@ hr {
          cursor: pointer;
          display: inline-block;
 
-         & > h1, & > h2, & > h3, & > h4,
-         & > div > h1, & > div > h2, & > div > h3, & > div > h4 {
+         h1, h2, h3, h4, h5, h6 {
             margin: 0;
          }
 
@@ -389,11 +402,12 @@ form {
    justify-content: flex-start;
    align-items: stretch;
    flex-flow: row wrap;
-   margin-bottom: 5px;
+   margin-bottom: 10px;
    color: map-get($colors, teal-darker);
    @include transitionAll;
    letter-spacing: 2px;
-   height: 32px;
+   min-height: 32px;
+   height: 100%;
 
    &.full {
       width: 100%;
@@ -413,6 +427,19 @@ form {
       &:hover, &:focus {
          border-bottom: 1px solid map-get($colors, teal-dark);
       }
+
+      label {
+        margin-bottom: 3px;
+        // flex: 0 1 100%;
+        width: 100%;
+      }
+      input {
+        flex: 1 0 90%;
+      }
+
+      input + button {
+        align-self: flex-end;
+      }
    }
 
    &.action {
@@ -430,8 +457,6 @@ form {
    }
 
    & input {
-      flex-grow: 2;
-      padding-left: 5px;
       padding-right: 5px;
    }
 
@@ -480,46 +505,6 @@ form {
             }
          }
       }
-   }
-
-   & label {
-      padding-left: 24px;
-      user-select: none;
-      vertical-align: middle;
-
-      &:before, &:after {
-         content: '';
-         display: block;
-         width: 16px;
-         height: 16px;
-         position: absolute;
-         top: 50%;
-         transform: translateY(-50%);
-      }
-
-      &:before {
-         left: 0;
-         border: 1px solid #e6e6e6;
-         box-shadow: inset 1px 1px rgba(0, 0, 0, 0.03);
-      }
-
-      &:after {
-         left: 3px;
-         background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/9487/icon-check.svg") no-repeat center center;
-         display: none;
-      }
-   }
-
-   & input[type=radio]:checked + & > label:before,
-   & input[type=checkbox]:checked + & > label:before {
-      background-color: #19191a;
-      border: none;
-      box-shadow: none;
-   }
-
-   & input[type=radio]:checked + & > label:after,
-   & input[type=checkbox]:checked + & > label:after {
-      display: block;
    }
 
    & select {
@@ -640,7 +625,7 @@ ul li span {
 }
 
 .login-overlay {
-   position: absolute;
+   position: fixed;
    right: 0;
    top: 0;
    width: 100vw;
@@ -713,51 +698,17 @@ table {
    }
 }
 
-.w10 {
-   width: 10%;
-}
-
-.w20 {
-   width: 20%;
-}
-
-.w30 {
-   width: 30%;
-}
-
-.w40 {
-   width: 40%;
-}
-
-.w50 {
-   width: 50%;
-}
-
-.w60 {
-   width: 60%;
-}
-
-
-
-
-
-
 notification {
-  /* modals are hidden by default */
   display: none;
 
   .notification {
-    /* notification container fixed across whole screen */
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-
-    /* z-index must be higher than .notification-background */
     z-index: 1000;
 
-    /* enables scrolling for tall notifications */
     overflow: auto;
 
     .notification-body {
@@ -773,23 +724,18 @@ notification {
   }
 
   .notification-background {
-    /* notification background fixed across whole screen */
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-
-    /* semi-transparent black  */
     background-color: #000;
     opacity: 0.50;
 
-    /* z-index must be below .notification and above everything else  */
     z-index: 999;
   }
 }
 
 body.notification-open {
-  /* body overflow is hidden to hide main scrollbar when modal window is open */
   overflow: hidden;
 }
