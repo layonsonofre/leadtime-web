@@ -22,6 +22,10 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
    }
 
    checkLogin(url: string): boolean {
+      console.error('auth-guard.checkLogin() SKIPPED!!!!!!');
+      if (1 == 1) {
+         return true;
+      }
       if (this.dataService.isLoggedIn) {
          return true;
       }

@@ -5,24 +5,19 @@ import { NotificationService } from '../notification/notification.service';
 
 @Component({
    selector: 'carga',
-   templateUrl: './carga.component.html',
-   styleUrls: ['./carga.component.scss']
+   templateUrl: './carga.component.html'
 })
 export class CargaComponent implements OnInit {
-   private cargasViagem: Array<any> = [];
+   private cargasDestinado: Array<any> = [];
    private cargasAguardando: Array<any> = [];
-   public cargas: any;
    private expanded: boolean = false;
    private filtro: any = {};
-   public loading: boolean = true;
-   public showFilter: boolean = false;
+   private loading: boolean = true;
+   private showFilter: boolean = false;
    private empty = true;
-   public ordenacao : string = "['+carga_previsao_inicio']";
-   private selected : string = 'viagem';
-
-   // HEDER
+   private ordenacao: string = "['+carga_previsao_inicio']";
+   private firstTabChange: boolean;
    private indicadores: Array<any> = [];
-
 
    private pagination_inf: number;
    private pagination_sup: number;
@@ -38,6 +33,8 @@ export class CargaComponent implements OnInit {
    constructor(private dataService: DataService, private notificationService: NotificationService) { }
 
    ngOnInit() {
+      this.firstTabChange = true;
+
       this.filtro.orders_label = ["Realizada", "Prevista", "Tempo atraso"];
       this.filtro.orders = ["realizada", "prevista", "tempo_atraso"];
       this.filtro.orderIndex = 0;
@@ -51,67 +48,62 @@ export class CargaComponent implements OnInit {
       this.filtro.pagination_amount = 10;
 
       this.filtro.page = "carga";
-      this.filtro.aba = "destinado";
+      this.filtro.aba = 'destinado';
 
-      this.loadCargasViagem(true);
+      this.loadIndicadores(true);
+      this.loadViagens(true);
       this.filtro.previsto = true;
       this.filtro.atrasado = true;
    }
 
-   loadCargasViagem(force?: boolean) {
+   loadViagens(force: boolean) {
       this.loading = true;
       this.empty = true;
-      this.dataService.loadCargasViagem(force, this.filtro).then(data => {
-        this.loading = false;
-        console.log(data);
+      this.dataService.loadViagens(this.filtro.page + '_' + this.filtro.aba, force, this.filtro).then(data => {
+         this.loading = false;
+         console.error('BACKEND:', data);
          if (data.viagens) {
-            this.cargasViagem = this.cargasViagem.concat(data.viagens);
+            if (this.filtro.aba === 'destinado') {
+               if (force) {
+                  this.cargasDestinado = this.cargasDestinado.concat(data.viagens);
+               }
+            } else if (this.filtro.aba === 'aguardando') {
+               if (force) {
+                  this.cargasAguardando = this.cargasAguardando.concat(data.viagens);
+               }
+            }
             this.empty = false;
          } else {
-           this.notificationService.title = 'Algo deu errado';
-           this.notificationService.code = data.detail.error;
-           this.notificationService.message = data.message;
-           this.notificationService.stacktrace = data.detail.stacktrace;
-           this.notificationService.open('load-error');
+            this.notificationService.title = 'Algo deu errado';
+            this.notificationService.code = data.detail.error;
+            this.notificationService.message = data.message;
+            this.notificationService.stacktrace = data.detail.stacktrace;
+            this.notificationService.open('load-error');
          }
       });
    }
 
-  loadIndicadores(force?: boolean) {
-    this.loading = true;
-    this.empty = true;
-    this.dataService.loadIndicadores(force, this.filtro).then(data => {
-      this.loading = false;
-      console.log(data);
-      if (data.indicadores) {
-        this.indicadores = this.indicadores.concat(data.indicadores);
-        this.empty = false;
-      } else {
-        this.notificationService.title = 'Algo deu errado';
-        this.notificationService.code = data.detail.error;
-        this.notificationService.message = data.message;
-        this.notificationService.stacktrace = data.detail.stacktrace;
-        this.notificationService.open('load-error');
-      }
-    });
-  }
-
-   loadCargasAguardando(force?: boolean) {
+   loadIndicadores(force?: boolean) {
       this.loading = true;
-      this.empty = true;
-      this.dataService.loadCargasAguardando(force).then(data => {
-         if (data.viagens) {
-            this.cargasAguardando = this.cargasAguardando.concat(data.viagens);
-            this.empty = false;
-         }
+      this.dataService.loadIndicadores(force, null).then(data => {
          this.loading = false;
+         console.error('indicadores', data.indicadores);
+         if (data.indicadores) {
+            this.indicadores = data.indicadores;
+         } else {
+            this.notificationService.title = 'Algo deu errado';
+            this.notificationService.code = data.detail.error;
+            this.notificationService.message = data.message;
+            this.notificationService.stacktrace = data.detail.stacktrace;
+            this.notificationService.open('load-error');
+         }
       });
    }
 
    expand() {
       this.expanded = !this.expanded;
-      for(let i = 0; i < this.cargasViagem.length; i++) {
-         this.cargasViagem[i].details = this.expanded;
+      for(let i = 0; i < this.cargasDestinado.length; i++) {
+         this.cargasDestinado[i].details = this.expanded;
       }
       for(let i = 0; i < this.cargasAguardando.length; i++) {
          this.cargasAguardando[i].details = this.expanded;
@@ -140,64 +132,55 @@ export class CargaComponent implements OnInit {
          if (this.filtro.valor) {
             let temp = this.filtro.valor.toLowerCase();
             if (this.filtro.placa && dataArray[i].placa && (dataArray[i].placa[0].placa.toLowerCase().indexOf(temp) >= 0)
-            || this.filtro.num_romaneio && dataArray[i].num_romaneio && (dataArray[i].num_romaneio.toLowerCase().indexOf(temp) >= 0)
-            || this.filtro.origem && dataArray[i].origem && (dataArray[i].origem.toLowerCase().indexOf(temp) >= 0)
-            || this.filtro.destino && dataArray[i].destino && (dataArray[i].destino.toLowerCase().indexOf(temp) >= 0)
-            || this.filtro.transportadora && dataArray[i].transportadora && (dataArray[i].transportadora.toLowerCase().indexOf(temp) >= 0)
-            || this.filtro.mercadoria && dataArray[i].mercadoria && this.searchMercadoria(dataArray[i].mercadoria, temp)
-         ) {
-            dataArray[i].visible = true;
-            hasOne = true;
-         } else {
-            dataArray[i].visible = false;
+               || this.filtro.num_romaneio && dataArray[i].num_romaneio && (dataArray[i].num_romaneio.toLowerCase().indexOf(temp) >= 0)
+               || this.filtro.origem && dataArray[i].origem && (dataArray[i].origem.toLowerCase().indexOf(temp) >= 0)
+               || this.filtro.destino && dataArray[i].destino && (dataArray[i].destino.toLowerCase().indexOf(temp) >= 0)
+               || this.filtro.transportadora && dataArray[i].transportadora && (dataArray[i].transportadora.toLowerCase().indexOf(temp) >= 0)
+               || this.filtro.mercadoria && dataArray[i].mercadoria && this.searchMercadoria(dataArray[i].mercadoria, temp)
+            ) {
+               dataArray[i].visible = true;
+               hasOne = true;
+            } else {
+               dataArray[i].visible = false;
+            }
          }
       }
+      this.empty = !hasOne && this.filtro.valor;
    }
-   this.empty = !hasOne && this.filtro.valor;
-}
 
-searchMercadoria(item: any, value: string): boolean {
-   for (let i = 0; i < item.length; i++) {
-      if (item[i].mercadoria && (item[i].mercadoria.toLowerCase().indexOf(value) >= 0)) {
-         return true;
+   searchMercadoria(item: any, value: string): boolean {
+      for (let i = 0; i < item.length; i++) {
+         if (item[i].mercadoria && (item[i].mercadoria.toLowerCase().indexOf(value) >= 0)) {
+            return true;
+         }
+      }
+      return false;
+   }
+
+   loadMore() {
+      this.filtro.pagination_inf += this.filtro.pagination_amount;
+      this.filtro.pagination_sup += this.filtro.pagination_amount;
+      this.loadViagens(true);
+   }
+
+   sort() {
+      this.filtro.orderIndex++;
+      if (this.filtro.orderIndex >= this.filtro.orders.length) {
+         this.filtro.orderIndex = 0;
+      }
+      this.filtro.order_by = this.filtro.orders_label[this.filtro.orderIndex];
+   }
+
+   setAscDesc() {
+      this.filtro.ascending = !this.filtro.ascending;
+      this.filtro.asc_desc = this.filtro.ascending === true ? 'asc' : 'desc';
+   }
+
+   tab(menu: string) {
+      if (this.filtro.aba != menu) {
+         this.filtro.aba = menu;
+         this.loadViagens(this.firstTabChange);
+         this.firstTabChange = false;
       }
    }
-   return false;
-}
-
-loadData(tabIndex: number) {
-   if (tabIndex === 0) {
-      this.loadCargasViagem(false);
-   } else {
-      this.loadCargasAguardando(false);
-   }
-}
-
-loadMore() {
-   this.filtro.pagination_inf += this.filtro.pagination_amount;
-   this.filtro.pagination_sup += this.filtro.pagination_amount;
-
-   if (this.page === 'carga') {
-      this.loadCargasViagem(true);
-   } else {
-      this.loadCargasAguardando(true);
-   }
-}
-
-sort() {
-   this.filtro.orderIndex++;
-   if (this.filtro.orderIndex >= this.filtro.orders.length) {
-      this.filtro.orderIndex = 0;
-   }
-   this.filtro.order_by = this.filtro.orders_label[this.filtro.orderIndex];
-}
-
-setAscDesc() {
-   this.filtro.ascending = !this.filtro.ascending;
-   this.filtro.asc_desc = this.filtro.ascending === true ? 'asc' : 'desc';
-}
-
-tab(menu : string) {
-   this.selected = menu;
-}
 }

@@ -9,16 +9,13 @@ export class DataService {
 
    protected user: Usuario = Usuario.getInstance();
 
-   public cargasViagem: any = null;
-   public cargasAguardando: any = null;
-   public descargasPrevisao: any = null;
-   public descargasTempo: any = null;
+   public cargasDestinado: Array<any> = [];
+   public cargasAguardando: Array<any> = [];
+   public indicadores: Array<any> = [];
+   public mercadoriaCliente: Array<any> = [];
+   public mercadoriaLeadTime: Array<any> = [];
    public transitTime: any = null;
    public indicadoresHome: any = null;
-   public mercadoriaCliente: any = null;
-   public mercadoriaLeadTime: any = null;
-   //Heder
-   public indicadores: any = null;
 
 
    public isLoggedIn: boolean = false;
@@ -47,103 +44,39 @@ export class DataService {
       this.isLoggedIn = false;
    }
 
-  /*
-   * INICIO DO BLOCO DE INDICADORES
-   */
-  loadIndicadores(force?: boolean, parameters?: string): Promise<any> {
-    if (this.indicadores == null || force) {
-      return this.gateway.backendCall(this._modulo, "getIndicadores", parameters, false).then(
-        (result) => {
-          this.indicadores = result;
-          return this.indicadores;
-        }
-      );
-    } else {
-      return Promise.resolve(this.cargasViagem);
-    }
-  }
-  /*
-   * FIM DO BLOCO DE INDICADORES
-   */
-
-   /*
-   * INICIO DO BLOCO DE CARGA
-   */
-   loadCargasViagem(force?: boolean, parameters?: string): Promise<any> {
-       if (this.cargasViagem == null || force) {
-         return this.gateway.backendCall(this._modulo, "getViagem", parameters, false).then(
+   loadIndicadores(force?: boolean, parameters?: string): Promise<any> {
+      if (this.indicadores == null || force) {
+         return this.gateway.backendCall(this._modulo, "getIndicadores", parameters, false).then(
             (result) => {
-               this.cargasViagem = result;
-               return this.cargasViagem;
+               this.indicadores = result;
+               return this.indicadores;
             }
          );
       } else {
-         return Promise.resolve(this.cargasViagem);
+         return Promise.resolve(this.indicadores);
       }
    }
 
-   loadCargasAguardando(force?: boolean): Promise<any> {
-
-      if (this.cargasAguardando == null || force) {
-         return new Promise(resolve => {
-            this.http.get('http://private-8d09d-leadtime.apiary-mock.com/cargas/aguardando')
-            .map(res => res.json())
-            .subscribe(data => {
-               this.cargasAguardando = data[0];
-               resolve(this.cargasAguardando);
-            }, err => {
-               console.error(err);
-            });
-         });
+   loadViagens(tab: string, force: boolean, parameters?: string): Promise<any> {
+      if (this.cargasDestinado == null || this.cargasAguardando == null || force) {
+         return this.gateway.backendCall(this._modulo, "getViagem", parameters, false).then(
+            (result) => {
+               if (tab === 'carga_destinado') {
+                  this.cargasDestinado = result;
+               } else if (tab === 'carga_aguardando') {
+                  this.cargasAguardando = result;
+               }
+               return result;
+            }
+         );
       } else {
-         return Promise.resolve(this.cargasAguardando);
+         if (tab === 'carga_destinado') {
+            return Promise.resolve(this.cargasDestinado);
+         } else if (tab === 'carga_aguardando') {
+            return Promise.resolve(this.cargasAguardando);
+         }
       }
    }
-   /*
-   * FIM DO BLOCO DE CARGA
-   */
-
-   /*
-   * INICIO DO BLOCO DE DESCARGA
-   */
-   loadDescargasPrevisao(force?: boolean): Promise<any> {
-      if (this.descargasPrevisao == null || force) {
-         return new Promise(resolve => {
-            this.http.get('http://private-8d09d-leadtime.apiary-mock.com/descargas/previsao')
-            .map(res => res.json())
-            .subscribe(data => {
-               this.descargasPrevisao = data;
-               resolve(this.descargasPrevisao);
-            }, err => {
-               console.error(err);
-            });
-         });
-      } else {
-         return Promise.resolve(this.descargasPrevisao);
-      }
-   }
-
-   loadDescargasTempo(force?: boolean): Promise<any> {
-
-      if (this.descargasTempo == null || force) {
-         return new Promise(resolve => {
-            this.http.get('http://private-8d09d-leadtime.apiary-mock.com/descargas/tempo')
-            .map(res => res.json())
-            .subscribe(data => {
-               this.descargasTempo = data;
-               resolve(this.descargasTempo);
-            }, err => {
-               console.error(err);
-            });
-         });
-      } else {
-         return Promise.resolve(this.descargasTempo);
-      }
-   }
-
-   /*
-   * FIM DO BLOCO DE DESCARGA
-   */
 
    /*
    * INICIO DO BLOCO DE TRANSIT TIME
@@ -199,8 +132,8 @@ export class DataService {
       //       }
       //    );
       // } else {
-         return Promise.resolve({"NOME":[{"mercadoria_de_para_id": 1, "mercadoria_api": "Mercadoria2", "mercadoria_id":1},{"mercadoria_de_para_id": 2, "mercadoria_api": "Mercadoria1", "mercadoria_id":2}]});
-         //return Promise.resolve(this.mercadoriaCliente);
+      return Promise.resolve({"NOME":[{"mercadoria_de_para_id": 1, "mercadoria_api": "Mercadoria2", "mercadoria_id":1},{"mercadoria_de_para_id": 2, "mercadoria_api": "Mercadoria1", "mercadoria_id":2}]});
+      //return Promise.resolve(this.mercadoriaCliente);
       // }
    }
 
@@ -214,8 +147,8 @@ export class DataService {
       //       }
       //    );
       // } else {
-         return Promise.resolve({"mercadoria":[{"mercadoria_id": 1, "natureza_id": 1, "mercadoria":"Teste1"},{"mercadoria_id": 2, "natureza_id": 1, "mercadoria":"Teste2"}]});
-         //return Promise.resolve(this.mercadoriaLeadTime);
+      return Promise.resolve({"mercadoria":[{"mercadoria_id": 1, "natureza_id": 1, "mercadoria":"Teste1"},{"mercadoria_id": 2, "natureza_id": 1, "mercadoria":"Teste2"}]});
+      //return Promise.resolve(this.mercadoriaLeadTime);
       // }
    }
 }

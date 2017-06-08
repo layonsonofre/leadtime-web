@@ -4,29 +4,29 @@
    <div class="padded header">
       <h1 class="page-title">Cargas</h1>
       <div class="tabs">
-         <a [class.active]="selected === 'viagem'" (click)="tab('viagem')">Viagem</a>
-         <a [class.active]="selected === 'aguard'" (click)="tab('aguard')">Aguardando</a>
+         <a [class.active]="filtro.aba === 'destinado'" (click)="tab('destinado')">Destinado</a>
+         <a [class.active]="filtro.aba === 'aguardando'" (click)="tab('aguardando')">Aguardando</a>
       </div>
    </div>
-   <div class="padded content" *ngIf="selected === 'viagem'">
+   <div class="padded content" *ngIf="filtro.aba === 'destinado'">
       <div class="summary">
          <h4>Informações / <a class="header-link" [ngClass]="showFilter === true ? 'active' : ''"(click)="showFilter = !showFilter">Filtros</a></h4>
          <div class="summary-info-block" *ngIf="!showFilter">
             <div class="summary-info">
-               <h1>17</h1>
+               <h1>{{ indicadores[0].page === 'destinado' ? indicadores[0].total_page : 0 }}</h1>
                <h3>Total</h3>
             </div>
-            <div class="summary-info action" (click)="statusFilter('previsto', cargasViagem)" [ngClass]="filtro.previsto === true ? 'animated pulse active' : ''">
+            <div class="summary-info action" (click)="statusFilter('previsto', cargasDestinado)" [ngClass]="filtro.previsto === true ? 'animated pulse active' : ''">
                <h1>17</h1>
                <h3 class="f-previsto">Previstos</h3>
             </div>
-            <div class="summary-info action" (click)="statusFilter('atrasado', cargasViagem)" [ngClass]="filtro.atrasado === true ? 'animated pulse active' : ''">
+            <div class="summary-info action" (click)="statusFilter('atrasado', cargasDestinado)" [ngClass]="filtro.atrasado === true ? 'animated pulse active' : ''">
                <h1>17</h1>
                <h3 class="f-atrasado">Atrasados</h3>
             </div>
          </div>
          <div class="filters animated fadeIn" *ngIf="showFilter">
-            <form (submit)="search(cargasViagem)">
+            <form (submit)="search(cargasDestinado)">
                <div class="input-wrap text full">
                   <span class="icon">test</span>
                   <input placeholder="Insira os parâmetros de sua pesquisa" [(ngModel)]="filtro.valor" name="valor">
@@ -69,7 +69,140 @@
             </form>
          </div>
       </div>
-      <div *ngFor="let viagem of cargasViagem | sortCards : filtro.order_by : filtro.asc_desc, let i = index" [ngClass]="viagem.visible === undefined || viagem.visible === true ? '' : 'hide'">
+      <div *ngFor="let viagem of cargasDestinado | sortCards : filtro.order_by : filtro.asc_desc, let i = index" [ngClass]="viagem.visible === undefined || viagem.visible === true ? '' : 'hide'">
+         <div class="card" [ngClass]="viagem.status == 'ATRASADO' ? 'atrasado' : 'previsto'" (click)="viagem.details = !viagem.details" [class.detailed]="viagem.details">
+            <!-- <div class="card-logo" [ngStyle]="{'background': 'url(' + viagem.transportadora.logo + ') no-repeat center #FFFFFF'}"></div> -->
+            <div class="card-logo"></div>
+            <div class="card-content">
+               <div class="minimized-info">
+                  <div class="info">
+                    <span class="icon-rodovia"></span>{{ viagem.num_romaneio }}
+                    <div class="help-text">Romaneio</div>
+                  </div>
+                  <div class="info">
+                     <span class="icon-caminhao"></span>{{ viagem.nome_cliente }}
+                     <div class="help-text">Cliente</div>
+                  </div>
+                  <div class="info full">
+                    <span class="icon-carga-previsao"></span>{{ viagem.carga_previsao_inicio }}
+                    <div class="help-text">Inicio previsto da carga</div>
+                  </div>
+               </div>
+               <div class="detailed-info">
+                  <div class="info">
+                    <span class="icon-rodovia"></span>{{ viagem.num_romaneio }}
+                    <div class="help-text">Romaneio</div>
+                  </div>
+                  <div class="info">
+                     <span class="icon-caminhao"></span>{{ viagem.numero_cliente }}
+                     <div class="help-text">Cliente</div>
+                  </div>
+                  <div class="info">
+                     <span class="icon-rodovia"></span>{{ viagem.carga_previsao_inicio }}
+                     <div class="help-text">Início previsto da carga</div>
+                  </div>
+                  <div class="info">
+                     <span class="icon-rodovia"></span>{{ viagem.carga_previsao_fim }}
+                     <div class="help-text">Fim previsto da carga</div>
+                  </div>
+                  <div class="info">
+                     <span class="icon-rodovia"></span>{{ viagem.descarga_previsao_inicio }}
+                     <div class="help-text">Início previsto da descarga</div>
+                  </div>
+                  <div class="info">
+                     <span class="icon-rodovia"></span>{{ viagem.descarga_previsao_fim }}
+                     <div class="help-text">Fim previsto da descarga</div>
+                  </div>
+                  <div class="info">
+                     <span class="icon-pessoa"></span>{{ viagem.motorista_nome }}
+                     <div class="help-text">Motorista</div>
+                  </div>
+                  <div class="info">
+                     <span class="icon-pessoa"></span>{{ viagem.motorista_celular }}
+                     <div class="help-text">Telefone</div>
+                  </div>
+                  <div class="info">
+                     <span class="icon-pessoa"></span>{{ viagem.motorista_cpf }}
+                     <div class="help-text">CPF</div>
+                  </div>
+                  <div class="info">
+                     <span class="icon-origem"></span>{{ viagem.origem_cidade }}
+                     <div class="help-text">Origem</div>
+                  </div>
+                  <div class="info">
+                     <span class="icon-destino"></span>{{ viagem.destino_cidade }}
+                     <div class="help-text">Destino</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <h1 *ngIf="empty" class="empty-list">Não foi encontrada nenhuma viagem para mostrar :-(</h1>
+      <a class="load-more" (click)="loadMore()"><i class="material-icons">refresh</i>{{empty ? 'Atualizar' : 'Ver mais'}}</a>
+   </div>
+
+   <div class="padded content" *ngIf="filtro.aba === 'aguardando'">
+      <div class="summary">
+         <h4>Informações / <a class="header-link" [ngClass]="showFilter === true ? 'active' : ''"(click)="showFilter = !showFilter">Filtros</a></h4>
+         <div class="summary-info-block" *ngIf="!showFilter">
+            <div class="summary-info">
+               <h1>17</h1>
+               <h3>Total</h3>
+            </div>
+            <div class="summary-info action" (click)="statusFilter('previsto', cargasAguardando)" [ngClass]="filtro.previsto === true ? 'animated pulse active' : ''">
+               <h1>17</h1>
+               <h3 class="f-previsto">Previstos</h3>
+            </div>
+            <div class="summary-info action" (click)="statusFilter('atrasado', cargasAguardando)" [ngClass]="filtro.atrasado === true ? 'animated pulse active' : ''">
+               <h1>17</h1>
+               <h3 class="f-atrasado">Atrasados</h3>
+            </div>
+         </div>
+         <div class="filters animated fadeIn" *ngIf="showFilter">
+            <form (submit)="search(cargasAguardando)">
+               <div class="input-wrap text full">
+                  <span class="icon">test</span>
+                  <input placeholder="Insira os parâmetros de sua pesquisa" [(ngModel)]="filtro.valor" name="valor">
+                  <button type="submit"><i class="material-icons">search</i></button>
+               </div>
+               <div class="input-wrap action">
+                  <input type="checkbox" [(ngModel)]="filtro.placa" id="placa" name="placa">
+                  <label for="placa">Placa</label>
+               </div>
+               <div class="input-wrap action">
+                  <input type="checkbox" [(ngModel)]="filtro.num_romaneio" id="num_romaneio" name="num_romaneio">
+                  <label for="num_romaneio">Romaneio</label>
+               </div>
+               <div class="input-wrap action">
+                  <input type="checkbox" [(ngModel)]="filtro.origem" id="origem" name="origem">
+                  <label for="origem">Origem</label>
+               </div>
+               <div class="input-wrap action">
+                  <input type="checkbox" [(ngModel)]="filtro.destino" id="destino" name="destino">
+                  <label for="destino">Destino</label>
+               </div>
+               <div class="input-wrap action">
+                  <input type="checkbox" [(ngModel)]="filtro.transportadora" id="transportadora" name="transportadora">
+                  <label for="transportadora">Transportadora</label>
+               </div>
+               <div class="input-wrap action">
+                  <input type="checkbox" [(ngModel)]="filtro.mercadoria" id="mercadoria" name="mercadoria">
+                  <label for="mercadoria">Mercadoria</label>
+               </div>
+
+               <ul class="filter-actions">
+                  <li (click)="expand()"><span class="material-icons">fullscreen</span>Expandir/contrair todos</li>
+                  <li>
+                     <span (click)="sort()" class="material-icons">import_export</span>
+                     <span (click)="sort()">Ordenar: {{filtro.orders_label[this.filtro.orderIndex]}}</span>
+                     <span (click)="setAscDesc()" *ngIf="filtro.ascending" class="material-icons">arrow_upward</span>
+                     <span (click)="setAscDesc()" *ngIf="!filtro.ascending" class="material-icons">arrow_downward</span>
+                  </li>
+               </ul>
+            </form>
+         </div>
+      </div>
+      <div *ngFor="let viagem of cargasAguardando | sortCards : filtro.order_by : filtro.asc_desc, let i = index" [ngClass]="viagem.visible === undefined || viagem.visible === true ? '' : 'hide'">
          <div class="card" [ngClass]="viagem.status == 'ATRASADO' ? 'atrasado' : 'previsto'" (click)="viagem.details = !viagem.details" [class.detailed]="viagem.details">
             <!-- <div class="card-logo" [ngStyle]="{'background': 'url(' + viagem.transportadora.logo + ') no-repeat center #FFFFFF'}"></div> -->
             <div class="card-logo"></div>
