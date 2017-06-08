@@ -2,6 +2,7 @@ import { Component, OnInit, Optional } from '@angular/core';
 import { DataService } from '../data.service';
 import { SortCardsPipe } from '../sort-cards.pipe';
 import { NotificationService } from '../notification/notification.service';
+import * as $ from 'jquery';
 
 @Component({
    selector: 'carga',
@@ -20,6 +21,10 @@ export class CargaComponent implements OnInit {
 
    private pagination_inf: number;
    private pagination_sup: number;
+   private destinados_pagination_inf: number;
+   private destinados_pagination_sup: number;
+   private aguardando_pagination_inf: number;
+   private aguardando_pagination_sup: number;
    private pagination_amount: number;
    private page: string;
    private aba: string;
@@ -52,6 +57,10 @@ export class CargaComponent implements OnInit {
       this.filtro.pagination_inf = 0;
       this.filtro.pagination_sup = 10;
       this.filtro.pagination_amount = 10;
+      this.aguardando_pagination_inf = this.filtro.pagination_inf;
+      this.aguardando_pagination_sup = this.filtro.pagination_sup;
+      this.destinados_pagination_inf = this.filtro.pagination_inf;
+      this.destinados_pagination_sup = this.filtro.pagination_sup;
 
       this.filtro.page = "carga";
       this.filtro.aba = 'destinado';
@@ -75,12 +84,10 @@ export class CargaComponent implements OnInit {
       this.dataService.loadViagens(this.filtro.page + '_' + this.filtro.aba, force, this.filtro).then(data => {
          this.loading = false;
          if (data.viagens) {
-            if (this.filtro.aba === 'destinado') {
-               if (force) {
+            if (force) {
+               if (this.filtro.aba === 'destinado') {
                   this.cargasDestinado = this.cargasDestinado.concat(data.viagens);
-               }
-            } else if (this.filtro.aba === 'aguardando') {
-               if (force) {
+               } else if (this.filtro.aba === 'aguardando') {
                   this.cargasAguardando = this.cargasAguardando.concat(data.viagens);
                }
             }
@@ -156,7 +163,6 @@ export class CargaComponent implements OnInit {
          } else {
             dataArray[i].visible = false;
          }
-//|| (this.filtro.num_romaneio && dataArray[i].num_romaneio && (dataArray[i].num_romaneio.toLowerCase().indexOf(temp) >= 0))
          if (this.filtro.valor) {
             let temp = this.filtro.valor.toLowerCase();
             if ((this.filtro.placa && dataArray[i].placa && (dataArray[i].placa[0].placa.toLowerCase().indexOf(temp) >= 0))
@@ -192,9 +198,32 @@ export class CargaComponent implements OnInit {
       return false;
    }
 
+   paginate(increase: boolean) {
+      if (this.filtro.aba === 'destinado') {
+         if (increase) {
+            this.destinados_pagination_inf += this.filtro.pagination_amount;
+            this.destinados_pagination_sup += this.filtro.pagination_amount;
+         } else {
+            this.destinados_pagination_inf -= this.filtro.pagination_amount;
+            this.destinados_pagination_sup -= this.filtro.pagination_amount;
+         }
+         this.filtro.pagination_inf = this.destinados_pagination_inf;
+         this.filtro.pagination_sup = this.destinados_pagination_sup;
+      } else if (this.filtro.aba === 'aguardando') {
+         if (increase) {
+            this.aguardando_pagination_inf += this.filtro.pagination_amount;
+            this.aguardando_pagination_sup += this.filtro.pagination_amount;
+         } else {
+            this.aguardando_pagination_inf -= this.filtro.pagination_amount;
+            this.aguardando_pagination_sup -= this.filtro.pagination_amount;
+         }
+         this.filtro.pagination_inf = this.aguardando_pagination_inf;
+         this.filtro.pagination_sup = this.aguardando_pagination_sup;
+      }
+   }
+
    loadMore() {
-      this.filtro.pagination_inf += this.filtro.pagination_amount;
-      this.filtro.pagination_sup += this.filtro.pagination_amount;
+      this.paginate(true);
       this.loadViagens(true);
    }
 
@@ -214,6 +243,10 @@ export class CargaComponent implements OnInit {
    tab(menu: string) {
       if (this.filtro.aba != menu) {
          this.filtro.aba = menu;
+         if (this.firstTabChange) {
+             this.filtro.pagination_inf = 0;
+             this.filtro.pagination_sup = 10;
+         }
          this.loadViagens(this.firstTabChange);
          this.firstTabChange = false;
       }
