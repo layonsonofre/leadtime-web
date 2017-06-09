@@ -11,6 +11,8 @@ export class DataService {
 
    public cargasDestinado: Array<any> = [];
    public cargasAguardando: Array<any> = [];
+   public descargasDestinado: Array<any> = [];
+   public descargasAguardando: Array<any> = [];
    public indicadores: Array<any> = [];
    public mercadoriaCliente: Array<any> = [];
    public mercadoriaLeadTime: Array<any> = [];
@@ -58,13 +60,17 @@ export class DataService {
    }
 
    loadViagens(tab: string, force: boolean, parameters?: string): Promise<any> {
-      if (this.cargasDestinado == null || this.cargasAguardando == null || force) {
+      if (this.cargasDestinado == null || this.cargasAguardando == null || this.descargasDestinado == null || this.descargasAguardando == null || force) {
          return this.gateway.backendCall(this._modulo, "getViagem", parameters, false).then(
             (result) => {
                if (tab === 'carga_destinado') {
                   this.cargasDestinado = result;
                } else if (tab === 'carga_aguardando') {
                   this.cargasAguardando = result;
+               } else if (tab === 'descarga_destinado') {
+                  this.descargasDestinado = result;
+               } else if (tab === 'descarga_aguardando') {
+                  this.descargasAguardando = result;
                }
                return result;
             }
@@ -74,6 +80,10 @@ export class DataService {
             return Promise.resolve(this.cargasDestinado);
          } else if (tab === 'carga_aguardando') {
             return Promise.resolve(this.cargasAguardando);
+         } else if (tab === 'descarga_destinado') {
+            return Promise.resolve(this.descargasDestinado);
+         } else if (tab === 'descarga_aguardando') {
+            return Promise.resolve(this.descargasAguardando);
          }
       }
    }

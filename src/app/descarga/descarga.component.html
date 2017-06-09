@@ -1,11 +1,11 @@
 <div class="container">
    <div class="padded header">
-      <h1 class="page-title">Cargas</h1>
+      <h1 class="page-title">Descargas</h1>
       <div class="tabs">
          <a [class.active]="aba === 'destinado'" (click)="tab('destinado')">Destinado</a>
          <a [class.active]="aba === 'aguardando'" (click)="tab('aguardando')">Aguardando</a>
       </div>
    </div>
-   <cargas-aguardando [hidden]="aba != 'aguardando'"></cargas-aguardando>
-   <cargas-destinado [hidden]="aba != 'destinado'"></cargas-destinado>
+   <descargas-aguardando [hidden]="aba != 'aguardando'"></descargas-aguardando>
+   <descargas-destinado [hidden]="aba != 'destinado'"></descargas-destinado>
 </div>

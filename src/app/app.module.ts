@@ -17,8 +17,15 @@ import { ChartsModule } from 'ng2-charts';
 import { LoginRoutingModule } from './login/login-routing.module';
 import { LoginComponent } from './login/login.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { LoaderComponent } from './loader/loader.component';
+import { ViagensComponent } from './viagens/viagens.component';
 import { HomeComponent } from './home/home.component';
 import { CargaComponent } from './carga/carga.component';
+import { CargasDestinadoComponent } from './carga/destinado/cargas-destinado.component';
+import { CargasAguardandoComponent } from './carga/aguardando/cargas-aguardando.component';
+import { DescargaComponent } from './descarga/descarga.component';
+import { DescargasDestinadoComponent } from './descarga/destinado/descargas-destinado.component';
+import { DescargasAguardandoComponent } from './descarga/aguardando/descargas-aguardando.component';
 import { SortCardsPipe } from './sort-cards.pipe';
 import { ConfiguracoesComponent } from './configuracoes/configuracoes.component';
 
@@ -26,9 +33,16 @@ import { ConfiguracoesComponent } from './configuracoes/configuracoes.component'
    declarations: [
       LoginComponent,
       SidenavComponent,
+      LoaderComponent,
+      ViagensComponent,
       AppComponent,
       HomeComponent,
       CargaComponent,
+      CargasDestinadoComponent,
+      CargasAguardandoComponent,
+      DescargaComponent,
+      DescargasDestinadoComponent,
+      DescargasAguardandoComponent,
       SortCardsPipe,
       ConfiguracoesComponent,
       NotificationComponent
