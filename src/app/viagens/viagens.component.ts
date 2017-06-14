@@ -89,6 +89,7 @@ export class ViagensComponent implements OnInit {
       this.dataService.loadIndicadores(force, null).then(data => {
          this.loading = false;
          if (data.indicadores) {
+            console.log('indicadores', data.indicadores);
             for (let entry of data.indicadores) {
                this.total = entry.total_page;
                if (entry.tipo === 'atrasado') {

@@ -14,9 +14,10 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^4.0.1",
+    "@angular/cli": "^1.1.1",
     "@angular/common": "^4.0.1",
-    "@angular/compiler": "^4.0.1",
-    "@angular/core": "^4.0.1",
+    "@angular/compiler": "^4.2.2",
+    "@angular/core": "^4.2.2",
     "@angular/forms": "^4.0.1",
     "@angular/http": "^4.0.1",
     "@angular/platform-browser": "^4.0.1",
@@ -31,10 +32,10 @@
     "hammerjs": "^2.0.8",
     "jquery": "^3.1.1",
     "ng2-charts": "^1.5.0",
-    "rxjs": "^5.0.0-beta.12",
+    "rxjs": "^5.4.0",
     "ts-helpers": "^1.1.1",
     "typings": "^2.1.0",
-    "zone.js": "^0.8.5"
+    "zone.js": "^0.8.12"
   },
   "devDependencies": {
     "@angular/cli": "^1.0.0",
