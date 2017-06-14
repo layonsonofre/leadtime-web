@@ -264,6 +264,7 @@ hr {
    cursor: pointer;
    text-decoration: none;
    vertical-align: middle;
+   text-shadow: $text-shadow;
 
    &:after {
       content: '';
@@ -277,8 +278,12 @@ hr {
       border-top: 8px solid rgba(0, 0, 0, 0.30);
    }
 
+   &.active {
+      font-weight: bold;
+   }
+
    &:hover, &.active {
-      font-weight: bolder;
+      text-shadow: $text-shadow-hover;
       &:after {
          border-top: 8px solid rgba(0, 0, 0, 0.60);
       }
@@ -534,6 +539,10 @@ form {
       }
    }
 }
+ul {
+   padding-left: 0px
+}
+
 ul li span {
    vertical-align: middle;
    margin-right: 4px;
@@ -542,17 +551,24 @@ ul li span {
 .filter-actions {
    list-style: none;
    display: flex;
-   align-items: center;
    height: 32px;
    width: 100%;
+   align-items: baseline;
+   justify-content: flex-start;
+   flex-wrap: wrap;
 
-   & li {
-      margin-right: 20px;
+   li {
+      min-width: 150px;
       cursor: pointer;
+      text-shadow: $text-shadow;
 
       &:hover{
          font-weight: bold;
+         text-shadow: $text-shadow-hover;
       }
+   }
+   li + li {
+      margin-left: 50px;
    }
 }
 

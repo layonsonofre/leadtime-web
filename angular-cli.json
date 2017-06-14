@@ -18,9 +18,11 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-        "styles.scss"
+        "styles.scss",
+        "../node_modules/animate.css/animate.min.css"
       ],
       "scripts": [
+         "../node_modules/chart.js/dist/Chart.bundle.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
