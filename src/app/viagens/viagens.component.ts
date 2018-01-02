@@ -91,11 +91,13 @@ export class ViagensComponent implements OnInit {
          if (data.indicadores) {
             console.log('indicadores', data.indicadores);
             for (let entry of data.indicadores) {
-               this.total = entry.total_page;
-               if (entry.tipo === 'atrasado') {
-                   this.atrasados = entry.total_tipo;
-               } else if (entry.tipo === 'previsto') {
-                   this.previstos = entry.total_tipo;
+               if (entry.page === this.aba) {
+                  this.total = entry.total_page;
+                  if (entry.tipo === 'atrasado') {
+                     this.atrasados = entry.total_tipo;
+                  } else if (entry.tipo === 'previsto') {
+                     this.previstos = entry.total_tipo;
+                  }
                }
             }
          } else {
