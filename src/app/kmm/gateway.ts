@@ -57,12 +57,12 @@ export class KMMGateway {
           resolvePai(data);
         }
       }).catch((dataError: any) => {
-        dataError = JSON.parse(dataError._body);
+      //   dataError = JSON.parse(dataError._body);
         let errorM = "Erro não identificado. Entre em contato com o suporte.";
-        if (dataError.status == 401) {
+        if (dataError.status === 401) {
           errorM = "Autenticação expirada. Faça novamente o login.";
           this.user.logout();
-        } else if (dataError.status == 403) {
+        } else if (dataError.status === 403) {
           this.user.logout();
         } else {
           try {
@@ -72,13 +72,14 @@ export class KMMGateway {
               errorM = JSON.stringify(dataError);
             }
           }
-          this.notificationService.title = 'Erro interno';
-          this.notificationService.code = dataError.code;
-          this.notificationService.message = errorM;
-          this.notificationService.open('login-error');
-          if (resolvePai != null) {
-            resolvePai(dataError);
-          }
+        }
+        console.log('message', errorM);
+        this.notificationService.title = 'Erro interno';
+        this.notificationService.code = dataError.code;
+        this.notificationService.message = errorM;
+        this.notificationService.open('login-error');
+        if (resolvePai != null) {
+           resolvePai(dataError);
         }
       });
     });
